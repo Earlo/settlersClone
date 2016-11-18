@@ -5,13 +5,16 @@ public:
 	Settler() : {}
 	int get_x_position const;
 	int get_y_position const;
-	void setTask(const Task t);
-	std::string getInventory;
+	Item get_inventory const;
+	void set_task(const Task t);
+	void collect(Resource r);
+	void occupy();
+	void idle();
 	
-private:
+protected:
 	int x_pos;
 	int y_pos;
-	Task currentTask;
-	std::string inventory;
+	Task current_task;
+	Item inventory;
 	
 };
