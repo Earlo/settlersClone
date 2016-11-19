@@ -26,7 +26,7 @@ protected:
 	int size; //Size of the building
 	int x_pos;
 	int y_pos;
-	bool under_construction; // false if the building is done
+	bool under_construction; // false if the building is constructed
 };
 
 
