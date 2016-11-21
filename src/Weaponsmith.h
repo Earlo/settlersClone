@@ -10,7 +10,11 @@ public:
 	void take_weapon();
 
 private:
-	int size = 3;
+	health_points = 30;
+	size = 3;
 	unsigned int weapons;
-	unsigned int max_inhabitants = 1;
+	required_settlers = 1;
+	required_wood = 2;
+	required_stone = 10;
+	required_iron = 5;
 };

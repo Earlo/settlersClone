@@ -7,6 +7,10 @@ public:
 	void make_new_settlers();
 
 private:
-	int size = 2;
-	unsigned int max_inhabitants = 6;
+	health_points = 20;
+	size = 2;
+	required_settlers = 2;
+	required_wood = 10;
+	required_stone = 2;
+	required_iron = 0;
 };

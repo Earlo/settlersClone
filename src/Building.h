@@ -1,4 +1,5 @@
 #include "Resource.h"
+#include "Settler.h"
 
 class Building {
 
@@ -9,20 +10,23 @@ public:
 	int get_x_position() const { return x_pos; }
 	int get_y_position() const { return y_pos; }
 	int get_size() const { return size; } // test
+	void add_settler(){}
 
-	Resource get_required_wood() const { return required_wood; }
-	Resource get_required_stone() const { return required_stone; }
-	Resource get_required_iron() const { return required_iron; }
+	unsigned int get_required_wood() const { return required_wood; }
+	unsigned int get_required_stone() const { return required_stone; }
+	unsigned int get_required_iron() const { return required_iron; }
 
 	unsigned int get_nof_inhabitants() const { return nof_inhabitants; } // Return true if the building has a settler.
 	bool get_construction_status() const { return under_construction; }
 
 protected:
-	Resource required_wood;
-	Resource required_stone;
-	Resource required_iron;
+	vector<Settler> settlers_inside;
+	unsigned int required_settlers;
+	unsigned int required_wood;
+	unsigned int required_stone;
+	unsigned int required_iron;
 
-	unsigned int nof_inhabitants; //Number of settlers inside the building.
+	unsigned int health_points;
 	int size; //Size of the building
 	int x_pos;
 	int y_pos;
