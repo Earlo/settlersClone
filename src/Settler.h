@@ -17,7 +17,7 @@ public:
 	void attack(const Building b);
 	void attack(const Settler s);
 	void gather(const Item i);
-	void build(Building b);
+	void build(const Building b);
 	void idle();
 
 private:
