@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Tile.h"
 
-int DRAWSIZE = 2;
+int DRAWSIZE = 16;
 
 void Tile::refreshShape(){
 	//std::cout<<"asd";
@@ -18,8 +18,6 @@ void Tile::refreshShape(){
 	shape.setPoint(2, sf::Vector2f(DRAWSIZE*(x-1)+1, DRAWSIZE*(y-1)+1));
 	shape.setPoint(3, sf::Vector2f(DRAWSIZE*(x  ), DRAWSIZE*(y-1)+1));
 	*/
-	std::cout<<this->x<<","<<this->y<<","<<this->z<<";"<<std::endl;
-
 	switch(this->_type){
 		case Tile::Type::DIRT:
 			this->shape.setFillColor (sf::Color(67-z/4,255-z,67-z/4));
@@ -28,7 +26,6 @@ void Tile::refreshShape(){
 			this->shape.setFillColor (sf::Color(67+z/4,67+z/4,255+z));
 			break;
 		case Tile::Type::SAND:
-			std::cout<<"happening";
 			this->shape.setFillColor(sf::Color(255-z,255-z,51));
 			break;
 		case Tile::Type::ROCK:

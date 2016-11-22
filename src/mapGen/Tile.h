@@ -33,10 +33,6 @@ public:
 	};
 	void setType( Tile::Type t ){
 		_type = t;
-		//this->z = 200;
-		//std::cout<<"set";							
-		//std::cout<<"set "<<this->x<<","<<this->y<<","<<this->z<<";"<<std::endl;
-
 	};
 	void refreshShape();
 private:
