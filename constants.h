@@ -1,5 +1,5 @@
 const int MOVSPEED = 16;
-const int DRAWSIZE = 4;
+const int DRAWSIZE = 1;
 const int SCREENX = 800;
 const int SCREENY = 600;
 const int VIEWX = 600;

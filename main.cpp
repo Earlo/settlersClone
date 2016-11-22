@@ -43,13 +43,15 @@ int main()
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
         window.clear();
-
+        //TODO change to something that's not so fucking slow : D
         for ( unsigned int x = 0; x < TILESTODRAWX; x++){
-            for ( unsigned int y = 0; y < TILESTODRAWY; y++){
-                int dx = x + camX/DRAWSIZE;
-                int dy = y + camY/DRAWSIZE;
-                if( dx > 0 && dx < WORLDX && dy > 0 && dy < WORLDY){
-                    window.draw(m.at(dx,dy).shape);
+            int dx = x + camX/DRAWSIZE;
+            if( dx > 0 && dx < WORLDX ){
+                for ( unsigned int y = 0; y < TILESTODRAWY; y++){
+                    int dy = y + camY/DRAWSIZE;
+                    if( dy > 0 && dy < WORLDY){
+                        window.draw(m.at(dx,dy).shape);
+                    }
                 }
             }
         }
