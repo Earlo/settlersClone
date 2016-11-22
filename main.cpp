@@ -41,13 +41,11 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
-        view1.setCenter (camX + VIEWX/2, camY + VIEWY/2);
+        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
         window.clear();
 
-        unsigned int tux = (VIEWX/DRAWSIZE)+3;
-        unsigned int tuy = (VIEWY/DRAWSIZE)+3;
-        for ( unsigned int x = 0; x < tux; x++){
-            for ( unsigned int y = 0; y < tuy; y++){
+        for ( unsigned int x = 0; x < TILESTODRAWX; x++){
+            for ( unsigned int y = 0; y < TILESTODRAWY; y++){
                 int dx = x + camX/DRAWSIZE;
                 int dy = y + camY/DRAWSIZE;
                 if( dx > 0 && dx < WORLDX && dy > 0 && dy < WORLDY){
