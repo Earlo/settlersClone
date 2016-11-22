@@ -1,11 +1,10 @@
 #pragma once
 #include "Settler.h"
 
-class Settler {
 	Settler::Settler() {}
 
 	int Settler::get_x_position const {
-		return x:pos;
+		return x_pos;
 	}
 	int Settler::get_y_position const {
 		return y_pos;
@@ -28,6 +27,5 @@ class Settler {
 	void Settler::attack(const Building b);
 	void Settler::attack(const Settler s);
 	void Settler::gather(const Item i);
+	void build(Building b);
 	void Settler::idle();
-	
-};
