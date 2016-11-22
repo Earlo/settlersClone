@@ -2,4 +2,8 @@
 
 class AI : public PlayerInput {
 
+public:
+
+private:
+
 };

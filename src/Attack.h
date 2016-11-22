@@ -2,4 +2,8 @@
 
 class Attack : public Task {
 
+public:
+
+private:
+
 };

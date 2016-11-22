@@ -2,4 +2,8 @@
 
 class Map {
 
+public:
+
+private:
+
 };

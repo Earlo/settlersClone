@@ -2,4 +2,8 @@
 
 class PlayerInput {
 
+public:
+
+private:
+
 };

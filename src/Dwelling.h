@@ -2,4 +2,8 @@
 
 class Dwelling {
 
+public:
+
+private:
+
 };

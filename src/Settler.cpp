@@ -21,10 +21,10 @@ class Settler {
 	void Settler::collect(Resource r);
 	void Settler::occupy();
 	void Settler::idle();
-	void defend(Building b);
-	void attack(Building b);
-	void attack(Settler s);
-	bool has_weapon() const {
+	void Settler::defend(Building b);
+	void Settler::attack(Building b);
+	void Settler::attack(Settler s);
+	bool Settler::has_weapon() const {
 		return armed;
 	}
 

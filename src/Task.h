@@ -2,4 +2,8 @@
 
 class Task {
 
+public:
+
+private:
+
 };

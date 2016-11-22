@@ -2,4 +2,8 @@
 
 class Gather : public Task {
 
+public:
+
+private:
+
 };

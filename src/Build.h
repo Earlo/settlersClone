@@ -2,4 +2,8 @@
 
 class Build : public Task {
 
+public:
+
+private:
+
 };

@@ -2,4 +2,8 @@
 
 class Building {
 
+public:
+
+private:
+
 };

@@ -2,4 +2,8 @@
 
 class Game {
 
+public:
+
+private:
+
 };
