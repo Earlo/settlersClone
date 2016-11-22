@@ -4,17 +4,18 @@
 
 //#include "Tile.h"
 #include "src/mapGen/Map.h"
+#include "constants.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
-    sf::View view1(sf::FloatRect(0, 0, 600, 600));
+
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
+    sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     window.setView(view1);
     
     int camX = 0;
     int camY = 0;
-    
-    Map m = Map(500,500);
+    Map m = Map(WORLDX,WORLDY);
 
     std::cout<< m.w  <<","<< m.w<< std::endl;
 
@@ -28,26 +29,28 @@ int main()
         }
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            camX = std::min(std::max(0,camX-1),500*16);
+            camX = std::min(std::max(0,camX-MOVSPEED),SCROLLX);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-            camX = std::min(std::max(0,camX+1),500*16);
+            camX = std::min(std::max(0,camX+MOVSPEED),SCROLLX);
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-            camY = std::min(std::max(0,camY-1),500*16);
+            camY = std::min(std::max(0,camY-MOVSPEED),SCROLLY);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-            camY = std::min(std::max(0,camY+1),500*16);
+            camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
-        view1.setCenter (camX + 300, camY + 300);
+        view1.setCenter (camX + VIEWX/2, camY + VIEWY/2);
         window.clear();
 
-        for ( unsigned int x = 0; x < (600/16)+3; x++){
-            for ( unsigned int y = 0; y < (600/16)+3; y++){
-                int dx = x + camX/16;
-                int dy = y + camY/16;
-                if( dx > 0 && dx < 500 && dy > 0 && dy < 500){
+        unsigned int tux = (VIEWX/DRAWSIZE)+3;
+        unsigned int tuy = (VIEWY/DRAWSIZE)+3;
+        for ( unsigned int x = 0; x < tux; x++){
+            for ( unsigned int y = 0; y < tuy; y++){
+                int dx = x + camX/DRAWSIZE;
+                int dy = y + camY/DRAWSIZE;
+                if( dx > 0 && dx < WORLDX && dy > 0 && dy < WORLDY){
                     window.draw(m.at(dx,dy).shape);
                 }
             }

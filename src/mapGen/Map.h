@@ -41,7 +41,7 @@ public:
 		double w0 = 80.0;
 		double w1 = 30.0;
 		double w2 = 10.0;
-		double wm = 40.0;
+		//double wm = 40.0;
 
 		double wC = 30.0;
 		double tw = w0+w1+w2+wC;//+wm;

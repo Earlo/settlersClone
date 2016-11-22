@@ -1,0 +1,10 @@
+const int MOVSPEED = 16;
+const int DRAWSIZE = 1;
+const int SCREENX = 800;
+const int SCREENY = 600;
+const int VIEWX = 600;
+const int VIEWY = 600;
+const int WORLDX = 1000;
+const int WORLDY = 1000;
+const int SCROLLX = WORLDX * DRAWSIZE;
+const int SCROLLY = WORLDY * DRAWSIZE;

@@ -2,8 +2,8 @@
 #include <iostream>
 #include "Tile.h"
 
-int DRAWSIZE = 16;
 
+#include "../../constants.h"
 void Tile::refreshShape(){
 	//std::cout<<"asd";
 	this->shape.setPointCount(4);
