@@ -2,4 +2,8 @@
 
 class Stockpile {
 
+public:
+
+private:
+
 };
