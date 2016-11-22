@@ -12,4 +12,4 @@ const int SCROLLX = WORLDX * DRAWSIZE;
 const int SCROLLY = WORLDY * DRAWSIZE;
 
 const unsigned int TILESTODRAWX = (VIEWX/DRAWSIZE)+3;
-const unsigned int TILESTODRAWX = (VIEWY/DRAWSIZE)+3;
+const unsigned int TILESTODRAWY = (VIEWY/DRAWSIZE)+3;
