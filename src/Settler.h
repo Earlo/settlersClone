@@ -4,16 +4,19 @@ class Settler {
 
 public:
 	Settler() : {}
+	
 	int get_x_position const;
 	int get_y_position const;
-	Item get_inventory const;
-	void defend();
-	void attack(Building b);
-	void attack(Settler s);
 	bool has_weapon() const;
+	Item get_inventory const;
+	Task get_task() const;
 	void set_task(const Task t);
-	void collect(Item i);
-	void occupy();
+
+	void occupy(const Building b);
+	void defend(const Building b);
+	void attack(const Building b);
+	void attack(const Settler s);
+	void gather(const Item i);
 	void idle();
 
 private:
