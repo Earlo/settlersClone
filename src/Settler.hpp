@@ -26,6 +26,9 @@ public:
     void gather(const Item i);
     void idle();
 
+    void move(int x, int y);
+    void draw();
+
 private:
     int x_pos;
     int y_pos;

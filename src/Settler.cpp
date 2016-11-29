@@ -22,28 +22,57 @@
 	void Settler::set_task(const Task t) {
 		current_task = t;
 	}
-	void Settler::build(const Building b {
-		//Check required resources
-		//Get resource from nearest warehouse
-		//Carry to building
-		//Repeat until resources run out or building is done
+	void Settler::build(const Building b) {
+		/*
+		Check required resources
+		Get resource r from nearest warehouse
+		Move to b
+		b.add_resource(r);
+		Repeat until resources run out or building is done
+		*/
 	}
 	void Settler::occupy(const Building b) {
-		//Move settler to Building
-		//Add settler to inhabitant list
-		//Remove settler from map
+		/*
+		Move settler to b
+		b.add_inhabitant(this);
+		map.remove_settler(this);
+		*/
 	}
 	void Settler::defend(const Building b) {
-		//Get weapon if not armed
-		//Go to building
-		//Add settler to defenders
-		//Remove settler from map
+		/*
+		if (has_weapon() == false) {
+			gather(Weapon)
+		}
+		Move settler to b
+		b.add_defender(this);
+		map.remove_settler(this);
+		*/
 	}
 	void Settler::gather(const Item i) {
-		//If weapon, go to nearest weaponsmith with stock and get one
-		//Else find nearest resource; mine and carry it to the nearest warehouse
-		//Repeat
+		/*
+		if (i == Weapon) {
+			go to nearest weaponsmith with weapons in stock
+			weaponsmith.take_weapon();
+	  }
+		Else {
+			go to nearest resource i
+			resource.mine();
+			go to nearest stockpile
+			stockpile.store(i);
+		}
+		Repeat
+		*/
 	}
 	void Settler::idle() {
 		//Clear task
 	}
+
+	void Settler::move(int x, int y) {
+		/*
+		route r = pathfinder.get_route(get_x_position, get_y_position(), x, y);
+		Iterator::<Int, Int> nextPos = r.next();
+		x_pos = std::get<0>(nextPos)
+		y_pos = std::get<1>(nextPos)
+		*/
+	}
+	void Settler::draw();
