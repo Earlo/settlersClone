@@ -24,16 +24,22 @@
 	}
 	void Settler::build(const Building b) {
 		/*
-		Check required resources
-		Get resource r from nearest warehouse
-		Move to b
-		b.add_resource(r);
-		Repeat until resources run out or building is done
+		list rl = b.needed_resources(); Check required resources
+		list resource_list = rl.filter(_.amount > 0);
+		while (resource_list.size() > 0 && building.completed() != false)
+			list sl = map.building_list(Stockpile);
+			list stockpile_list = //List of stockpiles with required resources
+			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
+			move(stock.get_x_position, stock.get_y_position);
+			//Select required resource r at random from stockpile
+			stock.get_resource(r);
+			move(b.get_x_position, b.get_y_position);
+			b.add_resource(r);
 		*/
 	}
 	void Settler::occupy(const Building b) {
 		/*
-		Move settler to b
+		move(b.get_x_position, b.get_y_position);
 		b.add_inhabitant(this);
 		map.remove_settler(this);
 		*/
@@ -41,9 +47,9 @@
 	void Settler::defend(const Building b) {
 		/*
 		if (has_weapon() == false) {
-			gather(Weapon)
+			gather(Weapon);
 		}
-		Move settler to b
+		move(b.get_x_position, b.get_y_position);
 		b.add_defender(this);
 		map.remove_settler(this);
 		*/
@@ -51,28 +57,38 @@
 	void Settler::gather(const Item i) {
 		/*
 		if (i == Weapon) {
-			go to nearest weaponsmith with weapons in stock
-			weaponsmith.take_weapon();
+			list wl = map.building_list(Weaponsmith);
+			list l = wl.filter(_.weapons > 0);
+			Building wsmith = pathfinder.find_nearest(get_x_position(), get_y_position(), l);
+			move(wsmith.get_x_position, wsmith.get_y_position);
+			wsmith.take_weapon();
 	  }
 		Else {
-			go to nearest resource i
-			resource.mine();
-			go to nearest stockpile
-			stockpile.store(i);
+			while(get_task() == Gather) {
+				list rl = map.resource_list(i);
+				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
+				move(r.get_x_position, r.get_y_position);
+				r.mine();
+				list sl = map.building_list(Stockpile);
+				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
+				move(stock.get_x_position, stock.get_y_position);
+				b.store(i);
+			}
 		}
-		Repeat
 		*/
 	}
 	void Settler::idle() {
-		//Clear task
+		//current_task = Idle
 	}
 
 	void Settler::move(int x, int y) {
 		/*
 		route r = pathfinder.get_route(get_x_position, get_y_position(), x, y);
-		Iterator::<Int, Int> nextPos = r.next();
-		x_pos = std::get<0>(nextPos)
-		y_pos = std::get<1>(nextPos)
+		While (get_x_position() != x && get_y_position != y) {
+			Iterator::<Int, Int> nextPos = r.next();
+			x_pos = std::get<0>(nextPos)
+			y_pos = std::get<1>(nextPos)
+		}
 		*/
 	}
 	void Settler::draw();
