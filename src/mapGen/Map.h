@@ -1,12 +1,13 @@
 #include <random>
 #include <time.h>
 #include <math.h>
+
 #include <SFML/Graphics.hpp>
+//#include <SFML/Image.hpp>
 
 #include "perlin/PerlinNoise.h"
 #include "Tile.h"
 #include "../../constants.h"
-
 
 std::default_random_engine generator(time(NULL));
 std::uniform_int_distribution<int> distribution(1000000,9999999);
@@ -15,18 +16,23 @@ class Map{
 private:
 	std::vector<std::vector<Tile>> terrain;
 	sf::Image IMG;
+	sf::Texture TEXTURE;
 	//TODO make some sense in the way w and h are defined
 	//unsigned int _w;
 	//unsigned int _h;
 public:
 
+	sf::Sprite sprite;
 	unsigned int w;
 	unsigned int h;
 
 	Map( unsigned int _w, unsigned int _h ){
 		this->w = _w;
 		this->h = _h;
-		this->IMG.create (_w*, unsigned int height, const Color &color=Color(0, 0, 0))
+
+		//this->IMG.create( _w*DRAWSIZE, _h*DRAWSIZE);
+		this->IMG.create( _w, _h);
+
 	    std::cout << "doing a map of size " << _w << "," << _h << std::endl;
 	    //init three noise functions with different seeds
 		PerlinNoise pn0(distribution(generator));
@@ -40,7 +46,7 @@ public:
 
 		PerlinNoise pnO(distribution(generator));
 
-		double w0 = 80.0;
+		double w0 = 70.0;
 		double w1 = 30.0;
 		double w2 = 10.0;
 		//double wm = 40.0;
@@ -108,15 +114,13 @@ public:
 				terrain[i][j].refreshShape();
 			}
 		}
-
+		this->updateImg();
 	    std::cout << "done" << std::endl;
 	};
 	
 	Tile at(int x, int y){
 		return terrain[x][y];
 	};
-
-
 
 	std::vector<Tile> nextTo(int x, int y){
 		std::vector<Tile> ret;
@@ -131,5 +135,18 @@ public:
 		}
 		return ret;
 	};
+
+	void updateImg(){
+		for (unsigned int i = 0; i < this->w; i++){
+			for (unsigned int j = 0; j < this->h; j++){
+                this->IMG.setPixel(i, j, this->at(i,j).shape.getFillColor());
+            }
+        }
+        this->IMG.saveToFile("result.png");
+        this->TEXTURE.loadFromImage(this->IMG);
+        this->TEXTURE.setSmooth(true);
+		this->sprite.setTexture(this->TEXTURE, true);
+		this->sprite.setScale( DRAWSIZE, DRAWSIZE);
+	}
 
 };
