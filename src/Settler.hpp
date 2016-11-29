@@ -23,8 +23,6 @@ public:
     void build(const Building b);
     void occupy(const Building b);
     void defend(const Building b);
-    void attack(const Building b);
-    void attack(const Settler s);
     void gather(const Item i);
     void idle();
 

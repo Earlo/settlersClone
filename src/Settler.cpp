@@ -39,8 +39,6 @@
 		//Add settler to defenders
 		//Remove settler from map
 	}
-	void Settler::attack(const Building b) {}
-	void Settler::attack(const Settler s) {}
 	void Settler::gather(const Item i) {
 		//If weapon, go to nearest weaponsmith with stock and get one
 		//Else find nearest resource; mine and carry it to the nearest warehouse
