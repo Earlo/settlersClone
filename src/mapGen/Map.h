@@ -1,10 +1,11 @@
 #include <random>
 #include <time.h>
 #include <math.h>
-
-#include "Tile.h"
+#include <SFML/Graphics.hpp>
 
 #include "perlin/PerlinNoise.h"
+#include "Tile.h"
+#include "../../constants.h"
 
 
 std::default_random_engine generator(time(NULL));
@@ -13,6 +14,7 @@ std::uniform_int_distribution<int> distribution(1000000,9999999);
 class Map{
 private:
 	std::vector<std::vector<Tile>> terrain;
+	sf::Image IMG;
 	//TODO make some sense in the way w and h are defined
 	//unsigned int _w;
 	//unsigned int _h;
@@ -24,7 +26,7 @@ public:
 	Map( unsigned int _w, unsigned int _h ){
 		this->w = _w;
 		this->h = _h;
-
+		this->IMG.create (_w*, unsigned int height, const Color &color=Color(0, 0, 0))
 	    std::cout << "doing a map of size " << _w << "," << _h << std::endl;
 	    //init three noise functions with different seeds
 		PerlinNoise pn0(distribution(generator));
