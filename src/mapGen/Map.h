@@ -40,16 +40,18 @@ public:
 		PerlinNoise pn2(distribution(generator));
 		
 		PerlinNoise pnm(distribution(generator));
+		
 		//noise for wood and ore
 		PerlinNoise pnW0(distribution(generator));
 		PerlinNoise pnW1(distribution(generator));
 
 		PerlinNoise pnO(distribution(generator));
 
-		double w0 = 70.0;
+		double w0 = 60.0;
 		double w1 = 30.0;
-		double w2 = 10.0;
-		//double wm = 40.0;
+		double w2 = 15.0;
+
+		double wm = 40.0;
 
 		double wC = 30.0;
 		double tw = w0+w1+w2+wC;//+wm;
@@ -59,13 +61,13 @@ public:
 				double x = (double)j/((double)w) - 0.5;
 				double y = (double)i/((double)h) - 0.5;
 				// Typical Perlin noise
-				double k = 0;
+				double k = -10;
 				// 4 10 30
 				k += (w0*(2*(pn0.noise(6  * x, 6  * y, x*y) - 0.5)));
 				k += (w1*(2*(pn1.noise(12 * x, 12 * y, x*y) - 0.5)));
 				k += (w2*(2*(pn2.noise(36 * x, 36 * y, x*y) - 0.5)));
-				//double mountain = ( pnm.noise(20 * x, 20 * y, x*y) );
-				//k += 2*wm*pow(mountain,3);
+				double mountain = ( pnm.noise(20 * x, 20 * y, x*y) );
+				k += 2*wm*pow(mountain,3);
 				k += wC*( 1 - ( std::max(0.1,(2*x)*(2*x)) +std::max(0.1,(2*y)*(2*y))));
 				k = std::min((k/tw),1.0)*255;
 
