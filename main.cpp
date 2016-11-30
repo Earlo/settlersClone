@@ -34,7 +34,6 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             camX = std::min(std::max(0,camX+MOVSPEED),SCROLLX);
         }
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             camY = std::min(std::max(0,camY-MOVSPEED),SCROLLY);
         }
@@ -43,18 +42,9 @@ int main()
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
         window.clear();
-        //TODO change to something that's not so fucking slow : D
-        for ( unsigned int x = 0; x < TILESTODRAWX; x++){
-            int dx = x + camX/DRAWSIZE;
-            if( dx > 0 && dx < WORLDX ){
-                for ( unsigned int y = 0; y < TILESTODRAWY; y++){
-                    int dy = y + camY/DRAWSIZE;
-                    if( dy > 0 && dy < WORLDY){
-                        window.draw(m.at(dx,dy).shape);
-                    }
-                }
-            }
-        }
+        
+        window.draw(m.sprite);
+
         window.setView(view1);
         window.display();
     }
