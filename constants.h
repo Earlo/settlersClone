@@ -2,7 +2,7 @@
 #define CONSTS
 
 const int MOVSPEED = 1;
-const int DRAWSIZE = 3;
+const int DRAWSIZE = 4;
 const int SCREENX = 800;
 const int SCREENY = 600;
 const int VIEWX = 600;

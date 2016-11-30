@@ -4,7 +4,15 @@
 
 //#include "Tile.h"
 #include "src/mapGen/Map.h"
+
+
 #include "constants.h"
+
+//TODO DO THIS SOMEWHERE ELSE
+#include "src/Building.h"
+
+bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
+
 
 int main()
 {
@@ -17,7 +25,20 @@ int main()
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
 
+    //TODO dont sort here
+    std::sort (m.woods.begin(), m.woods.end(), sortByY);
+
     std::cout<< m.w  <<","<< m.w<< std::endl;
+
+
+
+
+
+    //TODO find out why I need to do this to see the sprites
+    //TODO fix this
+    for (unsigned int i = 0; i < m.woods.size(); i++){
+        m.woods[i].updateImg();
+    }
 
     while (window.isOpen())
     {
@@ -44,6 +65,10 @@ int main()
         window.clear();
         
         window.draw(m.sprite);
+
+        for (unsigned int i = 0; i < m.woods.size(); i++){
+            window.draw(m.woods[i].sprite);
+        }
 
         window.setView(view1);
         window.display();

@@ -7,20 +7,33 @@
 
 #include "perlin/PerlinNoise.h"
 #include "Tile.h"
+
+#include "../Tree.h"
+
+
 #include "../../constants.h"
 
 std::default_random_engine generator(time(NULL));
 std::uniform_int_distribution<int> distribution(1000000,9999999);
+std::uniform_real_distribution<double> chance(0,1.0);
 
 class Map{
 private:
 	std::vector<std::vector<Tile>> terrain;
 	sf::Image IMG;
 	sf::Texture TEXTURE;
+
+
+
 	//TODO make some sense in the way w and h are defined
 	//unsigned int _w;
 	//unsigned int _h;
 public:
+
+
+    //TODO make some more sensible way to store stuff drawn on screen
+    std::vector<Building> woods;
+
 
 	sf::Sprite sprite;
 	unsigned int w;
@@ -103,13 +116,14 @@ public:
 				}
 				if ( terrain[i][j].type() == Tile::Type::DIRT ){
 					double val = (pnW0.noise(10  * x, 8  * y, x*y) + pnW1.noise(8  * x, 10  * y, x*y))/2;
-					if ( val  > 0.55){
-						terrain[i][j].setType( Tile::Type::WOODS );
+					if ( (val > 0.55) && ( val > 0.5 + chance(generator) ) ) {
+						//terrain[i][j].setType( Tile::Type::WOODS );
+					    woods.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
+
 					}					
 				}
 			}
 		}
-
 	
 		for (unsigned int i = 0; i < _w; i++){
 			for (unsigned int j = 0; j < _h; j++){
