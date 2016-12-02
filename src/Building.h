@@ -10,11 +10,6 @@
 
 //should inherint something along line class Drawable or something(?)
 class Building {
-private:
-
-	//TODO an preload imgs and textures for objects and so on
-	sf::Image IMG;
-	sf::Texture TEXTURE;
 
 public:
 	sf::Sprite sprite;
@@ -25,16 +20,7 @@ public:
 		this->y_pos = y_position;
 	}
 
-	void updateImg(){
-        //TODO change everything here
 
-        this->IMG.loadFromFile("sprites/Tree1.png");
-        this->TEXTURE.loadFromImage(this->IMG);
-		this->sprite.setTexture(this->TEXTURE, true);
-		this->sprite.setScale( 1, 1);
-
-		this->sprite.setPosition( this->x_pos-8, this->y_pos-22 );
-	}
 
 	//virtual ~Building();
 	int get_x_position() const { return x_pos; }

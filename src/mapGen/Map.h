@@ -32,7 +32,7 @@ public:
 
 
     //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Building> woods;
+    std::vector<Tree> woods;
 
 
 	sf::Sprite sprite;
