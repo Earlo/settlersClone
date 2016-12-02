@@ -7,6 +7,7 @@
 
 
 #include "constants.h"
+#include "src/Game.h"
 
 //TODO DO THIS SOMEWHERE ELSE
 #include "src/Building.h"
@@ -40,6 +41,8 @@ int main()
         m.woods[i].updateImg();
     }
 
+    Game g = Game(m.woods);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -65,10 +68,8 @@ int main()
         window.clear();
         
         window.draw(m.sprite);
-
-        for (unsigned int i = 0; i < m.woods.size(); i++){
-            window.draw(m.woods[i].sprite);
-        }
+	
+	g.draw(window);
 
         window.setView(view1);
         window.display();
