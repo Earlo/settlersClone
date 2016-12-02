@@ -1,10 +1,10 @@
-#ifndef Settler_hpp
-#define Settler_hpp
+#ifndef Settler
+#define Settler
 
 #include <stdio.h>
-#include "Item.hpp"
-#include "Building.hpp"
-#include "Task.hpp"
+#include "Item.h"
+#include "Building.h"
+#include "Task.h"
 
 class Settler {
 

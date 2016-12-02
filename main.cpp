@@ -4,7 +4,15 @@
 
 //#include "Tile.h"
 #include "src/mapGen/Map.h"
+
+
 #include "constants.h"
+
+//TODO DO THIS SOMEWHERE ELSE
+#include "src/Building.h"
+
+bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
+
 
 int main()
 {
@@ -17,7 +25,20 @@ int main()
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
 
+    //TODO dont sort here
+    std::sort (m.woods.begin(), m.woods.end(), sortByY);
+
     std::cout<< m.w  <<","<< m.w<< std::endl;
+
+
+
+
+
+    //TODO find out why I need to do this to see the sprites
+    //TODO fix this
+    for (unsigned int i = 0; i < m.woods.size(); i++){
+        m.woods[i].updateImg();
+    }
 
     while (window.isOpen())
     {
@@ -34,7 +55,6 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             camX = std::min(std::max(0,camX+MOVSPEED),SCROLLX);
         }
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             camY = std::min(std::max(0,camY-MOVSPEED),SCROLLY);
         }
@@ -43,18 +63,13 @@ int main()
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
         window.clear();
-        //TODO change to something that's not so fucking slow : D
-        for ( unsigned int x = 0; x < TILESTODRAWX; x++){
-            int dx = x + camX/DRAWSIZE;
-            if( dx > 0 && dx < WORLDX ){
-                for ( unsigned int y = 0; y < TILESTODRAWY; y++){
-                    int dy = y + camY/DRAWSIZE;
-                    if( dy > 0 && dy < WORLDY){
-                        window.draw(m.at(dx,dy).shape);
-                    }
-                }
-            }
+        
+        window.draw(m.sprite);
+
+        for (unsigned int i = 0; i < m.woods.size(); i++){
+            window.draw(m.woods[i].sprite);
         }
+
         window.setView(view1);
         window.display();
     }
