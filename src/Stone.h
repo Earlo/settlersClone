@@ -21,9 +21,21 @@ public:
         this->updateImg();
 		}
 
+	void updateImg(){
+
+        this->IMG.loadFromFile("sprites/Stone.png");
+        this->TEXTURE.loadFromImage(this->IMG);
+		this->sprite.setTexture(this->TEXTURE, true);
+		this->sprite.setScale( 1, 1);
+
+		this->sprite.setPosition( this->x_pos-8, this->y_pos-22 );
+	}
     //virtual ~Stones () {} // 1)
 
 private:
+
+	sf::Image IMG;
+	sf::Texture TEXTURE;
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;

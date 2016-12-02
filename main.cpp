@@ -40,8 +40,14 @@ int main()
     for (unsigned int i = 0; i < m.woods.size(); i++){
         m.woods[i].updateImg();
     }
+    for (unsigned int i = 0; i < m.stones.size(); i++){
+        m.stones[i].updateImg();
+    }
+    for (unsigned int i = 0; i < m.iron_.size(); i++){
+        m.iron_[i].updateImg();
+    }
 
-    Game g = Game(m.woods);
+    Game g = Game(m.woods, m.stones, m.iron_);
 
     while (window.isOpen())
     {

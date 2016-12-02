@@ -1,7 +1,7 @@
 #ifndef CONSTS
 #define CONSTS
 
-const int MOVSPEED = 1;
+const int MOVSPEED = 3;
 const int DRAWSIZE = 4;
 const int SCREENX = 800;
 const int SCREENY = 600;

@@ -9,6 +9,8 @@
 #include "Tile.h"
 
 #include "../Tree.h"
+#include "../Stone.h"
+#include "../Iron.h"
 
 
 #include "../../constants.h"
@@ -32,7 +34,9 @@ public:
 
 
     //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Tree> woods;
+	std::vector<Tree> woods;
+	std::vector<Stone> stones;
+	std::vector<Iron> iron_;
 
 
 	sf::Sprite sprite;
@@ -91,7 +95,8 @@ public:
 		for (unsigned int i = 0; i < _w; i++){
 			for (unsigned int j = 0; j < _h; j++){
 				if (terrain[i][j].z >= 100){
-						terrain[i][j].setType( Tile::Type::ROCK );
+						//terrain[i][j].setType( Tile::Type::ROCK );
+						stones.push_back(Stone(i*DRAWSIZE,j*DRAWSIZE));
 					}
 				if (terrain[i][j].z >= 0){
 				    std::vector<Tile> v = nextTo(i,j);
@@ -111,7 +116,8 @@ public:
 				double y = (double)i/((double)h) - 0.5;
 				if ( terrain[i][j].type() == Tile::Type::ROCK ){
 					if ( pnO.noise(8  * x, 8  * y, x*y) > 0.4){
-						terrain[i][j].setType( Tile::Type::ORE );
+						//terrain[i][j].setType( Tile::Type::ORE );
+						iron_.push_back(Iron(i*DRAWSIZE,j*DRAWSIZE));
 					}
 				}
 				if ( terrain[i][j].type() == Tile::Type::DIRT ){
