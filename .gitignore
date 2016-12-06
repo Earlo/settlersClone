@@ -7,6 +7,7 @@
 *.o
 *.so
 
+
 main
 
 # Packages #
@@ -27,6 +28,9 @@ main
 *.log
 *.sql
 *.sqlite
+
+# Backups #
+*~
 
 # OS generated files #
 ######################
