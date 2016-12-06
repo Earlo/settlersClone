@@ -13,20 +13,20 @@ class Building {
 
 public:
 	sf::Sprite sprite;
-
+	
 	//Building(int x_position, int y_position) : x_pos(x_position), y_pos(y_position) { }
 	Building(int x_position, int y_position){
 		this->x_pos = x_position;
 		this->y_pos = y_position;
 	}
-
-
-
 	//virtual ~Building();
 	int get_x_position() const { return x_pos; }
 	int get_y_position() const { return y_pos; }
 	int get_size() const { return size; } // test
 	
+	
+	virtual void updateImg() {};
+
 	//void add_settler(Settler sett) { settlers_inside.push_back(sett); }
 
 	//unsigned int get_required_wood() const { return required_wood; }

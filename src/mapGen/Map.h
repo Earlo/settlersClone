@@ -32,7 +32,7 @@ public:
 
 
     //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Tree> woods;
+    std::vector<Building> stuff;
 
 
 	sf::Sprite sprite;
@@ -118,7 +118,7 @@ public:
 					double val = (pnW0.noise(10  * x, 8  * y, x*y) + pnW1.noise(8  * x, 10  * y, x*y))/2;
 					if ( (val > 0.55) && ( val > 0.5 + chance(generator) ) ) {
 						//terrain[i][j].setType( Tile::Type::WOODS );
-					    woods.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
+					    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
 
 					}					
 				}

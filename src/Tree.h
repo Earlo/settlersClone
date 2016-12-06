@@ -6,11 +6,10 @@
 
 #include "Building.h"
 
+#include "../assets.h"
 
 
 class Tree : public Building {
-
-
 public:
 
 	//sf::Sprite sprite;
@@ -22,12 +21,7 @@ public:
 		}
 
 	void updateImg(){
-
-        this->IMG.loadFromFile("sprites/Tree1.png");
-        this->TEXTURE.loadFromImage(this->IMG);
-		this->sprite.setTexture(this->TEXTURE, true);
-		this->sprite.setScale( 1, 1);
-
+		this->sprite.setTexture(ASSETHANDLER.TREETEX, true);
 		this->sprite.setPosition( this->x_pos-8, this->y_pos-22 );
 	}
 
@@ -35,8 +29,6 @@ public:
 
 private:
 
-	sf::Image IMG;
-	sf::Texture TEXTURE;
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;

@@ -21,27 +21,24 @@ int main()
     sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     window.setView(view1);
+    window.setFramerateLimit(60);
     
     int camX = 0;
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
 
     //TODO dont sort here
-    std::sort (m.woods.begin(), m.woods.end(), sortByY);
+    std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     std::cout<< m.w  <<","<< m.w<< std::endl;
 
+    Game g = Game(m.stuff);
 
-
-
-
-    //TODO find out why I need to do this to see the sprites
-    //TODO fix this
-    for (unsigned int i = 0; i < m.woods.size(); i++){
-        m.woods[i].updateImg();
-    }
-
-    Game g = Game(m.woods);
+    //just testing
+    sf::Clock clock;
+    float lastTime = clock.getElapsedTime().asSeconds();
+    float currentTime = clock.getElapsedTime().asSeconds();
+    float fps = 1.0;
 
     while (window.isOpen())
     {
@@ -66,13 +63,19 @@ int main()
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
         window.clear();
-        
+        //Draw terrain
         window.draw(m.sprite);
-	
-	g.draw(window);
-
+	    //Draw objects
+    	g.draw(window,view1);
         window.setView(view1);
         window.display();
+    
+        currentTime = clock.getElapsedTime().asSeconds();
+        fps = 1.f / (currentTime - lastTime);
+        //window.setTitle(std::to_string(fps));
+        lastTime = currentTime;
+        std::cout<<fps<<std::endl;
+
     }
 
     return 0;
