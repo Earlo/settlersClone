@@ -24,7 +24,7 @@ class AssetHandler{
 		IRONIMG.loadFromFile("sprites/Iron.png");
 		IRONTEX.loadFromImage(IRONIMG);
 		
-		FORTRESSIMG.loadFromFile("sprites/tower.png");
+		FORTRESSIMG.loadFromFile("sprites/Tree1.png");
 		FORTRESSTEX.loadFromImage(FORTRESSIMG);
 	}
 
