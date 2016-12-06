@@ -62,15 +62,20 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
-	if (event.type == sf::Event::MouseButtonPressed &&
-                     event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2i pos = sf::Mouse::getPosition(window);
-		Fortress fortress(pos.x + camX, pos.y - camY);
-		std::vector<Building>& builds = g.get_buildings();
-                builds.push_back(fortress);
-		std::cout << "does dis work" << std::endl;
-            }
+
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+	    
+        if (event.type == sf::Event::MouseButtonPressed &&
+            event.mouseButton.button == sf::Mouse::Left) {
+            
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
+    		Fortress fortress(pos.x + camX, pos.y + camY);
+    		std::vector<Building>& builds = g.get_buildings();
+            builds.push_back(fortress);
+            
+            //std::cout << pos.x + camX << ","<< pos.y + camY << std::endl;
+            
+            }
         window.clear();
         //Draw terrain
         window.draw(m.sprite);
