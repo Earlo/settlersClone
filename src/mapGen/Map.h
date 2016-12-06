@@ -9,6 +9,8 @@
 #include "Tile.h"
 
 #include "../Tree.h"
+#include "../Stone.h"
+#include "../Iron.h"
 
 
 #include "../../constants.h"
@@ -58,7 +60,7 @@ public:
 		PerlinNoise pnW0(distribution(generator));
 		PerlinNoise pnW1(distribution(generator));
 
-		PerlinNoise pnO(distribution(generator));
+		PerlinNoise pnO0(distribution(generator));
 
 		double w0 = 60.0;
 		double w1 = 30.0;
@@ -92,6 +94,7 @@ public:
 			for (unsigned int j = 0; j < _h; j++){
 				if (terrain[i][j].z >= 100){
 						terrain[i][j].setType( Tile::Type::ROCK );
+						//stones.push_back(Stone(i*DRAWSIZE,j*DRAWSIZE));
 					}
 				if (terrain[i][j].z >= 0){
 				    std::vector<Tile> v = nextTo(i,j);
@@ -109,18 +112,28 @@ public:
 			for (unsigned int j = 0; j < _h; j++){
 				double x = (double)j/((double)w) - 0.5;
 				double y = (double)i/((double)h) - 0.5;
+
+
 				if ( terrain[i][j].type() == Tile::Type::ROCK ){
-					if ( pnO.noise(8  * x, 8  * y, x*y) > 0.4){
-						terrain[i][j].setType( Tile::Type::ORE );
+					if (chance(generator) + terrain[i][j].z/516 > .8){
+						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
+							if ( .55 < chance(generator) ) {
+								stuff.push_back( Iron(i*DRAWSIZE,j*DRAWSIZE) );
+							}
+						}
+						else {
+						    stuff.push_back( Stone(i*DRAWSIZE,j*DRAWSIZE) );
+						}
 					}
 				}
-				if ( terrain[i][j].type() == Tile::Type::DIRT ){
+				else if ( terrain[i][j].type() == Tile::Type::DIRT ){
 					double val = (pnW0.noise(10  * x, 8  * y, x*y) + pnW1.noise(8  * x, 10  * y, x*y))/2;
-					if ( (val > 0.55) && ( val > 0.5 + chance(generator) ) ) {
-						//terrain[i][j].setType( Tile::Type::WOODS );
-					    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
-
-					}					
+					if (val > .55){
+						terrain[i][j].setType( Tile::Type::WOODS );
+						if ( val > .5 + chance(generator) ) {
+						    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
+						}					
+					}
 				}
 			}
 		}

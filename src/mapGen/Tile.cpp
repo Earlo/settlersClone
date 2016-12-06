@@ -20,7 +20,7 @@ void Tile::refreshShape(){
 	*/
 	switch(this->_type){
 		case Tile::Type::DIRT:
-			this->shape.setFillColor (sf::Color(67-z/4,255-z,67-z/4));
+			this->shape.setFillColor (sf::Color(91-z*30/100,231-z*127/100,77-z*20/100));
 			break;
 		case Tile::Type::WATER:
 			this->shape.setFillColor (sf::Color(67+z/4,67+z/4,255+z));

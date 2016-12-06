@@ -21,9 +21,15 @@ public:
         this->updateImg();
 		}
 
-    //virtual ~Stones () {} // 1)
+	void updateImg(){
+		this->sprite.setTexture(ASSETHANDLER.STONETEX, true);
+		this->sprite.setPosition( this->x_pos-ASSETHANDLER.STONEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.STONEIMG.getSize().y );
+	}
+
+    //virtual ~Stone () {} // 1)
 
 private:
+
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;

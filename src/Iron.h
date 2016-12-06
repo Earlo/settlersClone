@@ -21,9 +21,15 @@ public:
         this->updateImg();
 		}
 
+	void updateImg(){
+		this->sprite.setTexture(ASSETHANDLER.IRONTEX, true);
+		this->sprite.setPosition( this->x_pos-ASSETHANDLER.IRONIMG.getSize().x/2, this->y_pos-ASSETHANDLER.IRONIMG.getSize().y );
+	}
+
     //virtual ~Iron () {} // 1)
 
 private:
+
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;

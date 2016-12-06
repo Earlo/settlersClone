@@ -2,6 +2,8 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Tree.h"
+#include "Stone.h"
+#include "Iron.h"
 
 
 #include "../assets.h"
@@ -25,12 +27,10 @@ public:
 				window.draw(buildings[i].sprite);
 			}
 		}
-
 	}
 
-	std::vector<Building> get_trees(){return buildings;}
+	std::vector<Building> get_buildings(){return buildings;}
 	
-
 private:
 	std::vector<Building> buildings;
 

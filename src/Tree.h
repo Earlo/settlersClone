@@ -22,7 +22,7 @@ public:
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.TREETEX, true);
-		this->sprite.setPosition( this->x_pos-8, this->y_pos-22 );
+		this->sprite.setPosition( this->x_pos-ASSETHANDLER.TREEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.TREEIMG.getSize().y );
 	}
 
     //virtual ~Tree () {} // 1)

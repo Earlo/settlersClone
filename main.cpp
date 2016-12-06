@@ -74,7 +74,7 @@ int main()
         fps = 1.f / (currentTime - lastTime);
         //window.setTitle(std::to_string(fps));
         lastTime = currentTime;
-        std::cout<<fps<<std::endl;
+        //std::cout<<fps<<std::endl;
 
     }
 
