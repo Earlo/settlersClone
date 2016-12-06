@@ -93,8 +93,7 @@ public:
 		for (unsigned int i = 0; i < _w; i++){
 			for (unsigned int j = 0; j < _h; j++){
 				if (terrain[i][j].z >= 100){
-						terrain[i][j].setType( Tile::Type::ROCK );
-						//stones.push_back(Stone(i*DRAWSIZE,j*DRAWSIZE));
+					terrain[i][j].setType( Tile::Type::ROCK );
 					}
 				if (terrain[i][j].z >= 0){
 				    std::vector<Tile> v = nextTo(i,j);

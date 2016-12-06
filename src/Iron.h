@@ -29,7 +29,6 @@ public:
     //virtual ~Iron () {} // 1)
 
 private:
-
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;
