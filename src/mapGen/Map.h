@@ -170,7 +170,6 @@ public:
                 this->IMG.setPixel(i, j, this->at(i,j).shape.getFillColor());
             }
         }
-        this->IMG.saveToFile("result.png");
         this->TEXTURE.loadFromImage(this->IMG);
         this->TEXTURE.setSmooth(true);
 		this->sprite.setTexture(this->TEXTURE, true);
