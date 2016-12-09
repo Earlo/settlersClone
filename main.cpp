@@ -21,7 +21,14 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
-    window.setView(view1);
+    view1.setViewport(sf::FloatRect(0, 0, .75f, 1));
+
+    sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
+    menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(200, 800));
+    rectangle.setFillColor(sf::Color::Red);
+
     window.setFramerateLimit(60);
     
     int camX = 0;
@@ -78,10 +85,12 @@ int main()
             }
         window.clear();
         //Draw terrain
+	window.setView(menuView);
+	window.draw(rectangle);
+	window.setView(view1);
         window.draw(m.sprite);
 	    //Draw objects
     	g.draw(window,view1);
-        window.setView(view1);
         window.display();
     
         currentTime = clock.getElapsedTime().asSeconds();
