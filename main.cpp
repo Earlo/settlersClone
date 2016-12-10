@@ -12,6 +12,7 @@
 //TODO DO THIS SOMEWHERE ELSE
 #include "src/Building.h"
 #include "src/Fortress.h"
+#include "src/Menu.h"
 
 bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
 
@@ -25,9 +26,12 @@ int main()
 
     sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
     menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
-    sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(200, 800));
-    rectangle.setFillColor(sf::Color::Red);
+
+    sf::Texture texture;
+    if(!texture.loadFromFile("sprites/menutile.jpg")){
+        std::cout << "Error loading menu texture" << std::endl;
+    }
+    sf::Sprite sprite(texture);
 
     window.setFramerateLimit(60);
     
@@ -86,7 +90,6 @@ int main()
         window.clear();
         //Draw terrain
 	window.setView(menuView);
-	window.draw(rectangle);
 	window.setView(view1);
         window.draw(m.sprite);
 	    //Draw objects
