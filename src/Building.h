@@ -19,7 +19,8 @@ public:
 		this->x_pos = x_position;
 		this->y_pos = y_position;
 	}
-	//virtual ~Building();
+	virtual ~Building() {};
+	
 	int get_x_position() const { return x_pos; }
 	int get_y_position() const { return y_pos; }
 	int get_size() const { return size; } // test

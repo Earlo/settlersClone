@@ -17,7 +17,7 @@
 
 std::default_random_engine generator(time(NULL));
 std::uniform_int_distribution<int> distribution(1000000,9999999);
-std::uniform_real_distribution<double> chance(0,1.0);
+std::uniform_real_distribution<double> chance(0,1.f);
 
 class Map{
 private:
@@ -114,11 +114,10 @@ public:
 
 
 				if ( terrain[i][j].type() == Tile::Type::ROCK ){
-					if (chance(generator) + terrain[i][j].z/516 > .8){
+					//int hval = ((terrain[i][j].z-100)/512.f);
+					if (chance(generator) > 0.985){
 						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
-							if ( .55 < chance(generator) ) {
-								stuff.push_back( Iron(i*DRAWSIZE,j*DRAWSIZE) );
-							}
+							stuff.push_back( Iron(i*DRAWSIZE,j*DRAWSIZE) );
 						}
 						else {
 						    stuff.push_back( Stone(i*DRAWSIZE,j*DRAWSIZE) );
@@ -129,7 +128,7 @@ public:
 					double val = (pnW0.noise(10  * x, 8  * y, x*y) + pnW1.noise(8  * x, 10  * y, x*y))/2;
 					if (val > .55){
 						terrain[i][j].setType( Tile::Type::WOODS );
-						if ( val > .5 + chance(generator) ) {
+						if ( val > .55 + chance(generator) ) {
 						    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
 						}					
 					}
