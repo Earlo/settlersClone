@@ -5,7 +5,8 @@
 
 class Gather : public Task {
 public:
-	std::vector<Building> Targets;
+	std::vector<Building> targets;
+	Building returnPoint;
 private:
 
 };

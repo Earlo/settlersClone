@@ -4,19 +4,18 @@
 #include <SFML/Graphics.hpp>
 
 
-#include "Building.h"
+#include "Entity.h"
+
+#include "../assets.h"
 
 
-
-class Iron : public Building {
-
-
+class Iron : public Entity {
 public:
 
 	//sf::Sprite sprite;
 
 	Iron(int x_position, int y_position)
-		:Building(x_position, y_position){
+		:Entity(x_position, y_position){
 
         this->updateImg();
 		}

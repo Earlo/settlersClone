@@ -10,7 +10,6 @@ public:
 	void repair();
 	Fortress(int x_position, int y_position)
 		:Building(x_position, y_position){
-
         this->updateImg();
 		}
 

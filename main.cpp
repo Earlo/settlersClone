@@ -11,10 +11,11 @@
 #include "src/Game.h"
 
 //TODO DO THIS SOMEWHERE ELSE
-#include "src/Building.h"
+#include "src/Entity.h"
+#include "src/Settler.h"
 #include "src/Fortress.h"
 
-bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
+bool sortByY (Entity i,Entity j) { return (i.get_y_position()<j.get_y_position()); }
 
 
 int main()
@@ -25,6 +26,9 @@ int main()
     window.setView(view1);
     window.setFramerateLimit(60);
     
+
+    bool initted = false;
+
     int camX = 0;
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
@@ -33,6 +37,8 @@ int main()
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     std::cout<< m.w  <<","<< m.w<< std::endl;
+
+
 
     Game g = Game(m.stuff);
 
@@ -69,21 +75,29 @@ int main()
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 	    
         if (event.type == sf::Event::MouseButtonPressed &&
-            event.mouseButton.button == sf::Mouse::Left) {
+            event.mouseButton.button == sf::Mouse::Left && !initted) {
+            
+           
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
             
 
-            sf::Vector2i pos = sf::Mouse::getPosition(window);
-
-            int xpx = (pos.x + camX)/DRAWSIZE;
-            int ypx = (pos.y + camY)/DRAWSIZE;
+            //int xpx = (pos.x + camX)/DRAWSIZE;
+            //int ypx = (pos.y + camY)/DRAWSIZE;
+            /*
             std::cout << xpx << ","<< ypx << " -> ";
             std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
             std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
-        
-        	//Fortress fortress(pos.x + camX, pos.y + camY);
-    		//std::vector<Building>& builds = g.get_buildings();
-            //builds.push_back(fortress);
-            
+            */
+        	
+            Fortress fortress(pos.x + camX, pos.y + camY);
+            Settler setl0(pos.x + camX, pos.y + camY + 10)
+            Settler setl1(pos.x + camX, pos.y + camY + 10)
+    		std::vector<Entity>& builds = g.get_entities();
+            builds.push_back(fortress);
+            builds.push_back(setl0);
+            builds.push_back();
+
+            initted = true;
             
             }
         window.clear();

@@ -1,26 +1,33 @@
-#ifndef Settler
-#define Settler
+#ifndef SETTLER
+#define SETTLER
 
-#include <stdio.h>
 #include "Item.h"
 #include "Building.h"
-#include "Task.h"
+#include "logic/Task.h"
 
-class Settler {
+//forward declaration
+class Building;
 
+class Settler : public Entity {
 public:
-    Settler();
+    Settler(int x_position, int y_position)
+        :Entity(x_position, y_position){
 
-    ~Settler();
+        this->updateImg();
+        }
 
-    int get_x_position() const;
-    int get_y_position() const;
+    void updateImg(){
+        this->sprite.setTexture(ASSETHANDLER.SETTLERTEX, true);
+        this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
+    }
+
+
     bool has_weapon() const;
     Item get_inventory() const;
     Task get_task() const;
 
     void set_task(const Task t);
-    void build(const Building b);
+    void build( const Building b);
     void occupy(const Building b);
     void defend(const Building b);
     void gather(const Item i);
@@ -30,12 +37,11 @@ public:
     void draw();
 
 private:
-    int x_pos;
-    int y_pos;
     bool armed;
     Task current_task;
     Item inventory;
+
 };
 
+#endif
 
-#endif /* Settler_hpp */

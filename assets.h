@@ -8,11 +8,14 @@ class AssetHandler{
 	sf::Image STONEIMG;
 	sf::Image IRONIMG;
 	sf::Image FORTRESSIMG;
+	sf::Image SETTLERIMG;
 	
+
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
 	sf::Texture IRONTEX;
 	sf::Texture FORTRESSTEX;
+	sf::Texture SETTLERTEX;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -26,6 +29,10 @@ class AssetHandler{
 		
 		FORTRESSIMG.loadFromFile("sprites/tower.png");
 		FORTRESSTEX.loadFromImage(FORTRESSIMG);
+
+		SETTLERIMG.loadFromFile("sprites/settler0.png");
+		SETTLERTEX.loadFromImage(SETTLERIMG);
+
 	}
 
 };

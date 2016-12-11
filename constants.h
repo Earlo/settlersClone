@@ -11,8 +11,8 @@ const int CAMCENTERX = VIEWX/2;
 const int CAMCENTERY = VIEWY/2;
 //const int WORLDX = 1000;
 //const int WORLDY = 1000;
-const int WORLDX = 200;
-const int WORLDY = 200;
+const int WORLDX = 300;
+const int WORLDY = 300;
 
 const int SCROLLX = WORLDX * DRAWSIZE - SCREENX;
 const int SCROLLY = WORLDY * DRAWSIZE - SCREENY;

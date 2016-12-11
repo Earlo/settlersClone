@@ -39,7 +39,7 @@ public:
 
 
     //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Building> stuff;
+    std::vector<Entity> stuff;
 
 
 	sf::Sprite sprite;

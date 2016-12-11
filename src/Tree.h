@@ -4,18 +4,16 @@
 #include <SFML/Graphics.hpp>
 
 
-#include "Building.h"
+#include "Entity.h"
 
 #include "../assets.h"
 
 
-class Tree : public Building {
+class Tree : public Entity {
 public:
 
-	//sf::Sprite sprite;
-
 	Tree(int x_position, int y_position)
-		:Building(x_position, y_position){
+		:Entity(x_position, y_position){
 
         this->updateImg();
 		}
@@ -28,7 +26,6 @@ public:
     //virtual ~Tree () {} // 1)
 
 private:
-
 	int health_points = 5;
 	int size = 2;
 	int required_settlers = 0;
