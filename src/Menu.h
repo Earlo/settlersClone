@@ -20,19 +20,19 @@ public:
 		infobox2.setPosition(10,10);
 
 		button1.setSize(sf::Vector2f(85, 90));
-		button1.setFillColor(sf::Color::Green);
+		button1.setTexture(&ASSETHANDLER.FORTICONT, true);
 		button1.setPosition(10,200);
 
 		button2.setSize(sf::Vector2f(85, 90));
-		button2.setFillColor(sf::Color::Green);
+		button2.setTexture(&ASSETHANDLER.WSICONT, true);
 		button2.setPosition(105,200);
 
 		button3.setSize(sf::Vector2f(85, 90));
-		button3.setFillColor(sf::Color::Green);
+		button3.setTexture(&ASSETHANDLER.FHOUSEICONT, true);
 		button3.setPosition(10,300);
 
 		button4.setSize(sf::Vector2f(85, 90));
-		button4.setFillColor(sf::Color::Green);
+		button4.setTexture(&ASSETHANDLER.FHOUSEICONT, true);
 		button4.setPosition(105,300);
 
 		infobox.setSize(sf::Vector2f(180, 190));
