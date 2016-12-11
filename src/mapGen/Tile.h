@@ -1,4 +1,7 @@
-//dunno if we should have all drawing stuff done in one place, but I am doing something here as a test anyway
+#ifndef TILE
+#define TILE
+
+
 #include <SFML/Graphics.hpp>
 
 class Tile{
@@ -41,6 +44,7 @@ private:
 
 };
 
+#endif
 
 
 

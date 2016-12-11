@@ -21,6 +21,11 @@ public:
         this->updateImg();
 		}
 
+	void updateImg(){
+		this->sprite.setTexture(ASSETHANDLER.IRONTEX, true);
+		this->sprite.setPosition( this->x_pos-ASSETHANDLER.IRONIMG.getSize().x/2, this->y_pos-ASSETHANDLER.IRONIMG.getSize().y );
+	}
+
     //virtual ~Iron () {} // 1)
 
 private:

@@ -4,6 +4,7 @@
 
 //#include "Tile.h"
 #include "src/mapGen/Map.h"
+#include "src/logic/SpatialHash.h"
 
 
 #include "constants.h"
@@ -11,6 +12,7 @@
 
 //TODO DO THIS SOMEWHERE ELSE
 #include "src/Building.h"
+#include "src/Fortress.h"
 
 bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
 
@@ -21,27 +23,26 @@ int main()
     sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     window.setView(view1);
+    window.setFramerateLimit(60);
     
     int camX = 0;
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
 
     //TODO dont sort here
-    std::sort (m.woods.begin(), m.woods.end(), sortByY);
+    std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     std::cout<< m.w  <<","<< m.w<< std::endl;
 
+    Game g = Game(m.stuff);
 
+    SHASH.initHash( m );
 
-
-
-    //TODO find out why I need to do this to see the sprites
-    //TODO fix this
-    for (unsigned int i = 0; i < m.woods.size(); i++){
-        m.woods[i].updateImg();
-    }
-
-    Game g = Game(m.woods);
+    //just testing
+    //sf::Clock clock;
+    //float lastTime = clock.getElapsedTime().asSeconds();
+    //float currentTime = clock.getElapsedTime().asSeconds();
+    //float fps = 1.0;
 
     while (window.isOpen())
     {
@@ -64,15 +65,41 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
-        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
-        window.clear();
-        
-        window.draw(m.sprite);
-	
-	g.draw(window);
 
+        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+	    
+        if (event.type == sf::Event::MouseButtonPressed &&
+            event.mouseButton.button == sf::Mouse::Left) {
+            
+
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
+
+            int xpx = (pos.x + camX)/DRAWSIZE;
+            int ypx = (pos.y + camY)/DRAWSIZE;
+            std::cout << xpx << ","<< ypx << " -> ";
+            std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
+            std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
+        
+        	//Fortress fortress(pos.x + camX, pos.y + camY);
+    		//std::vector<Building>& builds = g.get_buildings();
+            //builds.push_back(fortress);
+            
+            
+            }
+        window.clear();
+        //Draw terrain
+        window.draw(m.sprite);
+	    //Draw objects
+    	g.draw(window,view1);
         window.setView(view1);
         window.display();
+    
+        //currentTime = clock.getElapsedTime().asSeconds();
+        //fps = 1.f / (currentTime - lastTime);
+        //window.setTitle(std::to_string(fps));
+        //lastTime = currentTime;
+        //std::cout<<fps<<std::endl;
+
     }
 
     return 0;

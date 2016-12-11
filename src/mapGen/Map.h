@@ -1,3 +1,7 @@
+#ifndef MAP
+#define MAP
+
+
 #include <random>
 #include <time.h>
 #include <math.h>
@@ -9,18 +13,21 @@
 #include "Tile.h"
 
 #include "../Tree.h"
+#include "../Stone.h"
+#include "../Iron.h"
 
 
 #include "../../constants.h"
 
 std::default_random_engine generator(time(NULL));
 std::uniform_int_distribution<int> distribution(1000000,9999999);
-std::uniform_real_distribution<double> chance(0,1.0);
+std::uniform_real_distribution<double> chance(0,1.f);
 
 class Map{
 private:
 	std::vector<std::vector<Tile>> terrain;
 	sf::Image IMG;
+	sf::Image PASSABLE;
 	sf::Texture TEXTURE;
 
 
@@ -32,7 +39,7 @@ public:
 
 
     //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Tree> woods;
+    std::vector<Building> stuff;
 
 
 	sf::Sprite sprite;
@@ -58,7 +65,7 @@ public:
 		PerlinNoise pnW0(distribution(generator));
 		PerlinNoise pnW1(distribution(generator));
 
-		PerlinNoise pnO(distribution(generator));
+		PerlinNoise pnO0(distribution(generator));
 
 		double w0 = 60.0;
 		double w1 = 30.0;
@@ -91,7 +98,7 @@ public:
 		for (unsigned int i = 0; i < _w; i++){
 			for (unsigned int j = 0; j < _h; j++){
 				if (terrain[i][j].z >= 100){
-						terrain[i][j].setType( Tile::Type::ROCK );
+					terrain[i][j].setType( Tile::Type::ROCK );
 					}
 				if (terrain[i][j].z >= 0){
 				    std::vector<Tile> v = nextTo(i,j);
@@ -109,18 +116,27 @@ public:
 			for (unsigned int j = 0; j < _h; j++){
 				double x = (double)j/((double)w) - 0.5;
 				double y = (double)i/((double)h) - 0.5;
+
+
 				if ( terrain[i][j].type() == Tile::Type::ROCK ){
-					if ( pnO.noise(8  * x, 8  * y, x*y) > 0.4){
-						terrain[i][j].setType( Tile::Type::ORE );
+					//int hval = ((terrain[i][j].z-100)/512.f);
+					if (chance(generator) > 0.985){
+						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
+							stuff.push_back( Iron(i*DRAWSIZE,j*DRAWSIZE) );
+						}
+						else {
+						    stuff.push_back( Stone(i*DRAWSIZE,j*DRAWSIZE) );
+						}
 					}
 				}
-				if ( terrain[i][j].type() == Tile::Type::DIRT ){
+				else if ( terrain[i][j].type() == Tile::Type::DIRT ){
 					double val = (pnW0.noise(10  * x, 8  * y, x*y) + pnW1.noise(8  * x, 10  * y, x*y))/2;
-					if ( (val > 0.55) && ( val > 0.5 + chance(generator) ) ) {
-						//terrain[i][j].setType( Tile::Type::WOODS );
-					    woods.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
-
-					}					
+					if (val > .55){
+						terrain[i][j].setType( Tile::Type::WOODS );
+						if ( val > .55 + chance(generator) ) {
+						    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
+						}					
+					}
 				}
 			}
 		}
@@ -158,7 +174,6 @@ public:
                 this->IMG.setPixel(i, j, this->at(i,j).shape.getFillColor());
             }
         }
-        this->IMG.saveToFile("result.png");
         this->TEXTURE.loadFromImage(this->IMG);
         this->TEXTURE.setSmooth(true);
 		this->sprite.setTexture(this->TEXTURE, true);
@@ -166,3 +181,5 @@ public:
 	}
 
 };
+
+#endif
