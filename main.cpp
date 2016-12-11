@@ -6,6 +6,7 @@
 #include "src/Game.h"
 #include "src/Building.h"
 #include "src/Fortress.h"
+#include "src/FamilyHouse.h"
 #include "src/Menu.h"
 
 bool sortByY (Building i,Building j) { return (i.get_y_position()<j.get_y_position()); }
@@ -47,6 +48,7 @@ int main()
     std::cout<< m.w  <<","<< m.w<< std::endl;
 
     Game g = Game(m.stuff);
+    std::vector<Building>& builds = g.get_buildings();
 
     //just testing
     sf::Clock clock;
@@ -86,7 +88,7 @@ int main()
 
             sf::Vector2i pos = sf::Mouse::getPosition(window);
     	    Fortress fortress(pos.x + camX, pos.y + camY);
-    	    std::vector<Building>& builds = g.get_buildings();
+            game_started = true;
             builds.push_back(fortress);
 
             
@@ -98,7 +100,19 @@ int main()
 		        std::cout << "yolololo" << std::endl;
                         button1_pressed = true;
 	        }
-        }        
+        }
+
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+	        if(event.type == sf::Event::MouseButtonPressed &&
+                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == true){
+                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+		        sf::Vector2i pos(mouseX,mouseY);
+                        FamilyHouse fhouse(pos.x + camX, pos.y + camY);
+                        builds.push_back(fhouse);
+                        button1_pressed = false;
+                        }
+	        }
+        }         
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 	    
