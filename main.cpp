@@ -52,7 +52,7 @@ int main(){
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     Game g = Game(m.stuff);
-    std::vector<Entity>& builds = g.get_entities();
+    std::vector<Entity>& entities = g.get_entities();
 
     SHASH.initHash( m );
 
@@ -91,11 +91,11 @@ int main(){
 
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
-	    
-        if (event.type == sf::Event::MouseButtonPressed &&
-            event.mouseButton.button == sf::Mouse::Left && !initted) {
             
-           
+
+	if (event.type == sf::Event::MouseButtonPressed &&
+            event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
+
             sf::Vector2i pos = sf::Mouse::getPosition(window);
             
 
@@ -114,24 +114,13 @@ int main(){
             p.settlers.push_back(setl1);
             //p.tasks.push_back( );
 
-    		std::vector<Entity>& builds = g.get_entities();
-            builds.push_back(fortress);
-            builds.push_back(setl0);
-            builds.push_back(setl1);
+            entities.push_back(fortress);
+            entities.push_back(setl0);
+            entities.push_back(setl1);
             initted = true;        
         	//Fortress fortress(pos.x + camX, pos.y + camY);
     		//std::vector<Building>& builds = g.get_buildings();
-            //builds.push_back(fortress);
-        }
-            
-
-	if (event.type == sf::Event::MouseButtonPressed &&
-            event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false) {
-
-            sf::Vector2i pos = sf::Mouse::getPosition(window);
-    	    Fortress fortress(pos.x + camX, pos.y + camY);
-            game_started = true;
-            builds.push_back(fortress);            
+            //builds.push_back(fortress);    
             }
 
         if(mouseX > 610 && mouseX < 790 && mouseY > 300 && mouseY < 380){ // is mouse on button check
@@ -148,7 +137,7 @@ int main(){
                         if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         FamilyHouse fhouse(pos.x + camX, pos.y + camY);
-                        builds.push_back(fhouse);
+                        entities.push_back(fhouse);
                         button1_pressed = false;
                         }
 	        }
