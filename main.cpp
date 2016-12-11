@@ -21,8 +21,7 @@
 bool sortByY (Entity i,Entity j) { return (i.get_y_position()<j.get_y_position()); }
 
 
-int main()
-{
+int main(){
 
     sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
@@ -31,11 +30,6 @@ int main()
     sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
     menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
     Menu menu;
-    sf::Texture texture;
-    if(!texture.loadFromFile("sprites/menutile.jpg")){
-        std::cout << "Error loading menu texture" << std::endl;
-    }
-
     window.setFramerateLimit(60);
     
 
@@ -58,7 +52,7 @@ int main()
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     Game g = Game(m.stuff);
-    std::vector<Building>& builds = g.get_buildings();
+    std::vector<Entity>& builds = g.get_entities();
 
     SHASH.initHash( m );
 
@@ -128,6 +122,7 @@ int main()
         	//Fortress fortress(pos.x + camX, pos.y + camY);
     		//std::vector<Building>& builds = g.get_buildings();
             //builds.push_back(fortress);
+        }
             
 
 	if (event.type == sf::Event::MouseButtonPressed &&
@@ -176,8 +171,8 @@ int main()
         //fps = 1.f / (currentTime - lastTime);
 
        
-        currentTime = clock.getElapsedTime().asSeconds();
-        fps = 1.f / (currentTime - lastTime);
+        //currentTime = clock.getElapsedTime().asSeconds();
+        //fps = 1.f / (currentTime - lastTime);
 
         //window.setTitle(std::to_string(fps));
         //lastTime = currentTime;
