@@ -9,6 +9,8 @@ class Menu
 public:
 	Menu() {};
 
+	sf::RectangleShape get_button1() {return button1;}
+
 	void drawmenu(sf::RenderWindow &window){
     		background.setSize(sf::Vector2f(200, 800));
 		background.setTexture(&ASSETHANDLER.MENU_BACKGROUND_TEX, true);

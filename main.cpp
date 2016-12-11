@@ -1,15 +1,9 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
-//#include "Tile.h"
 #include "src/mapGen/Map.h"
-
-
 #include "constants.h"
 #include "src/Game.h"
-
-//TODO DO THIS SOMEWHERE ELSE
 #include "src/Building.h"
 #include "src/Fortress.h"
 #include "src/Menu.h"
@@ -36,6 +30,15 @@ int main()
     
     int camX = 0;
     int camY = 0;
+
+    int mouseX;
+    int mouseY;
+
+    bool game_started = false;
+
+    //buttonchecks
+    bool button1_pressed = false;
+
     Map m = Map(WORLDX,WORLDY);
 
     //TODO dont sort here
@@ -52,13 +55,18 @@ int main()
     float fps = 1.0;
 
     while (window.isOpen())
-    {
+    {	
+
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+	if (event.type == sf::Event::MouseMoved) {
+                mouseX = event.mouseMove.x;
+                mouseY = event.mouseMove.y;
+            }
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             camX = std::min(std::max(0,camX-MOVSPEED),SCROLLX);
@@ -73,19 +81,27 @@ int main()
             camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
 
-        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
-	    
-        if (event.type == sf::Event::MouseButtonPressed &&
-            event.mouseButton.button == sf::Mouse::Left) {
-            
+	if (event.type == sf::Event::MouseButtonPressed &&
+            event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false) {
+
             sf::Vector2i pos = sf::Mouse::getPosition(window);
-    		Fortress fortress(pos.x + camX, pos.y + camY);
-    		std::vector<Building>& builds = g.get_buildings();
+    	    Fortress fortress(pos.x + camX, pos.y + camY);
+    	    std::vector<Building>& builds = g.get_buildings();
             builds.push_back(fortress);
-            
-            //std::cout << pos.x + camX << ","<< pos.y + camY << std::endl;
+
             
             }
+
+        if(mouseX > 610 && mouseX < 790 && mouseY > 300 && mouseY < 380){ // is mouse on button check
+	        if(event.type == sf::Event::MouseButtonPressed &&
+                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == false){
+		        std::cout << "yolololo" << std::endl;
+                        button1_pressed = true;
+	        }
+        }        
+
+        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+	    
         window.clear();
 
 	window.setView(menuView);
