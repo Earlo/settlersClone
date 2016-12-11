@@ -15,6 +15,8 @@
 #include "src/Settler.h"
 #include "src/Fortress.h"
 
+#include "src/logic/HumanPlayer.h"
+
 bool sortByY (Entity i,Entity j) { return (i.get_y_position()<j.get_y_position()); }
 
 
@@ -32,13 +34,9 @@ int main()
     int camX = 0;
     int camY = 0;
     Map m = Map(WORLDX,WORLDY);
-
+    HumanPlayer p = HumanPlayer();
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
-
-    std::cout<< m.w  <<","<< m.w<< std::endl;
-
-
 
     Game g = Game(m.stuff);
 
@@ -90,12 +88,16 @@ int main()
             */
         	
             Fortress fortress(pos.x + camX, pos.y + camY);
-            Settler setl0(pos.x + camX, pos.y + camY + 10)
-            Settler setl1(pos.x + camX, pos.y + camY + 10)
+            Settler setl0(pos.x + camX, pos.y + camY + 10);
+            Settler setl1(pos.x + camX, pos.y + camY + 10);
+            p.settlers.push_back(setl0);
+            p.settlers.push_back(setl1);
+            //p.tasks.push_back( );
+
     		std::vector<Entity>& builds = g.get_entities();
             builds.push_back(fortress);
             builds.push_back(setl0);
-            builds.push_back();
+            builds.push_back(setl1);
 
             initted = true;
             

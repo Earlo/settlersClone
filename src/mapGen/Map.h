@@ -12,10 +12,7 @@
 #include "perlin/PerlinNoise.h"
 #include "Tile.h"
 
-#include "../Tree.h"
-#include "../Stone.h"
-#include "../Iron.h"
-
+#include "../Resource.h"
 
 #include "../../constants.h"
 
@@ -122,10 +119,10 @@ public:
 					//int hval = ((terrain[i][j].z-100)/512.f);
 					if (chance(generator) > 0.985){
 						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
-							stuff.push_back( Iron(i*DRAWSIZE,j*DRAWSIZE) );
+							stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON) );
 						}
 						else {
-						    stuff.push_back( Stone(i*DRAWSIZE,j*DRAWSIZE) );
+						    stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE) );
 						}
 					}
 				}
@@ -134,7 +131,7 @@ public:
 					if (val > .55){
 						terrain[i][j].setType( Tile::Type::WOODS );
 						if ( val > .55 + chance(generator) ) {
-						    stuff.push_back( Tree(i*DRAWSIZE,j*DRAWSIZE) );
+							stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE) );
 						}					
 					}
 				}

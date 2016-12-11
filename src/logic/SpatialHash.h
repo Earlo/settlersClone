@@ -3,9 +3,7 @@
 
 #include "../../constants.h"
 
-#include "../Tree.h"
-#include "../Stone.h"
-#include "../Iron.h"
+#include "../Resource.h"
 
 #include "../mapGen/Map.h"
 
@@ -21,20 +19,20 @@ public:
 	std::vector<std::vector<double>> WEIGHT;
 
 	//actually makes sense to have seperate hash for each, since looking for trees or stone is completely different task
-    std::vector<std::vector<std::vector<Tree>>> trees;
-    std::vector<std::vector<std::vector<Stone>>> stone;
-    std::vector<std::vector<std::vector<Iron>>> iron;
+    std::vector<std::vector<std::vector<Resource>>> trees;
+    std::vector<std::vector<std::vector<Resource>>> stone;
+    std::vector<std::vector<std::vector<Resource>>> iron;
 
 	SpatialHash( ){
 		for (unsigned int i = 0; i < HASHX; i++){
-			trees.push_back( std::vector<std::vector<Tree>>() );
-			stone.push_back( std::vector<std::vector<Stone>>() );
-			iron.push_back( std::vector<std::vector<Iron>>() );
+			trees.push_back( std::vector<std::vector<Resource>>() );
+			stone.push_back( std::vector<std::vector<Resource>>() );
+			iron.push_back( std::vector<std::vector<Resource>>() );
 			WEIGHT.push_back( std::vector<double>() );
 			for (unsigned int j = 0; j < HASHY; j++){
-				trees[i].push_back( std::vector<Tree>() );
-				stone[i].push_back( std::vector<Stone>() );
-				iron[i].push_back( std::vector<Iron>() );
+				trees[i].push_back( std::vector<Resource>() );
+				stone[i].push_back( std::vector<Resource>() );
+				iron[i].push_back( std::vector<Resource>() );
 				WEIGHT[i].push_back( -1.f );
 			}
 		}
