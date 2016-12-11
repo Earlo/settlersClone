@@ -4,6 +4,7 @@
 
 //#include "Tile.h"
 #include "src/mapGen/Map.h"
+#include "src/logic/SpatialHash.h"
 
 
 #include "constants.h"
@@ -35,11 +36,13 @@ int main()
 
     Game g = Game(m.stuff);
 
+    SHASH.initHash( m );
+
     //just testing
-    sf::Clock clock;
-    float lastTime = clock.getElapsedTime().asSeconds();
-    float currentTime = clock.getElapsedTime().asSeconds();
-    float fps = 1.0;
+    //sf::Clock clock;
+    //float lastTime = clock.getElapsedTime().asSeconds();
+    //float currentTime = clock.getElapsedTime().asSeconds();
+    //float fps = 1.0;
 
     while (window.isOpen())
     {
@@ -68,12 +71,19 @@ int main()
         if (event.type == sf::Event::MouseButtonPressed &&
             event.mouseButton.button == sf::Mouse::Left) {
             
+
             sf::Vector2i pos = sf::Mouse::getPosition(window);
-    		Fortress fortress(pos.x + camX, pos.y + camY);
-    		std::vector<Building>& builds = g.get_buildings();
-            builds.push_back(fortress);
+
+            int xpx = (pos.x + camX)/DRAWSIZE;
+            int ypx = (pos.y + camY)/DRAWSIZE;
+            std::cout << xpx << ","<< ypx << " -> ";
+            std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
+            std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
+        
+        	//Fortress fortress(pos.x + camX, pos.y + camY);
+    		//std::vector<Building>& builds = g.get_buildings();
+            //builds.push_back(fortress);
             
-            //std::cout << pos.x + camX << ","<< pos.y + camY << std::endl;
             
             }
         window.clear();
@@ -84,10 +94,10 @@ int main()
         window.setView(view1);
         window.display();
     
-        currentTime = clock.getElapsedTime().asSeconds();
-        fps = 1.f / (currentTime - lastTime);
+        //currentTime = clock.getElapsedTime().asSeconds();
+        //fps = 1.f / (currentTime - lastTime);
         //window.setTitle(std::to_string(fps));
-        lastTime = currentTime;
+        //lastTime = currentTime;
         //std::cout<<fps<<std::endl;
 
     }

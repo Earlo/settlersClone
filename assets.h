@@ -18,10 +18,10 @@ class AssetHandler{
 		TREEIMG.loadFromFile("sprites/Tree1.png");
 		TREETEX.loadFromImage(TREEIMG);
 
-		STONEIMG.loadFromFile("sprites/Stone.png");
+		STONEIMG.loadFromFile("sprites/Stone0.png");
 		STONETEX.loadFromImage(STONEIMG);
 
-		IRONIMG.loadFromFile("sprites/Iron.png");
+		IRONIMG.loadFromFile("sprites/Iron0.png");
 		IRONTEX.loadFromImage(IRONIMG);
 		
 		FORTRESSIMG.loadFromFile("sprites/tower.png");

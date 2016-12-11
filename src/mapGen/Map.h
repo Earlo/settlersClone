@@ -1,3 +1,7 @@
+#ifndef MAP
+#define MAP
+
+
 #include <random>
 #include <time.h>
 #include <math.h>
@@ -23,6 +27,7 @@ class Map{
 private:
 	std::vector<std::vector<Tile>> terrain;
 	sf::Image IMG;
+	sf::Image PASSABLE;
 	sf::Texture TEXTURE;
 
 
@@ -176,3 +181,5 @@ public:
 	}
 
 };
+
+#endif

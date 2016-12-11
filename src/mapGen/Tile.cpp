@@ -1,8 +1,7 @@
 
-#include <iostream>
+//#include <iostream>
+
 #include "Tile.h"
-
-
 #include "../../constants.h"
 void Tile::refreshShape(){
 	//std::cout<<"asd";
@@ -18,7 +17,7 @@ void Tile::refreshShape(){
 	shape.setPoint(2, sf::Vector2f(DRAWSIZE*(x-1)+1, DRAWSIZE*(y-1)+1));
 	shape.setPoint(3, sf::Vector2f(DRAWSIZE*(x  ), DRAWSIZE*(y-1)+1));
 	*/
-	switch(this->_type){
+	switch(this->type()){
 		case Tile::Type::DIRT:
 			this->shape.setFillColor (sf::Color(91-z*30/100,231-z*127/100,77-z*20/100));
 			break;
