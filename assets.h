@@ -8,11 +8,13 @@ class AssetHandler{
 	sf::Image STONEIMG;
 	sf::Image IRONIMG;
 	sf::Image FORTRESSIMG;
+	sf::Image MENU_BACKGROUND_IMG;
 	
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
 	sf::Texture IRONTEX;
 	sf::Texture FORTRESSTEX;
+	sf::Texture MENU_BACKGROUND_TEX;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -26,6 +28,10 @@ class AssetHandler{
 		
 		FORTRESSIMG.loadFromFile("sprites/tower.png");
 		FORTRESSTEX.loadFromImage(FORTRESSIMG);
+
+		MENU_BACKGROUND_IMG.loadFromFile("sprites/menutile.png");
+		MENU_BACKGROUND_TEX.loadFromImage(MENU_BACKGROUND_IMG);
+		MENU_BACKGROUND_TEX.setRepeated(true);
 	}
 
 };
