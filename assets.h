@@ -11,6 +11,8 @@ class AssetHandler{
 	sf::Image SETTLERIMG;	
 	sf::Image MENU_BACKGROUND_IMG;
 	sf::Image FHOUSEIMG;
+	sf::Image WEPSMITHIMG;
+	sf::Image CASTLEIMG;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -19,6 +21,8 @@ class AssetHandler{
 	sf::Texture SETTLERTEX;
 	sf::Texture MENU_BACKGROUND_TEX;
 	sf::Texture FHOUSETEX;
+	sf::Texture WEPSMITHTEX;
+	sf::Texture CASTLETEX;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -41,6 +45,12 @@ class AssetHandler{
 
 		FHOUSEIMG.loadFromFile("sprites/familyhouse.png");
 		FHOUSETEX.loadFromImage(FHOUSEIMG);
+
+		WEPSMITHIMG.loadFromFile("sprites/weaponsmith.png");
+		WEPSMITHTEX.loadFromImage(WEPSMITHIMG);
+
+		CASTLEIMG.loadFromFile("sprites/tower.png");
+		CASTLETEX.loadFromImage(CASTLEIMG);
 	}
 
 };

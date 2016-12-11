@@ -12,6 +12,7 @@
 #include "src/Entity.h"
 #include "src/Settler.h"
 #include "src/Fortress.h"
+#include "src/Castle.h"
 #include "src/FamilyHouse.h"
 #include "src/Menu.h"
 #include "src/logic/HumanPlayer.h"
@@ -107,20 +108,18 @@ int main(){
             std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
             */
         	
-            Fortress fortress(pos.x + camX, pos.y + camY);
+            Castle castle(pos.x + camX, pos.y + camY);
             Settler setl0(pos.x + camX, pos.y + camY + 10);
             Settler setl1(pos.x + camX, pos.y + camY + 10);
             p.settlers.push_back(setl0);
             p.settlers.push_back(setl1);
             //p.tasks.push_back( );
 
-            entities.push_back(fortress);
+            entities.push_back(castle);
             entities.push_back(setl0);
             entities.push_back(setl1);
             initted = true;        
-        	//Fortress fortress(pos.x + camX, pos.y + camY);
-    		//std::vector<Building>& builds = g.get_buildings();
-            //builds.push_back(fortress);    
+
             }
 
         if(mouseX > 610 && mouseX < 790 && mouseY > 300 && mouseY < 380){ // is mouse on button check
