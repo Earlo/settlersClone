@@ -26,12 +26,11 @@ int main()
 
     sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
     menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
-
+    Menu menu;
     sf::Texture texture;
     if(!texture.loadFromFile("sprites/menutile.jpg")){
         std::cout << "Error loading menu texture" << std::endl;
     }
-    sf::Sprite sprite(texture);
 
     window.setFramerateLimit(60);
     
@@ -88,14 +87,15 @@ int main()
             
             }
         window.clear();
-        //Draw terrain
+
 	window.setView(menuView);
+	menu.drawmenu(window);
+
 	window.setView(view1);
-        window.draw(m.sprite);
-	    //Draw objects
-    	g.draw(window,view1);
+        window.draw(m.sprite); //Draw terrain
+        g.draw(window,view1); //Draw objects
         window.display();
-    
+       
         currentTime = clock.getElapsedTime().asSeconds();
         fps = 1.f / (currentTime - lastTime);
         //window.setTitle(std::to_string(fps));
