@@ -19,7 +19,7 @@
 		return current_task;
 	}
 
-	void Settler::set_task(const Task t) {
+	void Settler::set_task(const Settler::TType t) {
 		current_task = t;
 	}
 	void Settler::build(const Building b) {
@@ -72,7 +72,7 @@
 		b.add_defender(this);
 		game.remove_settler(this);
 	}
-	void Settler::gather(const Item i) {
+	void Settler::gather(const Resource i) {
 		if (i == Weapon) {
 			list wl = game.get_weaponsmiths();
 			list l = wl.filter(_.weapons > 0);
