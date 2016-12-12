@@ -1,6 +1,5 @@
 #pragma once
 #include "Building.h"
-#include "Weapon.h"
 
 #include <SFML/Graphics.hpp>
 #include "../assets.h"
@@ -11,7 +10,7 @@ class Weaponsmith : public Building {
 public:
 	void make_weapon();
 	void take_weapon();
-	FamilyHouse(int x_position, int y_position)
+	Weaponsmith(int x_position, int y_position)
 		:Building(x_position, y_position){
 
         this->updateImg();

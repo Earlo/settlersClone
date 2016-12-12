@@ -16,6 +16,8 @@ class AssetHandler{
 	sf::Image FHOUSEICON;
 	sf::Image FORTICON;
 	sf::Image WSICON;
+	sf::Image WAREIMG;
+	sf::Image WAREICON;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -29,6 +31,8 @@ class AssetHandler{
 	sf::Texture FHOUSEICONT;
 	sf::Texture FORTICONT;
 	sf::Texture WSICONT;
+	sf::Texture WARETEX;
+	sf::Texture WAREICONT;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -66,6 +70,13 @@ class AssetHandler{
 
 		WSICON.loadFromFile("sprites/weaponsmithICON.png");
 		WSICONT.loadFromImage(WSICON);
+
+		WAREICON.loadFromFile("sprites/warehouseICON.png");
+		WAREICONT.loadFromImage(WAREICON);
+
+		WAREIMG.loadFromFile("sprites/warehouse.png");
+		WARETEX.loadFromImage(WAREIMG);
+
 
 	}
 

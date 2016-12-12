@@ -12,6 +12,8 @@
 #include "src/Entity.h"
 #include "src/Settler.h"
 #include "src/Fortress.h"
+#include "src/Warehouse.h"
+#include "src/Weaponsmith.h"
 #include "src/Castle.h"
 #include "src/FamilyHouse.h"
 #include "src/Menu.h"
@@ -45,7 +47,10 @@ int main(){
     bool game_started = false;
 
     //buttonchecks
-    bool button1_pressed = false;
+    bool b1_pressed = false;
+    bool b2_pressed = false;
+    bool b3_pressed = false;
+    bool b4_pressed = false;
 
     Map m = Map(WORLDX,WORLDY);
     HumanPlayer p = HumanPlayer();
@@ -90,12 +95,76 @@ int main(){
             camY = std::min(std::max(0,camY+MOVSPEED),SCROLLY);
         }
 
+	//FORTRESS BUTTON
+        if(menu.button1_clicked(event, mouseX, mouseY, b1_pressed) == 1 && game_started == true){
+		        std::cout << "yolololo" << std::endl;
+                        b1_pressed = true;
+	}
+        
 
-        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
-            
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1_pressed == true){
+                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+		        sf::Vector2i pos(mouseX,mouseY);
+                        Fortress fort(pos.x + camX, pos.y + camY);
+                        entities.push_back(fort);
+                        b1_pressed = false;
+                        }
+	        }
+        }         
+	
+	//WEAPONSMITH BUTTON
+	if(menu.button2_clicked(event, mouseX, mouseY, b2_pressed) == 1 && game_started == true){
+		        std::cout << "wepsmith" << std::endl;
+                        b2_pressed = true;
+	}
+        
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2_pressed == true){
+                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+		        sf::Vector2i pos(mouseX,mouseY);
+                        Weaponsmith ws(pos.x + camX, pos.y + camY);
+                        entities.push_back(ws);
+                        b2_pressed = false;
+                        }
+	        }
+        }
 
-	if (event.type == sf::Event::MouseButtonPressed &&
-            event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
+	//FAMILYHOUSE BUTTON
+	if(menu.button3_clicked(event, mouseX, mouseY, b3_pressed) == 1 && game_started == true){
+		        std::cout << "fam house" << std::endl;
+                        b3_pressed = true;
+	}
+        
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3_pressed == true){
+                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+		        sf::Vector2i pos(mouseX,mouseY);
+                        FamilyHouse fhouse(pos.x + camX, pos.y + camY);
+                        entities.push_back(fhouse);
+                        b3_pressed = false;
+                        }
+	        }
+        }
+
+	//WAREHOUSE BUTTON
+	if(menu.button4_clicked(event, mouseX, mouseY, b4_pressed) == 1 && game_started == true){
+		        std::cout << "ware" << std::endl;
+                        b4_pressed = true;
+	}
+        
+
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4_pressed == true){
+                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+		        sf::Vector2i pos(mouseX,mouseY);
+                        Warehouse ware(pos.x + camX, pos.y + camY);
+                        entities.push_back(ware);
+                        b4_pressed = false;
+                        }
+	        }
+        }
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
 
             sf::Vector2i pos = sf::Mouse::getPosition(window);
             
@@ -121,27 +190,7 @@ int main(){
             initted = true;
 	    game_started = true;        
 
-            }
-
-        if(mouseX > 610 && mouseX < 790 && mouseY > 300 && mouseY < 380){ // is mouse on button check
-	        if(event.type == sf::Event::MouseButtonPressed &&
-                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == false && game_started == true){
-		        std::cout << "yolololo" << std::endl;
-                        button1_pressed = true;
-	        }
         }
-
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
-	        if(event.type == sf::Event::MouseButtonPressed &&
-                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == true){
-                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
-		        sf::Vector2i pos(mouseX,mouseY);
-                        FamilyHouse fhouse(pos.x + camX, pos.y + camY);
-                        entities.push_back(fhouse);
-                        button1_pressed = false;
-                        }
-	        }
-        }         
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 
