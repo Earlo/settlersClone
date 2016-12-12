@@ -118,13 +118,14 @@ int main(){
             entities.push_back(castle);
             entities.push_back(setl0);
             entities.push_back(setl1);
-            initted = true;        
+            initted = true;
+	    game_started = true;        
 
             }
 
         if(mouseX > 610 && mouseX < 790 && mouseY > 300 && mouseY < 380){ // is mouse on button check
 	        if(event.type == sf::Event::MouseButtonPressed &&
-                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == false){
+                    event.mouseButton.button == sf::Mouse::Left && button1_pressed == false && game_started == true){
 		        std::cout << "yolololo" << std::endl;
                         button1_pressed = true;
 	        }

@@ -13,6 +13,9 @@ class AssetHandler{
 	sf::Image FHOUSEIMG;
 	sf::Image WEPSMITHIMG;
 	sf::Image CASTLEIMG;
+	sf::Image FHOUSEICON;
+	sf::Image FORTICON;
+	sf::Image WSICON;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -23,6 +26,9 @@ class AssetHandler{
 	sf::Texture FHOUSETEX;
 	sf::Texture WEPSMITHTEX;
 	sf::Texture CASTLETEX;
+	sf::Texture FHOUSEICONT;
+	sf::Texture FORTICONT;
+	sf::Texture WSICONT;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -51,6 +57,16 @@ class AssetHandler{
 
 		CASTLEIMG.loadFromFile("sprites/tower.png");
 		CASTLETEX.loadFromImage(CASTLEIMG);
+
+		FHOUSEICON.loadFromFile("sprites/familyhouseICON.png");
+		FHOUSEICONT.loadFromImage(FHOUSEICON);
+
+		FORTICON.loadFromFile("sprites/towerICON.png");
+		FORTICONT.loadFromImage(FORTICON);
+
+		WSICON.loadFromFile("sprites/weaponsmithICON.png");
+		WSICONT.loadFromImage(WSICON);
+
 	}
 
 };
