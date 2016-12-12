@@ -46,7 +46,7 @@ class AssetHandler{
 		SETTLERIMG.loadFromFile("sprites/settler0.png");
 		SETTLERTEX.loadFromImage(SETTLERIMG);
 
-		MENU_BACKGROUND_IMG.loadFromFile("sprites/menutile.jpg");
+		MENU_BACKGROUND_IMG.loadFromFile("sprites/menutile.png");
 		MENU_BACKGROUND_TEX.loadFromImage(MENU_BACKGROUND_IMG);
 
 		FHOUSEIMG.loadFromFile("sprites/familyhouse.png");
