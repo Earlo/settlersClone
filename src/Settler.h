@@ -2,17 +2,23 @@
 #define SETTLER
 
 #include "Item.h"
-#include "Building.h"
-#include "logic/Task.h"
+#include "Resource.h"
+//#include "logic/Task.h"
 
 //forward declaration
 //class Building;
 
 class Settler : public Entity {
 public:
-    Settler(int x_position, int y_position)
+
+    enum class TType { BUILD, GATHERW, GATHERS, GATHERI, IDLE };
+
+    Settler(int x_position, int y_position )
         :Entity(x_position, y_position){
 
+        //Task current_task(Settler::TType::IDLE);
+        //Task t(Task::TType::IDLE);
+        this->current_task = Settler::TType::IDLE;
         this->updateImg();
         }
 
@@ -22,24 +28,40 @@ public:
     }
 
 
+    void update(){
+        switch (this->current_task) {
+        case Settler::TType::GATHERW:
+            if ()
+            this->gather()
+            break;
+        case Settler::TType::GATHERS:
+            break;
+        case Settler::TType::GATHERI:
+            break;
+        }
+
+    }
+
     bool has_weapon() const;
     Item get_inventory() const;
-    Task get_task() const;
 
-    void set_task(const Task t);
+    void set_task(const Settler::TType t);
     void build( const Building b);
     void occupy(const Building b);
     void defend(const Building b);
-    void gather(const Item i);
+    void gather(const Resource r);
     void idle();
 
     void move(int x, int y);
     void draw();
 
+    Settler::TType current_task;
+
 private:
+    
     bool armed;
-    Task current_task;
     Item inventory;
+    Resource Nearest;
 
 };
 

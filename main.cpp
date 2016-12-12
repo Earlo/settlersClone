@@ -209,8 +209,11 @@ int main(){
             */
         	
             Castle castle(pos.x + camX, pos.y + camY);
-            Settler setl0(pos.x + camX, pos.y + camY + 10);
+            Settler setl0(pos.x + camX +10, pos.y + camY);
             Settler setl1(pos.x + camX, pos.y + camY + 10);
+
+            setl0.current_task = Settler::TType::GATHERW;
+            setl1.current_task = Settler::TType::GATHERW;
             p.settlers.push_back(setl0);
             p.settlers.push_back(setl1);
             //p.tasks.push_back( );
@@ -224,6 +227,11 @@ int main(){
         }
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+
+
+        //do stuff player does
+        p.update();
+
 
         window.clear();
 
