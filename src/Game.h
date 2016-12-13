@@ -35,8 +35,9 @@ public:
 	int& get_stoners(){return stoners;}
 	int& get_ironers(){return ironers;}
 	int& get_idlers(){return idle;}
-	void increase_woodcutters(int& wood){
-		wood++;
+
+	void increase_woodcutters(){
+		this->woodcutters = this->woodcutters + 1;
 	}
 
 	std::vector<Entity>& get_entities(){return entities;}

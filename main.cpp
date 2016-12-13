@@ -73,7 +73,7 @@ int main(){
 
     while (window.isOpen())
     {	
-	//std::cout << wood << std::endl;
+	std::cout << wood << std::endl;
 	//wood++;
 	//std::cout << mouseX << std::endl;
 	//std::cout << mouseY << std::endl;
@@ -173,22 +173,22 @@ int main(){
 	
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 	if(menu.increase_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 	if(menu.increase_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 	if(menu.decrease_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 	if(menu.decrease_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 	if(menu.decrease_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters(wood);
+		g.increase_woodcutters();
 	}
 
 
