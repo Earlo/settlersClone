@@ -26,10 +26,12 @@
 		int req_wood = b.get_required_wood();
 		int req_stone = b.get_required_stone();
 		int req_iron = b.get_required_iron();
-		Building stock = game.get_stockpile();
 
 		//TODO: Switch between resources at random
 		while (req_wood > 0 && get_construction_status() == true) {
+			list sl = game.get_stockpile_list();
+			list stockpile_list = sl.filter(_.wood > 0)
+			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_wood();
 			move(b.get_x_position, b.get_y_position);
@@ -37,6 +39,9 @@
 			req_wood = b.get_required_wood();
 		}
 		while (req_stone > 0 && get_construction_status() == true) {
+			list sl = game.get_stockpile_list();
+			list stockpile_list = sl.filter(_.stone > 0)
+			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_stone();
 			move(b.get_x_position, b.get_y_position);
@@ -44,6 +49,9 @@
 			req_stone = b.get_required_stone();
 		}
 		while (req_iron > 0 && get_construction_status() == true) {
+			list sl = game.get_stockpile_list();
+			list stockpile_list = sl.filter(_.iron > 0)
+			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_iron();
 			move(b.get_x_position, b.get_y_position);
@@ -89,7 +97,8 @@
 				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
 				move(r.get_x_position, r.get_y_position);
 				r.mine();
-				Building stock = game.get_stockpile();
+				list sl = game.stockpile_list();
+				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
 				move(stock.get_x_position, stock.get_y_position);
 				b.store(i);
 			}
