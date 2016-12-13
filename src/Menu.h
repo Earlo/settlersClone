@@ -3,11 +3,22 @@
 #include "../assets.h"
 
 #include "../constants.h"
+#include "Game.h"
+
 
 class Menu
 {
 public:
 	Menu() {};
+
+	/*if(!font.loadFromFile("arial.ttf")){
+		//handle error
+	}
+	wood_amount.setFont(font);
+	wood_amount.setSize(15);
+	wood_amount.setString("loL");
+	wood_amount.setPos(670,10);*/
+	
 
 	int button1_clicked(sf::Event event, int x, int y, bool& b1_pressed){ 
 		if(x > 610 && x < 695 && y > 200 && y < 290){
@@ -39,7 +50,15 @@ public:
                 }
                 else return 0;
 	}
-
+	int increase1(sf::Event event, int x, int y){
+		if(x > 0 && x < 800 && y > 0 && y < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				std::cout << "works" << std::endl;
+				return 1;
+			
+			}		
+		}
+	}	
 
 	void drawmenu(sf::RenderWindow &window){
     		
@@ -77,10 +96,12 @@ public:
 		window.draw(button2);
 		window.draw(button3);
 		window.draw(button4);
+		window.draw(wood_amount);
 	}
 
 
 private:
+	sf::Text wood_amount;
 	sf::RectangleShape background;
 	sf::RectangleShape infobox;
 	sf::RectangleShape infobox2;

@@ -58,8 +58,9 @@ int main(){
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     Game g = Game(m.stuff);
+    int wood = g.get_woodcutters();
     std::vector<Entity>& entities = g.get_entities();
-
+    
     SHASH.initHash( m );
 
     //just testing
@@ -70,7 +71,7 @@ int main(){
 
     while (window.isOpen())
     {	
-	std::cout << mouseY << std::endl;
+	std::cout << wood << std::endl;
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -164,6 +165,14 @@ int main(){
                         }
 	        }
         }
+	
+	//WOOD CUTTING INCREASE
+	if(menu.increase1(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+
+
+	//CASTLE SPAWN
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
 
             sf::Vector2i pos = sf::Mouse::getPosition(window);
@@ -188,6 +197,7 @@ int main(){
             entities.push_back(setl0);
             entities.push_back(setl1);
             initted = true;
+	    g.set_control();
 	    game_started = true;        
 
         }

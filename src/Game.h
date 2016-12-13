@@ -30,10 +30,19 @@ public:
 			}
 		}
 	}
+	void set_control(){
+		this->woodcutters = 0;
+	}
+
+	int& get_woodcutters(){return woodcutters;}
+	void increase_woodcutters(int& wood){
+		wood++;
+	}
 
 	std::vector<Entity>& get_entities(){return entities;}
 	
 private:
 	std::vector<Entity> entities;
+	int woodcutters = 0;
 
 };
