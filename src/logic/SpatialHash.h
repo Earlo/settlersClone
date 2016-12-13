@@ -1,11 +1,13 @@
-#ifndef SHASH
-#define SHAHS
+#ifndef SHASH_H
+#define SHAHS_H
 
 #include "../../constants.h"
 
 #include "../Resource.h"
 
 #include "../mapGen/Map.h"
+
+#include "math.h"
 
 //#include ""
 class SpatialHash{
@@ -81,6 +83,22 @@ public:
 			}
 		}
 		*/
+		for(unsigned int i = 0; i < m.resot.size(); i++){
+			std::cout << m.resot[i].get_x_position()<<"    "<< i << "     " << m.resot.size() << std::endl;
+			switch (m.resot[i].get_resource_type()) {
+				case Resource::RType::TREE:
+					trees[floor(m.resot[i].get_x_position()/HASHRES)][floor(m.resot[i].get_y_position()/HASHRES)].push_back(m.resot[i]);
+					break;
+				case Resource::RType::STONE:
+					stone[floor(m.resot[i].get_x_position()/HASHRES)][floor(m.resot[i].get_y_position()/HASHRES)].push_back(m.resot[i]);
+					break;
+				case Resource::RType::IRON:
+					iron[floor(m.resot[i].get_x_position()/HASHRES)][floor(m.resot[i].get_y_position()/HASHRES)].push_back(m.resot[i]);
+					break;
+
+			}
+		}
+
 	}
 };
 
