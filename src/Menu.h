@@ -42,11 +42,12 @@ public:
 
 
 	void drawmenu(sf::RenderWindow &window){
-    		background.setSize(sf::Vector2f(200, 800));
+    		
+		background.setSize(sf::Vector2f(200, 800));
 		background.setTexture(&ASSETHANDLER.MENU_BACKGROUND_TEX, true);
 
 		infobox2.setSize(sf::Vector2f(180, 180));
-		infobox2.setFillColor(sf::Color::Blue);
+		infobox2.setTexture(&ASSETHANDLER.CONTROLPANELTEX, true);
 		infobox2.setPosition(10,10);
 
 		button1.setSize(sf::Vector2f(85, 90));
@@ -66,7 +67,7 @@ public:
 		button4.setPosition(105,300);
 
 		infobox.setSize(sf::Vector2f(180, 190));
-		infobox.setFillColor(sf::Color::Blue);
+		infobox.setTexture(&ASSETHANDLER.INFOTEX, true);
 		infobox.setPosition(10,400);
 
 		window.draw(background);

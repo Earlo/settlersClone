@@ -70,7 +70,7 @@ int main(){
 
     while (window.isOpen())
     {	
-
+	std::cout << mouseY << std::endl;
         sf::Event event;
         while (window.pollEvent(event))
         {

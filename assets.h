@@ -18,6 +18,8 @@ class AssetHandler{
 	sf::Image WSICON;
 	sf::Image WAREIMG;
 	sf::Image WAREICON;
+	sf::Image CONTROLPANELIMG;
+	sf::Image INFOIMG;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -33,6 +35,8 @@ class AssetHandler{
 	sf::Texture WSICONT;
 	sf::Texture WARETEX;
 	sf::Texture WAREICONT;
+	sf::Texture CONTROLPANELTEX;
+	sf::Texture INFOTEX;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -59,7 +63,7 @@ class AssetHandler{
 		WEPSMITHIMG.loadFromFile("sprites/weaponsmith.png");
 		WEPSMITHTEX.loadFromImage(WEPSMITHIMG);
 
-		CASTLEIMG.loadFromFile("sprites/tower.png");
+		CASTLEIMG.loadFromFile("sprites/castle.png");
 		CASTLETEX.loadFromImage(CASTLEIMG);
 
 		FHOUSEICON.loadFromFile("sprites/familyhouseICON.png");
@@ -77,6 +81,11 @@ class AssetHandler{
 		WAREIMG.loadFromFile("sprites/warehouse.png");
 		WARETEX.loadFromImage(WAREIMG);
 
+		CONTROLPANELIMG.loadFromFile("sprites/controlpanel.png");
+		CONTROLPANELTEX.loadFromImage(CONTROLPANELIMG);
+
+		INFOIMG.loadFromFile("sprites/blankpanel.png");
+		INFOTEX.loadFromImage(INFOIMG);
 
 	}
 
