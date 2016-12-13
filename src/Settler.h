@@ -9,7 +9,7 @@
 class Settler {
 
 public:
-    Settler();
+    Settler(Game g);
 
     ~Settler();
 
