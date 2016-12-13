@@ -9,7 +9,7 @@
 class Settler {
 
 public:
-    Settler();
+    Settler(Game g);
 
     ~Settler();
 
@@ -30,6 +30,7 @@ public:
     void draw();
 
 private:
+    
     int x_pos;
     int y_pos;
     bool armed;
