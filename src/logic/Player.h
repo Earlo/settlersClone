@@ -9,9 +9,9 @@ public:
 	//std::vector<Task> tasks;
 
 	void update(){
-		for (unsigned int i = 0; i < settlers.size(); i++){
-			settlers[i].update();
-		}
+		//for (unsigned int i = 0; i < settlers.size(); i++){
+		//	settlers[i].update();
+		//}
 	}
 private:
 	

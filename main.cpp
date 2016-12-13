@@ -9,7 +9,6 @@
 #include "src/Game.h"
 
 //TODO DO THIS SOMEWHERE ELSE
-#include "src/Entity.h"
 #include "src/Settler.h"
 #include "src/Fortress.h"
 #include "src/Castle.h"
@@ -116,6 +115,7 @@ int main(){
             setl1.current_task = Settler::TType::GATHERW;
             p.settlers.push_back(setl0);
             p.settlers.push_back(setl1);
+            setl1.update();
             //p.tasks.push_back( );
 
             entities.push_back(castle);

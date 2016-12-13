@@ -1,15 +1,25 @@
-#pragma once
+#include <iostream>
 #include "Settler.h"
-
-	Settler::Settler() {}
-
-	int Settler::get_x_position() const {
-		return x_pos;
-	}
-	int Settler::get_y_position() const {
-		return y_pos;
-	}
-	bool Settler::has_weapon() const {
+	/*
+    void Settler::update(){
+        switch (this->current_task) {
+        case Settler::TType::GATHERW:
+        	/*
+            if (this->target.size() == 0){
+                break;
+            }
+            else{
+                this->gather();
+            }
+            break;
+        case Settler::TType::GATHERS:
+            break;
+        case Settler::TType::GATHERI:
+            break;
+        }
+    }
+    */
+	/*bool Settler::has_weapon() const {
 		return armed;
 	}
 	Item Settler::get_inventory() const {
@@ -72,7 +82,9 @@
 		b.add_defender(this);
 		game.remove_settler(this);
 	}
-	void Settler::gather(const Resource i) {
+	*/
+	void Settler::gather() {
+		/*
 		if (i == Weapon) {
 			list wl = game.get_weaponsmiths();
 			list l = wl.filter(_.weapons > 0);
@@ -80,30 +92,35 @@
 			move(wsmith.get_x_position, wsmith.get_y_position);
 			wsmith.take_weapon();
 	  }
-		Else {
-			while(get_task() == Gather) {
-				if (i == Tree) {
-					list rl = game.get_trees();
-				}
-				else if (i == Stone) {
-					list rl = game.get_stones();
-				}
-				else if (i == Iron) {
-					list rl = game.get_irons();
-				}
-				else {
-					throw "Unknown resource!";
-				}
-				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
-				move(r.get_x_position, r.get_y_position);
-				r.mine();
-				list sl = game.stockpile_list();
-				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
-				move(stock.get_x_position, stock.get_y_position);
-				b.store(i);
-			}
+		else {
+			*/
+			//while(get_task() == Gather) {
+		std::cout<<"vittu"<<std::endl;
+		/*Resource i = this->target[0];
+		if (i == Tree) {
+			list rl = game.get_trees();
 		}
+		else if (i == Stone) {
+			list rl = game.get_stones();
+		}
+		else if (i == Iron) {
+			list rl = game.get_irons();
+		}
+		else {
+			throw "Unknown resource!";
+		}*/
+		/*resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
+		move(r.get_x_position, r.get_y_position);
+		r.mine();
+		list sl = game.stockpile_list();
+		Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
+		move(stock.get_x_position, stock.get_y_position);
+		b.store(i);
+			//}
+		//}
+		*/
 	}
+	/*
 	void Settler::idle() {
 		current_task = Idle;
 	}
@@ -118,3 +135,4 @@
 
 	}
 	void Settler::draw();
+	*/
