@@ -30,7 +30,7 @@ public:
     void draw();
 
 private:
-    
+    Game game;
     int x_pos;
     int y_pos;
     bool armed;
