@@ -1,6 +1,8 @@
 #pragma once
 #include "Settler.hpp"
 #include <vector>
+#include <algorithm>
+
 
 	Settler::Settler(Game g) {
 		game = g;
@@ -38,8 +40,10 @@
 
 		//TODO: Switch between resources at random
 		while (req_wood > 0 && get_construction_status() == true) {
-			vector<Stockpile> sl = game.get_stockpile_list();
-			vector<Stockpile> stockpile_list = sl.filter(_.wood > 0)
+			std::vector<Stockpile> sl = game.get_stockpile_list();
+			std::vector<Stockpile> stockpile_list;
+			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
+			[](const Stockpile& s) { return s.wood > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_wood();
@@ -48,8 +52,10 @@
 			req_wood = b.get_required_wood();
 		}
 		while (req_stone > 0 && get_construction_status() == true) {
-			vector<Stockpile> sl = game.get_stockpile_list();
-			vector<Stockpile> stockpile_list = sl.filter(_.stone > 0)
+			std::vector<Stockpile> sl = game.get_stockpile_list();
+			std::vector<Stockpile> stockpile_list;
+			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
+			[](const Stockpile& s) { return s.stone > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_stone();
@@ -58,8 +64,10 @@
 			req_stone = b.get_required_stone();
 		}
 		while (req_iron > 0 && get_construction_status() == true) {
-			vector<Stockpile> sl = game.get_stockpile_list();
-			vector<Stockpile> stockpile_list = sl.filter(_.iron > 0)
+			std::vector<Stockpile> sl = game.get_stockpile_list();
+			std::vector<Stockpile> stockpile_list;
+			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
+			[](const Stockpile& s) { return s.iron > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_iron();
@@ -86,8 +94,11 @@
 
 	void Settler::gather(const Item i) {
 		if (i == Weapon) {
-			vector<Weaponsmith> wl = game.get_weaponsmiths();
-			vector<Weaponsmith> l = wl.filter(_.weapons > 0);
+			std::vector<Weaponsmith> wl = game.get_weaponsmiths();
+			std::vector<Weaponsmith> l;
+			std::vector<Stockpile> stockpile_list;
+			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
+			[](const Weaponsmith& w) { return w.weapons > 0; });
 			Building wsmith = pathfinder.find_nearest(get_x_position(), get_y_position(), l);
 			move(wsmith.get_x_position, wsmith.get_y_position);
 			wsmith.take_weapon();
@@ -95,13 +106,13 @@
 		Else {
 			while(get_task() == Gather) {
 				if (i == Tree) {
-					vector<Tree> rl = game.get_trees();
+					std::vector<Tree> rl = game.get_trees();
 				}
 				else if (i == Stone) {
-					vector<Stone> rl = game.get_stones();
+					std::vector<Stone> rl = game.get_stones();
 				}
 				else if (i == Iron) {
-					vector<Iron> rl = game.get_irons();
+					std::vector<Iron> rl = game.get_irons();
 				}
 				else {
 					throw "Unknown resource!";
@@ -109,7 +120,7 @@
 				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
 				move(r.get_x_position, r.get_y_position);
 				r.mine();
-				vector<Stockpile> sl = game.stockpile_list();
+				std::vector<Stockpile> sl = game.stockpile_list();
 				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
 				move(stock.get_x_position, stock.get_y_position);
 				b.store(i);
