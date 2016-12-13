@@ -1,5 +1,6 @@
 #pragma once
-#include "Settler.hpp	"
+#include "Settler.hpp"
+#include <vector>
 
 	Settler::Settler() {}
 
@@ -29,8 +30,8 @@
 
 		//TODO: Switch between resources at random
 		while (req_wood > 0 && get_construction_status() == true) {
-			list sl = game.get_stockpile_list();
-			list stockpile_list = sl.filter(_.wood > 0)
+			vector<Stockpile> sl = game.get_stockpile_list();
+			vector<Stockpile> stockpile_list = sl.filter(_.wood > 0)
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_wood();
@@ -39,8 +40,8 @@
 			req_wood = b.get_required_wood();
 		}
 		while (req_stone > 0 && get_construction_status() == true) {
-			list sl = game.get_stockpile_list();
-			list stockpile_list = sl.filter(_.stone > 0)
+			vector<Stockpile> sl = game.get_stockpile_list();
+			vector<Stockpile> stockpile_list = sl.filter(_.stone > 0)
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_stone();
@@ -49,8 +50,8 @@
 			req_stone = b.get_required_stone();
 		}
 		while (req_iron > 0 && get_construction_status() == true) {
-			list sl = game.get_stockpile_list();
-			list stockpile_list = sl.filter(_.iron > 0)
+			vector<Stockpile> sl = game.get_stockpile_list();
+			vector<Stockpile> stockpile_list = sl.filter(_.iron > 0)
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
 			move(stock.get_x_position, stock.get_y_position);
 			stock.take_iron();
@@ -74,8 +75,8 @@
 	}
 	void Settler::gather(const Item i) {
 		if (i == Weapon) {
-			list wl = game.get_weaponsmiths();
-			list l = wl.filter(_.weapons > 0);
+			vector<Weaponsmith> wl = game.get_weaponsmiths();
+			vector<Weaponsmith> l = wl.filter(_.weapons > 0);
 			Building wsmith = pathfinder.find_nearest(get_x_position(), get_y_position(), l);
 			move(wsmith.get_x_position, wsmith.get_y_position);
 			wsmith.take_weapon();
@@ -83,13 +84,13 @@
 		Else {
 			while(get_task() == Gather) {
 				if (i == Tree) {
-					list rl = game.get_trees();
+					vector<Tree> rl = game.get_trees();
 				}
 				else if (i == Stone) {
-					list rl = game.get_stones();
+					vector<Stone> rl = game.get_stones();
 				}
 				else if (i == Iron) {
-					list rl = game.get_irons();
+					vector<Iron> rl = game.get_irons();
 				}
 				else {
 					throw "Unknown resource!";
@@ -97,7 +98,7 @@
 				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
 				move(r.get_x_position, r.get_y_position);
 				r.mine();
-				list sl = game.stockpile_list();
+				vector<Stockpile> sl = game.stockpile_list();
 				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
 				move(stock.get_x_position, stock.get_y_position);
 				b.store(i);
