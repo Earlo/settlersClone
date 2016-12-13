@@ -62,7 +62,6 @@ public:
 
 	void decrease_woodcutters(){
 		if(woodcutters > 0){
-			std::cout << woodcutters << std::endl;
 			woodcutters -= 1;
 			idle += 1;
 		}
