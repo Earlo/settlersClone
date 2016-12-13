@@ -51,6 +51,7 @@ int main(){
     bool b2_pressed = false;
     bool b3_pressed = false;
     bool b4_pressed = false;
+    bool button_pressed = false;
 
     Map m = Map(WORLDX,WORLDY);
     
@@ -73,7 +74,7 @@ int main(){
 
     while (window.isOpen())
     {	
-	std::cout << wood << std::endl;
+	//std::cout << wood << std::endl;
 	//wood++;
 	//std::cout << mouseX << std::endl;
 	//std::cout << mouseY << std::endl;
@@ -160,7 +161,7 @@ int main(){
 	}
         
 
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4_pressed == true){
                         if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
@@ -172,25 +173,26 @@ int main(){
         }
 	
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
-	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
+	if(button_pressed == false && menu.increase_wood(event, mouseX, mouseY, button_pressed) == 1 && game_started == true){
+		std::cout << "work?" << std::endl;
 		g.increase_woodcutters();
 	}
 	if(menu.increase_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		g.increase_stoners();
 	}
 	if(menu.increase_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		g.increase_ironers();
 	}
 	if(menu.decrease_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		g.decrease_woodcutters();
 	}
 	if(menu.decrease_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		g.decrease_stoners();
 	}
 	if(menu.decrease_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		g.decrease_ironers();
 	}
-
+	button_pressed = false;
 
 	//CASTLE SPAWN
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
@@ -226,7 +228,7 @@ int main(){
         window.clear();
 
         window.setView(menuView);
-        menu.drawmenu(window);
+        menu.drawmenu(window, g);
 
         window.setView(view1);
         window.draw(m.sprite); //Draw terrain

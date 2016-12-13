@@ -99,9 +99,10 @@ public:
                 }
                 else return 0;
 	}
-	int increase_wood(sf::Event event, int x, int y){
+	int increase_wood(sf::Event event, int x, int y, bool& pressed){
 		if(x > 705 && x < 720 && y > 35 && y < 52){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				pressed = true;
 				std::cout << "WOOD INC" << std::endl;
 				return 1;
 			
@@ -154,7 +155,12 @@ public:
 		}
 	}	
 
-	void drawmenu(sf::RenderWindow &window){
+	void drawmenu(sf::RenderWindow &window, Game g){
+		wood_amount.setString(std::to_string(g.get_woodcutters()));
+		stone_amount.setString(std::to_string(g.get_stoners()));
+		iron_amount.setString(std::to_string(g.get_ironers()));
+		idle_amount.setString(std::to_string(g.get_idlers()));
+		
 
 		window.draw(background);
 		window.draw(infobox);
