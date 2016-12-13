@@ -30,11 +30,11 @@ public:
 			}
 		}
 	}
-	void set_control(){
-		this->woodcutters = 0;
-	}
 
 	int& get_woodcutters(){return woodcutters;}
+	int& get_stoners(){return stoners;}
+	int& get_ironers(){return ironers;}
+	int& get_idlers(){return idle;}
 	void increase_woodcutters(int& wood){
 		wood++;
 	}
@@ -43,6 +43,9 @@ public:
 	
 private:
 	std::vector<Entity> entities;
-	int woodcutters = 0;
+	int woodcutters = 10;
+	int stoners = 5;
+	int ironers = 3;
+	int idle = 4;
 
 };

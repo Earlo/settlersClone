@@ -32,7 +32,7 @@ int main(){
 
     sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
     menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
-    Menu menu;
+    
     window.setFramerateLimit(60);
     
 
@@ -53,11 +53,13 @@ int main(){
     bool b4_pressed = false;
 
     Map m = Map(WORLDX,WORLDY);
+    
     HumanPlayer p = HumanPlayer();
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
     Game g = Game(m.stuff);
+    Menu menu(g);
     int wood = g.get_woodcutters();
     std::vector<Entity>& entities = g.get_entities();
     
@@ -71,7 +73,10 @@ int main(){
 
     while (window.isOpen())
     {	
-	std::cout << wood << std::endl;
+	//std::cout << wood << std::endl;
+	//wood++;
+	//std::cout << mouseX << std::endl;
+	//std::cout << mouseY << std::endl;
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -166,8 +171,23 @@ int main(){
 	        }
         }
 	
-	//WOOD CUTTING INCREASE
-	if(menu.increase1(event, mouseX, mouseY) == 1 && game_started == true){
+	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
+	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+	if(menu.increase_stone(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+	if(menu.increase_iron(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+	if(menu.decrease_wood(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+	if(menu.decrease_stone(event, mouseX, mouseY) == 1 && game_started == true){
+		g.increase_woodcutters(wood);
+	}
+	if(menu.decrease_iron(event, mouseX, mouseY) == 1 && game_started == true){
 		g.increase_woodcutters(wood);
 	}
 
@@ -197,7 +217,6 @@ int main(){
             entities.push_back(setl0);
             entities.push_back(setl1);
             initted = true;
-	    g.set_control();
 	    game_started = true;        
 
         }
