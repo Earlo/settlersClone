@@ -37,11 +37,10 @@
 		int req_wood = b.get_required_wood();
 		int req_stone = b.get_required_stone();
 		int req_iron = b.get_required_iron();
+		std::vector<Stockpile> sl = game.get_stockpile_list();
+		std::vector<Stockpile> stockpile_list;
 
-		//TODO: Switch between resources at random
-		while (req_wood > 0 && get_construction_status() == true) {
-			std::vector<Stockpile> sl = game.get_stockpile_list();
-			std::vector<Stockpile> stockpile_list;
+		while (req_wood > 0 && b.get_construction_status() == true) {
 			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
 			[](const Stockpile& s) { return s.wood > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
@@ -51,9 +50,7 @@
 			b.add_resource(Wood);
 			req_wood = b.get_required_wood();
 		}
-		while (req_stone > 0 && get_construction_status() == true) {
-			std::vector<Stockpile> sl = game.get_stockpile_list();
-			std::vector<Stockpile> stockpile_list;
+		while (req_stone > 0 && b.get_construction_status() == true) {
 			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
 			[](const Stockpile& s) { return s.stone > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
@@ -63,9 +60,7 @@
 			b.add_resource(Stone);
 			req_stone = b.get_required_stone();
 		}
-		while (req_iron > 0 && get_construction_status() == true) {
-			std::vector<Stockpile> sl = game.get_stockpile_list();
-			std::vector<Stockpile> stockpile_list;
+		while (req_iron > 0 && b.get_construction_status() == true) {
 			std::copy_if(sl.begin(), sl.end(), std::back_inserter(stockpile_list),
 			[](const Stockpile& s) { return s.iron > 0; });
 			Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), stockpile_list);
@@ -117,13 +112,13 @@
 				else {
 					throw "Unknown resource!";
 				}
-				resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
+				Resource r = pathfinder.find_nearest(get_x_position(), get_y_position(), rl);
 				move(r.get_x_position, r.get_y_position);
-				r.mine();
+				r.take_resource();
 				std::vector<Stockpile> sl = game.stockpile_list();
 				Building stock = pathfinder.find_nearest(get_x_position(), get_y_position(), sl);
 				move(stock.get_x_position, stock.get_y_position);
-				b.store(i);
+				stock.store(i);
 			}
 		}
 	}

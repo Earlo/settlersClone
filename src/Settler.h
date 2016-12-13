@@ -5,6 +5,8 @@
 #include "Item.h"
 #include "Building.h"
 #include "Task.h"
+#include "Game.h"
+#include "logic/SpatialHash.h"
 
 class Settler {
 
