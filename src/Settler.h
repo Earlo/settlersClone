@@ -3,15 +3,16 @@
 
 #include "Item.h"
 #include "Building.h"
-#include "logic/Task.h"
+#include "Task.h"
+#include "Game.h"
+#include "logic/SpatialHash.h"
 
 //forward declaration
 //class Building;
 
 class Settler : public Entity {
 public:
-    Settler(int x_position, int y_position)
-        :Entity(x_position, y_position){
+    Settler(Game g);
 
         this->updateImg();
         }
@@ -37,6 +38,9 @@ public:
     void draw();
 
 private:
+    Game game;
+    int x_pos;
+    int y_pos;
     bool armed;
     Task current_task;
     Item inventory;
