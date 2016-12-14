@@ -230,79 +230,91 @@ public:
 		return 0;
 	}
 	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
-			   //FORTRESS BUTTON
-        if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many buttons being clicked to build multiple buildings
-		        std::cout << "yolololo" << std::endl;
-                        b1 = true;
-                        checker++;
-    	}
+	
+		//FORTRESS BUTTON
+		if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many build buttons being clicked
+				std::cout << "yolololo" << std::endl;
+		                b1 = true;
+		                checker++;
+	    	}
 
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
-	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
-                        if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-                        Fortress fort(mouseX + camX, mouseY + camY);
-                        v->push_back(fort);
-                        b1 = false;
-                        checker++;
-                        }
-	        }
-        }
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Fortress fort(mouseX + camX, mouseY + camY);
+		                v->push_back(fort);
+		                b1 = false;
+		                checker++;
+		                }
+			}
+		}
 
-    	//WEAPONSMITH BUTTON
-    	if(this->button2_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-    		        std::cout << "wepsmith" << std::endl;
-                            b2 = true;
-                            checker++;
-    	}
+	    	//WEAPONSMITH BUTTON
+	    	if(this->button2_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+	    		        std::cout << "wepsmith" << std::endl;
+		                    b2 = true;
+		                    checker++;
+	    	}
 
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
-	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
-                        if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-                        Weaponsmith ws(mouseX + camX, mouseY + camY);
-                        v->push_back(ws);
-                        b2 = false;
-                        checker++;
-                        }
-	        }
-        }
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Weaponsmith ws(mouseX + camX, mouseY + camY);
+		                v->push_back(ws);
+		                b2 = false;
+		                checker++;
+		                }
+			}
+		}
 
-    	//FAMILYHOUSE BUTTON
-    	if(this->button3_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-    		        std::cout << "fam house" << std::endl;
-                            b3 = true;
-                            checker++;
-    	}
+	    	//FAMILYHOUSE BUTTON
+	    	if(this->button3_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+	    		        std::cout << "fam house" << std::endl;
+		                    b3 = true;
+		                    checker++;
+	    	}
 
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
-	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
-                        if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-                        FamilyHouse fhouse(mouseX + camX, mouseY + camY);
-                        v->push_back(fhouse);
-                        b3 = false;
-                        checker++;
-                }
-	        }
-        }
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                FamilyHouse fhouse(mouseX + camX, mouseY + camY);
+		                v->push_back(fhouse);
+		                b3 = false;
+		                checker++;
+		        }
+			}
+		}
 
-        //WAREHOUSE BUTTON
-        if( this->button4_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-		        std::cout << "ware" << std::endl;
-                        b4 = true;
-                        checker++;
-	    }
+		//WAREHOUSE BUTTON
+		if( this->button4_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+				std::cout << "ware" << std::endl;
+		                b4 = true;
+		                checker++;
+		    }
 
 
-        if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
-	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
-                        if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-                        Warehouse ware(mouseX + camX, mouseY + camY);
-			p->add_wh(ware);
-                        v->push_back(ware);
-                        b4 = false;
-                        checker++;
-                        }
-	        }
-        }
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Warehouse ware(mouseX + camX, mouseY + camY);
+				p->add_wh(ware);
+		                v->push_back(ware);
+		                b4 = false;
+		                checker++;
+		                }
+			}
+		}
+		if(mouseX > 600 && mouseX < 800 && mouseY > 400 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				if(b1 || b2 || b3 || b4){
+					b1 = false;
+					b2 = false;
+					b3 = false;
+					b4 = false;
+					checker++;		
+				}
+			}		
+		}
 	
 
 	/*if(mouseX > 610 && mouseX < 790 && mouseY > 200 && mouseY < 390){
