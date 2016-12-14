@@ -4,7 +4,8 @@
 #include "Item.h"
 #include "Resource.h"
 #include "Building.h"
-
+#include "math.h"
+//#include "logic/SpatialHash.h"
 
 
 //#include "Entity.h"
@@ -55,6 +56,95 @@ public:
         }
     }
 
+	std::vector<int> nearest(SpatialHash SHASH, Resource::RType t){
+		int x = this->get_x_position()/ENTHASH;
+		int y = this->get_y_position()/ENTHASH;
+		int targetX;
+		int targetY;
+		int targetNUM;
+		double matka = 10000;
+		std::vector<int> v;
+
+		switch (t) {
+		case Resource::RType::TREE:
+			for(int dis = 0;dis < HASHX; dis++){
+				for(int i = x - dis; i <= (x + dis); i++){
+					for(int j = y - dis; j <= (y + dis); j++){
+						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+							for(unsigned int a = 0; a < SHASH.trees[i][j].size(); a++){
+								double tang  = sqrt(pow(SHASH.trees[i][j][a].get_x_position() - x, 2) + pow(SHASH.trees[i][j][a].get_y_position() - y, 2));
+								if(matka > tang){
+									matka = tang;
+									targetX = SHASH.trees[i][j][a].get_x_position();
+									targetY = SHASH.trees[i][j][a].get_y_position();
+									targetNUM = a;
+								}
+							}
+						}	
+					}
+				}
+				if(matka != 10000){
+					v.push_back(targetX);
+					v.push_back(targetY);
+					v.push_back(targetNUM);
+					return v;
+				}
+			}
+			break;
+
+		case Resource::RType::STONE:
+			for(int dis = 0;dis < HASHX; dis++){
+				for(int i = x - dis; i <= (x + dis); i++){
+					for(int j = y - dis; j <= (y + dis); j++){
+						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+							for(unsigned int a = 0; a < SHASH.stone[i][j].size(); a++){
+								double tang  = sqrt(pow(SHASH.stone[i][j][a].get_x_position() - x, 2) + pow(SHASH.stone[i][j][a].get_y_position() - y, 2));
+								if(matka > tang){
+									matka = tang;
+									targetX = SHASH.stone[i][j][a].get_x_position();
+									targetY = SHASH.stone[i][j][a].get_y_position();
+									targetNUM = a;
+								}
+							}
+						}	
+					}
+				}
+				if(matka != 10000){
+					v.push_back(targetX);
+					v.push_back(targetY);
+					v.push_back(targetNUM);
+					return v;
+				}
+			}
+			break;
+		case Resource::RType::IRON:
+			for(int dis = 0;dis < HASHX; dis++){
+				for(int i = x - dis; i <= (x + dis); i++){
+					for(int j = y - dis; j <= (y + dis); j++){
+						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+							for(unsigned int a = 0; a < SHASH.iron[i][j].size(); a++){
+								double tang  = sqrt(pow(SHASH.iron[i][j][a].get_x_position() - x, 2) + pow(SHASH.iron[i][j][a].get_y_position() - y, 2));
+								if(matka > tang){
+									matka = tang;
+									targetX = SHASH.iron[i][j][a].get_x_position();
+									targetY = SHASH.iron[i][j][a].get_y_position();
+									targetNUM = a;
+								}
+							}
+						}	
+					}
+				}
+				if(matka != 10000){
+					v.push_back(targetX);
+					v.push_back(targetY);
+					v.push_back(targetNUM);
+					return v;
+				}
+			}
+			break;
+		}
+	}	
+	
     bool has_weapon() const;
     Item get_inventory() const;
 

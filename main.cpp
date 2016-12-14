@@ -221,6 +221,9 @@ int main(){
             entities.push_back(castle);
             entities.push_back(setl0);
             entities.push_back(setl1);
+		std::vector<int> v = setl0.nearest(SHASH, Resource::RType::TREE);
+		std::cout<< v[0] << "     " << v[1]<< "      "<< v[2]<< std::endl;
+		std::cout<< mouseX << "   " << mouseY << std::endl;
             initted = true;
 	    game_started = true;        
 
