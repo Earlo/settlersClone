@@ -10,10 +10,10 @@
 class Castle : public Building {
 public:
 
-	Castle(int x_position, int y_position, HumanPlayer& p) : Building(x_position, y_position){
+	Castle(int x_position, int y_position, HumanPlayer* p) : Building(x_position, y_position){
 		for(unsigned int i = 0; i < 10; i++){
 			Settler settler(x_position, y_position);
-			p.add_to_idle(settler);
+			p->add_to_idle(settler);
 			std::cout << "hmm" << std::endl;
 		}
         	this->updateImg();
