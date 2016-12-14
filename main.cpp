@@ -59,14 +59,13 @@ int main(){
 
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
-
+    HumanPlayer p;
     Game g = Game(m.stuff);
-    Menu menu(g);
+    Menu menu(p);
     std::vector<Entity>& entities = g.get_entities();
 
     SHASH.initHash( m );
 
-    HumanPlayer p;
 
     //just testing
     //sf::Clock clock;
@@ -199,22 +198,22 @@ int main(){
 
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_woodcutters();
+		p.increase_woodcutters();
 	}
 	if(menu.increase_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_stoners();
+		p.increase_stoners();
 	}
 	if(menu.increase_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.increase_ironers();
+		p.increase_ironers();
 	}
 	if(menu.decrease_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		g.decrease_woodcutters();
+		p.decrease_woodcutters();
 	}
 	if(menu.decrease_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		g.decrease_stoners();
+		p.decrease_stoners();
 	}
 	if(menu.decrease_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		g.decrease_ironers();
+		p.decrease_ironers();
 	}
 	button_pressed = false;
 
@@ -230,7 +229,7 @@ int main(){
 		std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
 		std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
 		*/
-		Castle castle(pos.x + camX, pos.y + camY);
+		Castle castle(pos.x + camX, pos.y + camY, p);
 		Warehouse whouse(pos.x + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, pos.y + camY);
 		p.add_wh(whouse);
 		Settler setl0(pos.x + camX, pos.y + camY + 10);
@@ -251,7 +250,7 @@ int main(){
         window.clear();
 
         window.setView(menuView);
-        menu.drawmenu(window, g, b1_pressed, b2_pressed, b3_pressed, b4_pressed, p);
+        menu.drawmenu(window, b1_pressed, b2_pressed, b3_pressed, b4_pressed, p);
 
         window.setView(view1);
         window.draw(m.sprite); //Draw terrain
@@ -269,7 +268,7 @@ int main(){
         //window.setTitle(std::to_string(fps));
         //lastTime = currentTime;
         //std::cout<<fps<<std::endl;
-
+	//std::cout << p.get_idlers() << std::endl;
     }
 
     return 0;
