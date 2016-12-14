@@ -183,6 +183,7 @@ int main(){
                         }
 	        }
         }
+	
 
 	/*if(mouseX > 610 && mouseX < 790 && mouseY > 200 && mouseY < 390){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
