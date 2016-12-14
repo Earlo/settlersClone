@@ -20,6 +20,7 @@ const unsigned int TILESTODRAWX = (VIEWX/DRAWSIZE)+3;
 const unsigned int TILESTODRAWY = (VIEWY/DRAWSIZE)+3;
 //consts for spatial hash
 const int HASHRES = 10;
+const int ENTHASH = HASHRES*DRAWSIZE;
 const int HASHX = WORLDX/HASHRES;
 const int HASHY = WORLDY/HASHRES;
 //consts for pathfinding

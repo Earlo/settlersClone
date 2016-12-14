@@ -37,7 +37,7 @@ public:
 
     //TODO make some more sensible way to store stuff drawn on screen
     std::vector<Entity> stuff;
-
+    std::vector<Resource> resot;
 
 	sf::Sprite sprite;
 	unsigned int w;
@@ -119,10 +119,14 @@ public:
 					//int hval = ((terrain[i][j].z-100)/512.f);
 					if (chance(generator) > 0.985){
 						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
-							stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON) );
+							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON);
+							stuff.push_back( reso );
+							resot.push_back( reso );
 						}
 						else {
-						    stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE) );
+							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE);
+						    stuff.push_back( reso );
+						    resot.push_back( reso );
 						}
 					}
 				}
@@ -131,7 +135,9 @@ public:
 					if (val > .55){
 						terrain[i][j].setType( Tile::Type::WOODS );
 						if ( val > .55 + chance(generator) ) {
-							stuff.push_back( Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE) );
+							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE);
+							stuff.push_back( reso );
+							resot.push_back( reso );
 						}					
 					}
 				}

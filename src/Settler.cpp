@@ -107,6 +107,17 @@
 		else if (i == Iron) {
 			list rl = game.get_irons();
 		}
+		std::cout<<"vittu"<<std::endl;
+		/*Resource i = this->target[0];
+		if (i == Tree) {
+			list rl = game.get_trees();
+		}
+		else if (i == Stone) {
+			list rl = game.get_stones();
+		}
+		else if (i == Iron) {
+			list rl = game.get_irons();
+		}
 		else {
 			throw "Unknown resource!";
 		}*/
@@ -136,5 +147,6 @@
 
 	}
 	void Settler::draw();
+<<<<<<< HEAD
 <<<<<<< 5fa578dc23149b9669ab3bd4aa3dc6f478431db8
 */
