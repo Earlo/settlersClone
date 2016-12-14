@@ -202,28 +202,30 @@ int main(){
 	button_pressed = false;
 
 	//CASTLE SPAWN
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && m.at((mouseX + ASSETHANDLER.CASTLEIMG.getSize().x/2)/DRAWSIZE, (mouseY+ASSETHANDLER.WAREIMG.getSize().x/2)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
 
-            sf::Vector2i pos = sf::Mouse::getPosition(window);
+		sf::Vector2i pos = sf::Mouse::getPosition(window);
 
-            //int xpx = (pos.x + camX)/DRAWSIZE;
-            //int ypx = (pos.y + camY)/DRAWSIZE;
-            /*
-            std::cout << xpx << ","<< ypx << " -> ";
-            std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
-            std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
-            */
-            Castle castle(pos.x + camX, pos.y + camY);
-            Settler setl0(pos.x + camX, pos.y + camY + 10);
-            Settler setl1(pos.x + camX, pos.y + camY + 10);
-            p.settlers.push_back(setl0);
-            p.settlers.push_back(setl1);
-            //p.tasks.push_back( );
-            entities.push_back(castle);
-            entities.push_back(setl0);
-            entities.push_back(setl1);
-            initted = true;
-	          game_started = true;
+		//int xpx = (pos.x + camX)/DRAWSIZE;
+		//int ypx = (pos.y + camY)/DRAWSIZE;
+		/*
+		std::cout << xpx << ","<< ypx << " -> ";
+		std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
+		std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
+		*/
+		Castle castle(pos.x + camX, pos.y + camY);
+		Warehouse whouse(pos.x + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, pos.y + camY);
+		Settler setl0(pos.x + camX, pos.y + camY + 10);
+		Settler setl1(pos.x + camX, pos.y + camY + 10);
+		p.settlers.push_back(setl0);
+		p.settlers.push_back(setl1);
+		//p.tasks.push_back( );
+		entities.push_back(castle);
+		entities.push_back(whouse);
+		entities.push_back(setl0);
+		entities.push_back(setl1);
+		initted = true;
+		  game_started = true;
 
         }
 

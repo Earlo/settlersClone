@@ -7,15 +7,12 @@
 
 class Fortress : public Building {
 public:
-	const static int required_stone = 10;
-	const static int required_wood = 3;
-	const static int required_iron = 5;
-
-	void repair();
-	Fortress(int x_position, int y_position)
-		:Building(x_position, y_position){
-        this->updateImg();
-		}
+	void repair(){
+		
+	}
+	Fortress(int x_position, int y_position) : Building(x_position, y_position){
+        	this->updateImg();
+	}
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.FORTRESSTEX, true);
