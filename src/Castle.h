@@ -15,7 +15,6 @@ public:
 			Settler settler(x_position, y_position);
 			p.settlers.push_back(settler);
 			p.increase_idlers();
-			std::cout << "hmm" << std::endl;
 		}
         	this->updateImg();
 	}
