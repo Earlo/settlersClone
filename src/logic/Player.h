@@ -9,7 +9,6 @@
 class Player {
 public:
 	std::vector<Settler> settlers;
-	//std::vector<Task> tasks;
 
 	void update(sf::RenderWindow &window, sf::View view){
 		for (unsigned int i = 0; i < settlers.size(); i++){
@@ -21,6 +20,4 @@ public:
 			}
 		}
 	}
-private:
-	
 };

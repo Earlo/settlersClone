@@ -8,6 +8,10 @@
 
 class Weaponsmith : public Building {
 public:
+	const static int required_stone = 8;
+	const static int required_wood = 2;
+	const static int required_iron = 8;
+
 	void make_weapon();
 	void take_weapon();
 	Weaponsmith(int x_position, int y_position)
@@ -26,7 +30,5 @@ private:
 	int size = 3;
 	unsigned int weapons;
 	int required_settlers = 1;
-	int required_wood = 2;
-	int required_stone = 10;
-	int required_iron = 5;
+
 };
