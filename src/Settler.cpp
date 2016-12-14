@@ -1,4 +1,4 @@
-#pragma once
+/*
 #include "Settler.h"
 
 	Settler::Settler() {}
@@ -118,3 +118,4 @@
 
 	}
 	void Settler::draw();
+*/

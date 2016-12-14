@@ -6,7 +6,7 @@
 #include "logic/Task.h"
 
 //forward declaration
-class Building;
+//class Building;
 
 class Settler : public Entity {
 public:
