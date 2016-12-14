@@ -113,7 +113,7 @@ int main(){
 
         if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1_pressed == true){
-                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+                        if(m.at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         Fortress fort(pos.x + camX, pos.y + camY);
                         entities.push_back(fort);
@@ -132,7 +132,7 @@ int main(){
 
         if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2_pressed == true){
-                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+                        if(m.at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         Weaponsmith ws(pos.x + camX, pos.y + camY);
                         entities.push_back(ws);
@@ -151,7 +151,7 @@ int main(){
 
         if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3_pressed == true){
-                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+                        if(m.at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         FamilyHouse fhouse(pos.x + camX, pos.y + camY);
                         entities.push_back(fhouse);
@@ -171,7 +171,7 @@ int main(){
 
         if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4_pressed == true){
-                        if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
+                        if(m.at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         Warehouse ware(pos.x + camX, pos.y + camY);
 			p.add_wh(ware);
@@ -217,7 +217,7 @@ int main(){
 
 
 	//CASTLE SPAWN
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
 
             sf::Vector2i pos = sf::Mouse::getPosition(window);
             
