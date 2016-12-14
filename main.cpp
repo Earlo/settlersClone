@@ -36,8 +36,6 @@ int main(){
 
     window.setFramerateLimit(60);
 
-    bool initted = false;
-
     int camX = 0;
     int camY = 0;
     int mouseX;

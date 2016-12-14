@@ -361,13 +361,9 @@ public:
 	        std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
 	        */
 	        Castle castle(mouseX + camX, mouseY + camY, p);
-	        Settler setl0(mouseX + camX +10, mouseY + camY);
-	        Settler setl1(mouseX + camX, mouseY + camY + 10);
-			Warehouse whouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
-			p->add_wh(whouse);
+		Warehouse whouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
+		p->add_wh(whouse);
 
-	        p->settlers.push_back(setl0);
-	        p->settlers.push_back(setl1);
 
 	        //p->tasks.push_back( );
 
