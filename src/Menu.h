@@ -248,6 +248,7 @@ public:
 		}
 		return 0;
 	}
+
 	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity*>* v){
 	
 		//FORTRESS BUTTON
@@ -260,11 +261,21 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
+					if(p->buildings.size() == 0){
+						Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
 						p->buildings.insert(p->buildings.begin(),f);
-		                v->push_back(f);
-		                b1 = false;
-		                checker++;
+						v->push_back(f);
+						b1 = false;
+						checker++;
+					}
+					
+					if(!p->buildings[0]->get_construction_status()){
+						Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
+						p->buildings.insert(p->buildings.begin(),f);
+						v->push_back(f);
+						b1 = false;
+						checker++;
+					}
 		                }
 			}
 		}
@@ -279,11 +290,20 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
+					if(p->buildings.size() == 0){
+						Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
 						p->buildings.insert(p->buildings.begin(),ws);
-		                v->push_back(ws);
-		                b2 = false;
-		                checker++;
+						v->push_back(ws);
+						b2 = false;
+						checker++;
+					}
+					else if(!p->buildings[0]->get_construction_status()){		                
+						Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
+						p->buildings.insert(p->buildings.begin(),ws);
+						v->push_back(ws);
+						b2 = false;
+						checker++;
+					}
 		                }
 			}
 		}
@@ -298,12 +318,21 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
+					if(p->buildings.size() == 0){
+						FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
 						p->buildings.insert(p->buildings.begin(), fhouse);
-		                v->push_back(fhouse);
-		                b3 = false;
-		                checker++;
-		        }
+						v->push_back(fhouse);
+						b3 = false;
+						checker++;
+					}
+					if(!p->buildings[0]->get_construction_status()){	
+						FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
+						p->buildings.insert(p->buildings.begin(), fhouse);
+						v->push_back(fhouse);
+						b3 = false;
+						checker++;
+					}
+		        	}
 			}
 		}
 
@@ -318,14 +347,23 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
-
+					if(p->buildings.size() == 0){
+						Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
 						p->buildings.insert(p->buildings.begin(),ware);
 						p->add_wh(ware);
-		                v->push_back(ware);
-
-		                b4 = false;
-		                checker++;
+						v->push_back(ware);
+						b4 = false;
+						checker++;
+					}
+					if(!p->buildings[0]->get_construction_status()){	
+						Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
+						p->buildings.insert(p->buildings.begin(),ware);
+						p->add_wh(ware);
+						v->push_back(ware);
+						b4 = false;
+						checker++;
+					}
+		                
 		                }
 			}
 		}

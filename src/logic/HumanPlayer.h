@@ -338,13 +338,15 @@ public:
 		}
 	}
 	void increase_builders(){
-		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i]->get_task() == Settler::TType::IDLE){
-				settlers[i]->set_task(Settler::TType::BUILD);
-				settlers[i]->workPhase = 0;
-				builders++;
-				idlers--;
-				break;
+		if(buildings.size() > 0){ //check if there are any buildings to build
+			for(unsigned int i = 0; i < settlers.size(); i++){
+				if(settlers[i]->get_task() == Settler::TType::IDLE){
+						settlers[i]->set_task(Settler::TType::BUILD);
+						settlers[i]->workPhase = 0;
+						builders++;
+						idlers--;
+						break;
+				}
 			}
 		}
 	}
