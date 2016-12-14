@@ -218,10 +218,7 @@ int main(){
             //p.tasks.push_back( );
 
             entities.push_back(castle);
-            entities.push_back(setl0);
-            entities.push_back(setl1);
-		v = setl0.nearest(SHASH, Resource::RType::TREE);
-		std::cout<< v[0]/ENTHASH << "     " << v[1]/ENTHASH<< "      "<< v[2]<< std::endl;
+	    v = setl0.nearest(SHASH, Resource::RType::TREE);
             initted = true;
 	    game_started = true;        
 
@@ -234,7 +231,7 @@ int main(){
 
 	if(initted){
 		//std::cout<< p.settlers[0].get_x_position()<<"     "<<p.settlers[0].get_y_position() <<std::endl;
-		p.settlers[0].move(v, &m, &SHASH);
+		p.settlers[0].move(v, &m);
 	}
 
         window.clear();
