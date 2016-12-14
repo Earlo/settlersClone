@@ -7,11 +7,20 @@
 
 class Fortress : public Building {
 public:
-	void repair(){
-		
-	}
+
 	Fortress(int x_position, int y_position) : Building(x_position, y_position){
         	this->updateImg();
+	}
+	/*~Fortress(){}
+	
+	take_damage(){
+		health_points -= 10;
+		if(health_points < 0){
+					
+		}
+	}*/
+	void repair(){
+		
 	}
 
 	void updateImg(){

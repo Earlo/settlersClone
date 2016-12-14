@@ -10,6 +10,8 @@
 class Menu
 {
 public:
+	bool clickflag = false;
+
 	Menu(Game g) {
 		if(!font.loadFromFile("fonts/atwriter.ttf")){
 			std::cout << "error" << std::endl;
@@ -123,56 +125,74 @@ public:
 
 	int increase_wood(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 35 && y < 52){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
-
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "WOOD INC" << std::endl;
 				return 1;
 
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;		
 			}
 		}
 	}
 	int decrease_wood(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 35 && y < 52){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "WOOD DEC" << std::endl;
 				return 1;
-
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;			
 			}
 		}
 	}
 	int increase_stone(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 71 && y < 88){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "STONE INC" << std::endl;
 				return 1;
-
 			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;			
+			}		
 		}
 	}
 	int decrease_stone(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 71 && y < 88){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "STONE DEC" << std::endl;
 				return 1;
-
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;			
 			}
 		}
 	}
 	int increase_iron(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 108 && y < 124){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "IRON INC" << std::endl;
 				return 1;
-
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;			
 			}
 		}
 	}
 	int decrease_iron(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 108 && y < 124){
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				clickflag = true;
 				std::cout << "IRON DEC" << std::endl;
 				return 1;
-
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;			
 			}
 		}
 	}
