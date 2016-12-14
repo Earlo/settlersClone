@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CASTLE_H
+#define CASTLE_H
 #include "Building.h"
 
 #include <SFML/Graphics.hpp>
@@ -10,23 +11,13 @@
 class Castle : public Building {
 public:
 
-	Castle(int x_position, int y_position, HumanPlayer* p) : Building(x_position, y_position){
-		for(unsigned int i = 0; i < 10; i++){
-			Settler* s = new Settler(x_position, y_position);
-			p->settlers.push_back(s);
-			p->increase_idlers();
+	Castle(int x_position, int y_position, HumanPlayer* p);
 
-		}
-        	this->updateImg();
-	}
-
-	void updateImg(){
-		this->sprite.setTexture(ASSETHANDLER.CASTLETEX, true);
-		
-		this->sprite.setPosition( this->x_pos-ASSETHANDLER.CASTLEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.CASTLEIMG.getSize().y );
-	}
+	void updateImg();
 
 private:
 	int health_points = 100;
 	int size = 5;
 };
+
+#endif

@@ -10,7 +10,7 @@
 
 //TODO DO THIS SOMEWHERE ELSE
 #include "src/Settler.h"
-
+#include "src/Resource.h"
 /*
 #include "src/Fortress.h"
 #include "src/Warehouse.h"
