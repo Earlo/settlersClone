@@ -97,10 +97,10 @@ int main(){
     	//	p.settlers[0].move(v);
     	//}
         if(!game_started){
-            game_started = menu.startClick(event, mouseX, mouseY, camX, camY, &m, &p);
+            game_started = menu.startClick(event, mouseX, mouseY, camX, camY, &m, &p, &entities);
         }
         else{
-            menu.update( event, mouseX, mouseY, camX, camY, &m, &p);
+            menu.update( event, mouseX, mouseY, camX, camY, &m, &p, &entities);
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 

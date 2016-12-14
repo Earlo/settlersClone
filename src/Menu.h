@@ -229,7 +229,7 @@ public:
 		}
 		return 0;
 	}
-	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p){
+	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
 			   //FORTRESS BUTTON
         if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many buttons being clicked to build multiple buildings
 		        std::cout << "yolololo" << std::endl;
@@ -241,7 +241,7 @@ public:
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
                         if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
                         Fortress fort(mouseX + camX, mouseY + camY);
-                        //entities.push_back(fort);
+                        v->push_back(fort);
                         b1 = false;
                         checker++;
                         }
@@ -259,7 +259,7 @@ public:
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
                         if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
                         Weaponsmith ws(mouseX + camX, mouseY + camY);
-                        //entities.push_back(ws);
+                        v->push_back(ws);
                         b2 = false;
                         checker++;
                         }
@@ -277,7 +277,7 @@ public:
 	        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
                         if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
                         FamilyHouse fhouse(mouseX + camX, mouseY + camY);
-                        //entities.push_back(fhouse);
+                        v->push_back(fhouse);
                         b3 = false;
                         checker++;
                 }
@@ -297,7 +297,7 @@ public:
                         if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
                         Warehouse ware(mouseX + camX, mouseY + camY);
 			p->add_wh(ware);
-                        //entities.push_back(ware);
+                        v->push_back(ware);
                         b4 = false;
                         checker++;
                         }
@@ -338,7 +338,7 @@ public:
 		}
 	}
 
-	bool startClick(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p){
+	bool startClick(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
 		//CASTLE SPAWN
 	    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
 	        //int xpx = (pos.x + camX)/DRAWSIZE;
@@ -360,8 +360,8 @@ public:
 	        setl1.update();
 	        //p->tasks.push_back( );
 
-	        //entities.push_back(castle);
-	    	//entities.push_back(whouse);
+	        v->push_back(castle);
+	    	v->push_back(whouse);
 		    //v = setl0.nearest(SHASH, Resource::RType::TREE);
 	        //initted = true;
 		    return true;
@@ -430,11 +430,11 @@ public:
 	}
 
 private:
-	bool b1;
-	bool b2;
-	bool b3;
-	bool b4;
-	int checker;
+	bool b1 = false;
+	bool b2 = false;
+	bool b3 = false;
+	bool b4 = false;
+	int checker = 0;
 	sf::Font font;
 	sf::Text wood_amount;
 	sf::Text iron_amount;
