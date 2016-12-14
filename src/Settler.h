@@ -7,7 +7,7 @@
 #include "math.h"
 //#include "logic/SpatialHash.h"
 
-
+#include "../constants.h"
 //#include "Entity.h"
 //#include "../assets.h"
 
@@ -152,10 +152,10 @@ public:
 		double matka = 10000;
 		int x = this->x_pos;
 		int y = this->y_pos;
-		int nextX;
-		int nextY;
+		int dx;
+		int dy;
 
-		for(int i = x -1; i <= x +1; i++){
+		/*for(int i = x -1; i <= x +1; i++){
 			for(int j = y -1; j <= y +1; j++){
 				if(i >= 0 && j >= 0){//ei rajojen ulkopuolella
 					if(m->at(i/DRAWSIZE,j/DRAWSIZE).type() != Tile::Type::WATER){
@@ -168,12 +168,27 @@ public:
 					}		
 				}
 			}
-
 		}
-		std::cout<< "nykyinen: "<< x << "  " << y<< "   seuraava: "<< nextX<< "  "<<nextY<<std::endl;
-		this->x_pos = nextX;
-		this->y_pos = nextY;
-		this->sprite.setPosition( nextX-ASSETHANDLER.SETTLERIMG.getSize().x/2, nextY-ASSETHANDLER.SETTLERIMG.getSize().y );
+        */
+        //int dx = targetX - x;//(targetX - x)/abs(targetX - x);
+        //int dy = targetY - y;//(targetY - y)/abs(targetY - y);
+        if(targetX - x == 0){
+            dx = 0;
+        }
+        else{
+            dx = (int)((targetX - x)/abs(targetX - x));
+        }
+        if(targetY - y == 0){
+            dy = 0;
+        }
+        else{
+            dy = (int)((targetY - y)/abs(targetY - y));
+        }
+
+		std::cout<< "nykyinen: "<< x << "  " << y<<std::endl;
+		this->x_pos += dx;//(int)(acos(dx)*STLSPEED);
+		this->y_pos += dy;//(int)(asin(dx)*STLSPEED);
+		this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
 	}
 	
     bool has_weapon() const;

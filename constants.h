@@ -27,5 +27,8 @@ const int HASHY = WORLDY/HASHRES;
 const double MAXCOST = 10.0;
 const double BASECOST = 1.0;
 
+//consts for game
+const double STLSPEED = 2.0;
+
 
 #endif
