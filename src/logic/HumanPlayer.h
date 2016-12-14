@@ -16,13 +16,21 @@ public:
 	}
 
 	void update_resources(){
+		int wood = 0;
+		int stone = 0;
+		int iron = 0;
+
 		if(warehouses.size() > 0){
 			for(auto i : warehouses){
-				all_wood += i.get_wood();
-				all_iron += i.get_stone();
-				all_stone += i.get_iron();
+				wood += i.get_wood();
+				stone += i.get_stone();
+				iron += i.get_iron();
 			}
 		}
+		
+		all_wood = wood;
+		all_stone = stone;
+		all_iron = iron;
 	}
 	
 	int get_wood(){return all_wood;}

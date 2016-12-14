@@ -184,6 +184,18 @@ int main(){
 	        }
         }
 
+	/*if(mouseX > 610 && mouseX < 790 && mouseY > 200 && mouseY < 390){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				if(b1_pressed || b2_pressed || b3_pressed || b4_pressed){
+					b1_pressed = false;
+					b2_pressed = false;
+					b3_pressed = false;
+					b4_pressed = false;
+					checker++;		
+				}			
+			}
+		}*/
+
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
 		g.increase_woodcutters();
