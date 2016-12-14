@@ -69,13 +69,12 @@ public:
 		int targetNUM;
 		double matka = 10000;
 		std::vector<int> v;
-
 		switch (t) {
 		case Resource::RType::TREE:
 			for(int dis = 0;dis < HASHX; dis++){
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
-						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
 							for(unsigned int a = 0; a < SHASH->trees[i][j].size(); a++){
 								if(SHASH->trees[i][j][a].is_free()){
 									double tang  = sqrt(pow(SHASH->trees[i][j][a].get_x_position() - x, 2) + pow(SHASH->trees[i][j][a].get_y_position() - y, 2));
@@ -106,7 +105,7 @@ public:
 			for(int dis = 0;dis < HASHX; dis++){
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
-						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
 							for(unsigned int a = 0; a < SHASH->stone[i][j].size(); a++){
 								if(SHASH->stone[i][j][a].is_free()){
 									double tang  = sqrt(pow(SHASH->stone[i][j][a].get_x_position() - x, 2) + pow(SHASH->stone[i][j][a].get_y_position() - y, 2));
@@ -134,7 +133,7 @@ public:
 			for(int dis = 0;dis < HASHX; dis++){
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
-						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
+						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
 							for(unsigned int a = 0; a < SHASH->iron[i][j].size(); a++){
 								if(SHASH->iron[i][j][a].is_free()){
 									double tang  = sqrt(pow(SHASH->iron[i][j][a].get_x_position() - x, 2) + pow(SHASH->iron[i][j][a].get_y_position() - y, 2));
