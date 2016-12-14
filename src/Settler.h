@@ -56,6 +56,10 @@ public:
             break;
         case Settler::TType::GATHERI:
             break;
+	case Settler::TType::BUILD:
+	    break;
+	case Settler::TType::IDLE:
+	    break;
         }
     }
 
@@ -147,12 +151,13 @@ public:
 			}
 			break;
 		}
+		return std::vector<int> (-1);
 	}
 	
-	void move(std::vector<int> t, Map* m){
+	void move(std::vector<int> t){
 		int targetX = t[0];
 		int targetY = t[1];
-		double matka = 10000;
+		//double matka = 10000;
 		int x = this->x_pos;
 		int y = this->y_pos;
 		int dx;

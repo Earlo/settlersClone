@@ -12,7 +12,7 @@ class Menu
 public:
 	bool clickflag = false;
 
-	Menu(Game g) {
+	Menu() {
 		if(!font.loadFromFile("fonts/atwriter.ttf")){
 			std::cout << "error" << std::endl;
 		}
@@ -37,25 +37,21 @@ public:
 		req_iron.setPosition(30, 540);
 
 		wood_amount.setFont(font);
-		wood_amount.setString(std::to_string(g.get_woodcutters()));
 		wood_amount.setCharacterSize(20);
 		wood_amount.setColor(sf::Color::White);
 		wood_amount.setPosition(75, 30);
 
 		stone_amount.setFont(font);
-		stone_amount.setString(std::to_string(g.get_stoners()));
 		stone_amount.setCharacterSize(20);
 		stone_amount.setColor(sf::Color::White);
 		stone_amount.setPosition(75, 67);
 
 		iron_amount.setFont(font);
-		iron_amount.setString(std::to_string(g.get_ironers()));
 		iron_amount.setCharacterSize(20);
 		iron_amount.setColor(sf::Color::White);
 		iron_amount.setPosition(75, 103);
 
 		idle_amount.setFont(font);
-		idle_amount.setString(std::to_string(g.get_idlers()));
 		idle_amount.setCharacterSize(20);
 		idle_amount.setColor(sf::Color::White);
 		idle_amount.setPosition(75, 133);
@@ -94,7 +90,10 @@ public:
 	int button1_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 610 && x < 695 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 
 		}
 		else return 0;
@@ -103,21 +102,30 @@ public:
 	int button2_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 705 && x < 790 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 	        }
                 else return 0;
         }
         int button3_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 610 && x < 695 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 	        }
                 else return 0;
         }
         int button4_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 705 && x < 790 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+				}
+			return 0;
                 }
                 else return 0;
 	}
@@ -132,9 +140,12 @@ public:
 
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;		
+				clickflag = false;
+				return 0;		
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_wood(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 35 && y < 52){
@@ -144,9 +155,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int increase_stone(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 71 && y < 88){
@@ -156,9 +170,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}		
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_stone(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 71 && y < 88){
@@ -168,9 +185,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;		
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int increase_iron(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 108 && y < 124){
@@ -180,9 +200,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_iron(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 108 && y < 124){
@@ -192,9 +215,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 
 	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
@@ -240,11 +266,13 @@ public:
 
 
 
-	void drawmenu(sf::RenderWindow &window, Game g, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
-		wood_amount.setString(std::to_string(g.get_woodcutters()));
-		stone_amount.setString(std::to_string(g.get_stoners()));
-		iron_amount.setString(std::to_string(g.get_ironers()));
-		idle_amount.setString(std::to_string(g.get_idlers()));
+	void drawmenu(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
+
+
+		wood_amount.setString(std::to_string(p.get_woodcutters()));
+		stone_amount.setString(std::to_string(p.get_stoners()));
+		iron_amount.setString(std::to_string(p.get_ironers()));
+		idle_amount.setString(std::to_string(p.get_idlers()));
 
 
 		window.draw(background);

@@ -31,63 +31,10 @@ public:
 		}
 	}
 
-	int& get_woodcutters(){return woodcutters;}
-	int& get_stoners(){return stoners;}
-	int& get_ironers(){return ironers;}
-	int& get_idlers(){return idle;}
-
-	void increase_woodcutters(){
-		if(idle > 0){
-			
-			woodcutters += 1;
-			idle -= 1;
-		}
-	}
-
-	void increase_stoners(){
-		if(idle > 0){
-			
-			stoners += 1;
-			idle -= 1;
-		}
-	}
-
-	void increase_ironers(){
-		if(idle > 0){
-			
-			ironers += 1;
-			idle -= 1;
-		}
-	}
-
-	void decrease_woodcutters(){
-		if(woodcutters > 0){
-			woodcutters -= 1;
-			idle += 1;
-		}
-	}
-	void decrease_stoners(){
-		if(stoners > 0){
-		
-			stoners -= 1;
-			idle += 1;
-		}
-	}
-	void decrease_ironers(){
-		if(ironers > 0){
-			ironers -= 1;
-			idle += 1;
-		}
-	}
-
 	std::vector<Entity>& get_entities(){return entities;}
 
 	
 private:
 	std::vector<Entity> entities;
-	int woodcutters = 0;
-	int stoners = 0;
-	int ironers = 0;
-	int idle = 10;
 
 };
