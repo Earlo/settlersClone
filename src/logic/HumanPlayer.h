@@ -46,8 +46,8 @@ public:
 					break;
 				}
 				//std::cout << buildings[0]->needed_resource() << std::endl;
-				for(unsigned int b = 0; b < buildings.size(); b++){
-				if(buildings[b]->get_construction_status() && settlers[i]->workPhase == 0){
+				
+				if(buildings[0]->get_construction_status() && settlers[i]->workPhase == 0){ //workPhase is used to determine the part of the job that the settler is doing.
 					settlers[i]->set_nearest(warehouse_pos());
 					settlers[i]->move(settlers[i]->get_nearest(), m);
 					settlers[i]->workPhase = 1;
@@ -55,39 +55,35 @@ public:
 			
 				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
 					
-					if(buildings[b]->needed_resource() == 1 && warehouses[0]->get_wood() > 0){
-						settlers[i]->workPhase = 2;
-						//std::cout << "takes wood" << std::endl;
-						warehouses[0]->take_wood();
-						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest(), m);
+						if(buildings[0]->needed_resource() == 1 && warehouses[0]->get_wood() > 0){
+							settlers[i]->workPhase = 2;
+							//std::cout << "takes wood" << std::endl;
+							warehouses[0]->take_wood();
+							settlers[i]->set_nearest(build_position(buildings[0]));
+							settlers[i]->move(settlers[i]->get_nearest(), m);
 						
-					}
-					else if(buildings[b]->needed_resource() == 2 && warehouses[0]->get_stone() > 0){
-						//std::cout << "takes stone" << std::endl;							
-						warehouses[0]->take_stone();
-						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest(), m);
-						settlers[i]->workPhase = 3;
+						}
+						else if(buildings[0]->needed_resource() == 2 && warehouses[0]->get_stone() > 0){
+							//std::cout << "takes stone" << std::endl;							
+							warehouses[0]->take_stone();
+							settlers[i]->set_nearest(build_position(buildings[0]));
+							settlers[i]->move(settlers[i]->get_nearest(), m);
+							settlers[i]->workPhase = 3;
 						
-					}
-					else if(buildings[b]->needed_resource() == 3 && warehouses[0]->get_iron() > 0){
-						//std::cout << "takes iron" << std::endl;						
-						warehouses[0]->take_iron();
-						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest(), m);
-						settlers[i]->workPhase = 4;
+						}
+						else if(buildings[0]->needed_resource() == 3 && warehouses[0]->get_iron() > 0){
+							//std::cout << "takes iron" << std::endl;						
+							warehouses[0]->take_iron();
+							settlers[i]->set_nearest(build_position(buildings[0]));
+							settlers[i]->move(settlers[i]->get_nearest(), m);
+							settlers[i]->workPhase = 4;
 						
-					}
-					else{
-						
-						
-					}
+						}
 						
 					
-					}
-				
 				}
+				
+				
 				//GO TO BUILDING WITH WOOD
 				if(settlers[i]->workPhase == 2 && settlers[i]->get_x_position() == buildings[0]->get_x_position() && settlers[i]->get_y_position() == buildings[0]->get_y_position()){
 							//std::cout << "brings wood to building" << std::endl;

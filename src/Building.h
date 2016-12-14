@@ -63,8 +63,12 @@ public:
 	unsigned int get_current_wood(){return current_wood;}
 	unsigned int get_current_stone(){return current_stone;}
 	unsigned int get_current_iron(){return current_iron;}
+
+	unsigned int get_required_wood(){return required_wood;}
+	unsigned int get_required_stone(){return required_stone;}
+	unsigned int get_required_iron(){return required_iron;}
 	
-	unsigned int get_nof_inhabitants() const { return settlers_inside.size(); }
+	//unsigned int get_nof_inhabitants() const { return settlers_inside.size(); }
 	
 	bool get_construction_status() const { return under_construction; }
 
