@@ -7,15 +7,14 @@
 
 class FamilyHouse : public Building {
 public:
-	const static int required_stone = 4;
-	const static int required_wood = 10;
-	const static int required_iron = 2;
-	void make_new_settlers();
-	FamilyHouse(int x_position, int y_position)
-		:Building(x_position, y_position){
-
-        this->updateImg();
+	
+	FamilyHouse(int x_position, int y_position) : Building(x_position, y_position){
+		for(unsigned int i = 0; i < 2; i++){
+			Settler settler(x_position, y_position);
+			settlers_inside.push_back(settler);
 		}
+        	this->updateImg();
+	}
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.FHOUSETEX, true);
@@ -25,6 +24,5 @@ public:
 private:
 	int health_points = 20;
 	int size = 2;
-	int required_settlers = 2;
 
 };

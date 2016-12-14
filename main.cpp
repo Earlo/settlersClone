@@ -9,7 +9,6 @@
 #include "src/Game.h"
 
 //TODO DO THIS SOMEWHERE ELSE
-#include "src/Entity.h"
 #include "src/Settler.h"
 #include "src/Fortress.h"
 #include "src/Warehouse.h"
@@ -52,10 +51,13 @@ int main(){
     bool b3_pressed = false;
     bool b4_pressed = false;
     bool button_pressed = false;
+    //warehouse vector
+
 
     Map m = Map(WORLDX,WORLDY);
-
+    std::vector<int> v;
     HumanPlayer p = HumanPlayer();
+
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
@@ -64,7 +66,6 @@ int main(){
     std::vector<Entity>& entities = g.get_entities();
 
     SHASH.initHash( m );
-
     //just testing
     //sf::Clock clock;
     //float lastTime = clock.getElapsedTime().asSeconds();
@@ -173,12 +174,26 @@ int main(){
                         if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         Warehouse ware(pos.x + camX, pos.y + camY);
+			p.add_wh(ware);
                         entities.push_back(ware);
                         b4_pressed = false;
                         checker++;
                         }
 	        }
         }
+	
+
+	/*if(mouseX > 610 && mouseX < 790 && mouseY > 200 && mouseY < 390){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				if(b1_pressed || b2_pressed || b3_pressed || b4_pressed){
+					b1_pressed = false;
+					b2_pressed = false;
+					b3_pressed = false;
+					b4_pressed = false;
+					checker++;		
+				}			
+			}
+		}*/
 
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
@@ -202,9 +217,10 @@ int main(){
 	button_pressed = false;
 
 	//CASTLE SPAWN
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted) {
 
             sf::Vector2i pos = sf::Mouse::getPosition(window);
+            
 
             //int xpx = (pos.x + camX)/DRAWSIZE;
             //int ypx = (pos.y + camY)/DRAWSIZE;
@@ -214,28 +230,71 @@ int main(){
             std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
             */
             Castle castle(pos.x + camX, pos.y + camY);
-            Settler setl0(pos.x + camX, pos.y + camY + 10);
+            Settler setl0(pos.x + camX +10, pos.y + camY);
             Settler setl1(pos.x + camX, pos.y + camY + 10);
+
+            setl0.current_task = Settler::TType::GATHERW;
+            setl1.current_task = Settler::TType::GATHERW;
             p.settlers.push_back(setl0);
             p.settlers.push_back(setl1);
+            setl1.update();
             //p.tasks.push_back( );
+
             entities.push_back(castle);
-            entities.push_back(setl0);
-            entities.push_back(setl1);
+    	    v = setl0.nearest(SHASH, Resource::RType::TREE);
             initted = true;
-	          game_started = true;
+    	    game_started = true;
+        }
+
+        view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+
+
+        //do stuff player does
+
+	if(initted){
+		//std::cout<< p.settlers[0].get_x_position()<<"     "<<p.settlers[0].get_y_position() <<std::endl;
+		p.settlers[0].move(v, &m);
+	}
+
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && m.at((mouseX + ASSETHANDLER.CASTLEIMG.getSize().x/2)/DRAWSIZE, (mouseY+ASSETHANDLER.WAREIMG.getSize().x/2)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+
+		sf::Vector2i pos = sf::Mouse::getPosition(window);
+
+		//int xpx = (pos.x + camX)/DRAWSIZE;
+		//int ypx = (pos.y + camY)/DRAWSIZE;
+		/*
+		std::cout << xpx << ","<< ypx << " -> ";
+		std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
+		std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
+		*/
+		Castle castle(pos.x + camX, pos.y + camY);
+		Warehouse whouse(pos.x + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, pos.y + camY);
+		p.add_wh(whouse);
+		Settler setl0(pos.x + camX, pos.y + camY + 10);
+		Settler setl1(pos.x + camX, pos.y + camY + 10);
+		p.settlers.push_back(setl0);
+		p.settlers.push_back(setl1);
+		//p.tasks.push_back( );
+		entities.push_back(castle);
+		entities.push_back(whouse);
+		entities.push_back(setl0);
+		entities.push_back(setl1);
+		initted = true;
+		game_started = true;
 
         }
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
+
         window.clear();
 
         window.setView(menuView);
-        menu.drawmenu(window, g, b1_pressed, b2_pressed, b3_pressed, b4_pressed);
+        menu.drawmenu(window, g, b1_pressed, b2_pressed, b3_pressed, b4_pressed, p);
 
         window.setView(view1);
         window.draw(m.sprite); //Draw terrain
         g.draw(window,view1); //Draw objects
+        p.update(window,view1);//draw plauer
         window.display();
 
 

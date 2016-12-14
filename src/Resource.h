@@ -1,11 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "Entity.h"
+
+#include "../constants.h"
 
 #include "../assets.h"
 
+class SpatialHash;
 
 class Resource : public Entity{
 public:
@@ -13,10 +14,12 @@ public:
 	enum class RType { TREE, STONE, IRON };
 	
 	//Resource(int x, int y, Resource::RType t, unsigned int amount) : x_pos(x), y_pos(y), type(t), resource_amount(amount) { }
+	Resource();
 	Resource(int x_position, int y_position, Resource::RType t):Entity(x_position, y_position){
 		this->type = t;
-        this->updateImg();
-		}
+        	this->updateImg();
+
+	}
 
 	void updateImg() {
 		switch (this->get_resource_type()) {
@@ -46,3 +49,4 @@ private:
 	Resource::RType type;
 	unsigned int resource_amount = 5;
 };
+

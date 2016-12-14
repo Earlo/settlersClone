@@ -7,15 +7,23 @@
 
 class Fortress : public Building {
 public:
-	const static int required_stone = 10;
-	const static int required_wood = 3;
-	const static int required_iron = 5;
 
-	void repair();
-	Fortress(int x_position, int y_position)
-		:Building(x_position, y_position){
-        this->updateImg();
+	Fortress(int x_position, int y_position) : Building(x_position, y_position){
+        	this->updateImg();
+	}
+	~Fortress(){}
+	
+	void take_damage(int damage){
+		health_points -= damage;
+		if(health_points <= 0){
+			delete(this);		
 		}
+	}
+	void repair(){
+		if(health_points < 100 && settlers_inside.size() > 0){
+			health_points++;
+		}
+	}
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.FORTRESSTEX, true);

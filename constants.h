@@ -11,8 +11,8 @@ const int CAMCENTERX = VIEWX/2;
 const int CAMCENTERY = VIEWY/2;
 //const int WORLDX = 1000;
 //const int WORLDY = 1000;
-const int WORLDX = 300;
-const int WORLDY = 300;
+const int WORLDX = 400;
+const int WORLDY = 400;
 
 const int SCROLLX = WORLDX * DRAWSIZE - SCREENX;
 const int SCROLLY = WORLDY * DRAWSIZE - SCREENY;
@@ -20,6 +20,7 @@ const unsigned int TILESTODRAWX = (VIEWX/DRAWSIZE)+3;
 const unsigned int TILESTODRAWY = (VIEWY/DRAWSIZE)+3;
 //consts for spatial hash
 const int HASHRES = 10;
+const int ENTHASH = HASHRES*DRAWSIZE;
 const int HASHX = WORLDX/HASHRES;
 const int HASHY = WORLDY/HASHRES;
 //consts for pathfinding
@@ -42,6 +43,9 @@ const int WARE_W = 15; //warehouse
 const int WARE_S = 6;
 const int WARE_I = 0;
 
+
+//consts for game
+const double STLSPEED = 2.0;
 
 
 #endif
