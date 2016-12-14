@@ -51,7 +51,7 @@ int main(){
     bool b2_pressed = false;
     bool b3_pressed = false;
     bool b4_pressed = false;
-    bool button_pressed = false;
+
     //warehouse vector
 
 
@@ -61,7 +61,7 @@ int main(){
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
     HumanPlayer p;
     Game g = Game(m.stuff);
-    Menu menu(p);
+    Menu menu;
     std::vector<Entity>& entities = g.get_entities();
 
     SHASH.initHash( m );
@@ -215,7 +215,7 @@ int main(){
 	if(menu.decrease_iron(event, mouseX, mouseY) == 1 && game_started == true){
 		p.decrease_ironers();
 	}
-	button_pressed = false;
+
 
 	//CASTLE SPAWN
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && m.at((mouseX + ASSETHANDLER.CASTLEIMG.getSize().x/2)/DRAWSIZE, (mouseY+ASSETHANDLER.WAREIMG.getSize().x/2)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {

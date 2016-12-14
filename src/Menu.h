@@ -12,7 +12,7 @@ class Menu
 public:
 	bool clickflag = false;
 
-	Menu(HumanPlayer& p) {
+	Menu() {
 		if(!font.loadFromFile("fonts/atwriter.ttf")){
 			std::cout << "error" << std::endl;
 		}
@@ -90,7 +90,10 @@ public:
 	int button1_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 610 && x < 695 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 
 		}
 		else return 0;
@@ -99,21 +102,30 @@ public:
 	int button2_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 705 && x < 790 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 	        }
                 else return 0;
         }
         int button3_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 610 && x < 695 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+			}
+			return 0;
 	        }
                 else return 0;
         }
         int button4_clicked(sf::Event event, int x, int y, bool& b1_pressed){
 		if(x > 705 && x < 790 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {return 1;}
+                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+				return 1;
+				}
+			return 0;
                 }
                 else return 0;
 	}
@@ -128,9 +140,12 @@ public:
 
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;		
+				clickflag = false;
+				return 0;		
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_wood(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 35 && y < 52){
@@ -140,9 +155,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int increase_stone(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 71 && y < 88){
@@ -152,9 +170,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}		
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_stone(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 71 && y < 88){
@@ -164,9 +185,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;		
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int increase_iron(sf::Event event, int x, int y){
 		if(x > 705 && x < 720 && y > 108 && y < 124){
@@ -176,9 +200,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 	int decrease_iron(sf::Event event, int x, int y){
 		if(x > 728 && x < 744 && y > 108 && y < 124){
@@ -188,9 +215,12 @@ public:
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				clickflag = false;			
+				clickflag = false;
+				return 0;			
 			}
+			return 0;
 		}
+		return 0;
 	}
 
 	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
