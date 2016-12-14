@@ -7,6 +7,9 @@
 
 class FamilyHouse : public Building {
 public:
+	const static int required_stone = 4;
+	const static int required_wood = 10;
+	const static int required_iron = 2;
 	void make_new_settlers();
 	FamilyHouse(int x_position, int y_position)
 		:Building(x_position, y_position){
@@ -23,7 +26,5 @@ private:
 	int health_points = 20;
 	int size = 2;
 	int required_settlers = 2;
-	int required_wood = 10;
-	int required_stone = 2;
-	int required_iron = 0;
+
 };

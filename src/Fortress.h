@@ -7,6 +7,10 @@
 
 class Fortress : public Building {
 public:
+	const static int required_stone = 10;
+	const static int required_wood = 3;
+	const static int required_iron = 5;
+
 	void repair();
 	Fortress(int x_position, int y_position)
 		:Building(x_position, y_position){
@@ -22,8 +26,4 @@ private:
 	int health_points = 100;
 	int size = 5;
 	int required_settlers = 5;
-	int required_stone = 10;
-	int required_wood = 5;
-	int required_iron = 2;
-
 };

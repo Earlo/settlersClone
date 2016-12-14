@@ -7,6 +7,9 @@
 
 class Warehouse : public Building {
 public:
+	const static int required_stone = 2;
+	const static int required_wood = 14;
+	const static int required_iron = 0;
 	
 	Warehouse(int x_position, int y_position)
 		:Building(x_position, y_position){
@@ -22,8 +25,6 @@ private:
 	int health_points = 100;
 	int size = 5;
 	int required_settlers = 5;
-	int required_stone = 10;
-	int required_wood = 5;
-	int required_iron = 2;
+
 
 };
