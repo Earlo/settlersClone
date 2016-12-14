@@ -55,7 +55,6 @@ int main(){
 
 
     Map m = Map(WORLDX,WORLDY);
-    std::vector<int> v;
 
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
@@ -197,13 +196,13 @@ int main(){
 
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(menu.increase_wood(event, mouseX, mouseY) == 1 && game_started == true){
-		p.increase_woodcutters();
+		p.increase_woodcutters(SHASH);
 	}
 	if(menu.increase_stone(event, mouseX, mouseY) == 1 && game_started == true){
-		p.increase_stoners();
+		p.increase_stoners(SHASH);
 	}
 	if(menu.increase_iron(event, mouseX, mouseY) == 1 && game_started == true){
-		p.increase_ironers();
+		p.increase_ironers(SHASH);
 	}
 	if(menu.decrease_wood(event, mouseX, mouseY) == 1 && game_started == true){
 		p.decrease_woodcutters();
@@ -234,16 +233,13 @@ int main(){
             Settler setl1(pos.x + camX, pos.y + camY + 10);
 		Warehouse whouse(pos.x + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, pos.y + camY);
 		p.add_wh(whouse);
-            setl0.current_task = Settler::TType::GATHERW;
-            setl1.current_task = Settler::TType::GATHERW;
             p.settlers.push_back(setl0);
+	    p.increase_idlers();
             p.settlers.push_back(setl1);
-            setl1.update();
-            //p.tasks.push_back( );
+	    p.increase_idlers();
 
             entities.push_back(castle);
 	    entities.push_back(whouse);
-    	    v = setl0.nearest(SHASH, Resource::RType::TREE);
             initted = true;
     	    game_started = true;
         }
@@ -254,8 +250,7 @@ int main(){
         //do stuff player does
 
 	if(initted){
-		//std::cout<< p.settlers[0].get_x_position()<<"     "<<p.settlers[0].get_y_position() <<std::endl;
-		p.settlers[0].move(v);
+		p.play();
 	}
 
         

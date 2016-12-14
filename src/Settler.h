@@ -25,14 +25,11 @@ public:
 
     enum class TType { BUILD, GATHERW, GATHERS, GATHERI, IDLE };
 
-    Settler::TType current_task;
 
     Settler(int x_position, int y_position )
         :Entity(x_position, y_position){
 
-        //Task current_task(Settler::TType::IDLE);
-        //Task t(Task::TType::IDLE);
-        this->current_task = Settler::TType::IDLE;
+        this->task = Settler::TType::IDLE;
         this->updateImg();
         }
 
@@ -41,7 +38,7 @@ public:
         this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
     }
 
-    void update(){
+    /*void update(){
         switch (this->current_task) {
         case Settler::TType::GATHERW:
             if (this->target.size() == 0){
@@ -61,7 +58,7 @@ public:
 	case Settler::TType::IDLE:
 	    break;
         }
-    }
+    }*/
 
 	std::vector<int> nearest(SpatialHash SHASH, Resource::RType t){
 		int x = this->get_x_position()/ENTHASH;
@@ -202,7 +199,7 @@ public:
     bool has_weapon() const;
     Item get_inventory() const;
 
-    void set_task(const Settler::TType t);
+    void set_task(Settler::TType t){task = t;}
     void build( const Building b);
     void occupy(const Building b);
     void defend(const Building b);
@@ -211,11 +208,16 @@ public:
 
     void move(int x, int y);
     void draw();
+	Settler::TType get_task(){return task;}
+	void set_nearest(std::vector<int> v){near = v;}
+	std::vector<int> get_nearest(){return near;}
 
 private:
     //Game game;
     bool armed;
     Item inventory;
+    Settler::TType task;
+    std::vector<int> near;
     //Resource Nearest;
     std::vector<Resource> target;
 
