@@ -52,10 +52,11 @@ int main(){
     bool b3_pressed = false;
     bool b4_pressed = false;
     bool button_pressed = false;
+    //warehouse vector
+
 
     Map m = Map(WORLDX,WORLDY);
 
-    HumanPlayer p = HumanPlayer();
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
 
@@ -64,6 +65,8 @@ int main(){
     std::vector<Entity>& entities = g.get_entities();
 
     SHASH.initHash( m );
+
+    HumanPlayer p;
 
     //just testing
     //sf::Clock clock;
@@ -173,6 +176,7 @@ int main(){
                         if(m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT){
 		        sf::Vector2i pos(mouseX,mouseY);
                         Warehouse ware(pos.x + camX, pos.y + camY);
+			p.add_wh(ware);
                         entities.push_back(ware);
                         b4_pressed = false;
                         checker++;
@@ -215,6 +219,7 @@ int main(){
 		*/
 		Castle castle(pos.x + camX, pos.y + camY);
 		Warehouse whouse(pos.x + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, pos.y + camY);
+		p.add_wh(whouse);
 		Settler setl0(pos.x + camX, pos.y + camY + 10);
 		Settler setl1(pos.x + camX, pos.y + camY + 10);
 		p.settlers.push_back(setl0);

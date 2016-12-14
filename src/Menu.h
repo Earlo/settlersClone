@@ -4,7 +4,7 @@
 
 #include "../constants.h"
 #include "Game.h"
-
+#include "logic/HumanPlayer.h"
 
 
 class Menu
@@ -199,29 +199,34 @@ public:
 
 	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
 		p.update_resources();
+		int wood = p.get_wood();
+		int stone = p.get_stone();
+		int iron = p.get_iron();
+		
+
 		if(b1){
 			info_text.setString("Fortress");
-			req_wood.setString("Wood : 0 / " + std::to_string(FORT_W));
-			req_stone.setString("Stone : 0 / " + std::to_string(FORT_S));
-			req_iron.setString("Iron : 0 / " + std::to_string(FORT_I));
+			req_wood.setString("Wood : " + std::to_string(wood) + " / " + std::to_string(FORT_W));
+			req_stone.setString("Stone : " + std::to_string(stone) + " / " + std::to_string(FORT_S));
+			req_iron.setString("Iron : " + std::to_string(iron) + " / " + std::to_string(FORT_I));
 		}
 		else if(b2){
 			info_text.setString("Weaponsmith");
-			req_wood.setString("Wood : 0 / " + std::to_string(WEP_W));
-			req_stone.setString("Stone : 0 / " + std::to_string(WEP_S));
-			req_iron.setString("Iron : 0 / " + std::to_string(WEP_I));
+			req_wood.setString("Wood : " + std::to_string(wood) + " / " + std::to_string(WEP_W));
+			req_stone.setString("Stone : " + std::to_string(stone) + " / " + std::to_string(WEP_S));
+			req_iron.setString("Iron : " + std::to_string(iron) + " / " + std::to_string(WEP_I));
 		}
 		else if(b3){
 			info_text.setString("Familyhouse");
-			req_wood.setString("Wood : 0 / " + std::to_string(FAMILY_W));
-			req_stone.setString("Stone : 0 / " + std::to_string(FAMILY_S));
-			req_iron.setString("Iron : 0 / " + std::to_string(FAMILY_I));
+			req_wood.setString("Wood : " + std::to_string(wood) + " / " + std::to_string(FAMILY_W));
+			req_stone.setString("Stone : " + std::to_string(stone) + " / " + std::to_string(FAMILY_S));
+			req_iron.setString("Iron : " + std::to_string(iron) + " / " + std::to_string(FAMILY_I));
 		}
 		else if(b4){
 			info_text.setString("Warehouse");
-			req_wood.setString("Wood : 0 / " + std::to_string(WARE_W));
-			req_stone.setString("Stone : 0 / " + std::to_string(WARE_S));
-			req_iron.setString("Iron : 0 / " + std::to_string(WARE_I));
+			req_wood.setString("Wood : " + std::to_string(wood) + " / " + std::to_string(WARE_W));
+			req_stone.setString("Stone : " + std::to_string(stone) + " / " + std::to_string(WARE_S));
+			req_iron.setString("Iron : " + std::to_string(iron) + " / " + std::to_string(WARE_I));
 		}
 		window.draw(info_text);
 		window.draw(req_wood);
