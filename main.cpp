@@ -233,7 +233,7 @@ int main(){
         window.clear();
 
         window.setView(menuView);
-        menu.drawmenu(window, g, b1_pressed, b2_pressed, b3_pressed, b4_pressed);
+        menu.drawmenu(window, g, b1_pressed, b2_pressed, b3_pressed, b4_pressed, p);
 
         window.setView(view1);
         window.draw(m.sprite); //Draw terrain

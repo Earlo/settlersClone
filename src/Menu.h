@@ -197,7 +197,8 @@ public:
 		}
 	}
 
-	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4){
+	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
+		p.update_resources();
 		if(b1){
 			info_text.setString("Fortress");
 			req_wood.setString("Wood : 0 / " + std::to_string(FORT_W));
@@ -234,7 +235,7 @@ public:
 
 
 
-	void drawmenu(sf::RenderWindow &window, Game g, bool b1, bool b2, bool b3, bool b4){
+	void drawmenu(sf::RenderWindow &window, Game g, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
 		wood_amount.setString(std::to_string(g.get_woodcutters()));
 		stone_amount.setString(std::to_string(g.get_stoners()));
 		iron_amount.setString(std::to_string(g.get_ironers()));
@@ -244,7 +245,7 @@ public:
 		window.draw(background);
 		window.draw(infobox);
 		if(b1 || b2 || b3 || b4){
-			draw_info(window, b1 ,b2 ,b3, b4);
+			draw_info(window, b1 ,b2 ,b3, b4, p);
 		}
 		window.draw(controlpanel);
 		window.draw(button1);

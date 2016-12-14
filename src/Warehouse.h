@@ -7,6 +7,13 @@
 
 class Warehouse : public Building {
 public:
+	Warehouse(int x_position, int y_position) : Building(x_position, y_position){
+        	this->updateImg();
+		wood = 0;
+		stone = 0;
+		iron = 0;
+		weapon = 0;	
+	}
 	void take_wood(){
 		if(wood > 0){
 			wood--;
@@ -46,13 +53,10 @@ public:
 		weapon++;
 	}
 
-	Warehouse(int x_position, int y_position) : Building(x_position, y_position){
-        	this->updateImg();
-		wood = 0;
-		stone = 0;
-		iron = 0;
-		weapon = 0;	
-	}
+	const int& get_wood(){return wood;}
+	const int& get_stone(){return stone;}
+	const int& get_iron(){return iron;}
+	const int& get_weapons(){return weapon;}
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.WARETEX, true);

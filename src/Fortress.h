@@ -11,16 +11,18 @@ public:
 	Fortress(int x_position, int y_position) : Building(x_position, y_position){
         	this->updateImg();
 	}
-	/*~Fortress(){}
+	~Fortress(){}
 	
-	take_damage(){
-		health_points -= 10;
-		if(health_points < 0){
-					
+	void take_damage(int damage){
+		health_points -= damage;
+		if(health_points <= 0){
+			delete(this);		
 		}
-	}*/
+	}
 	void repair(){
-		
+		if(health_points < 100 && settlers_inside.size() > 0){
+			health_points++;
+		}
 	}
 
 	void updateImg(){

@@ -7,6 +7,5 @@ class Player {
 public:
 	std::vector<Settler> settlers;
 	std::vector<Task> tasks;
-private:
-	
+protected:
 };
