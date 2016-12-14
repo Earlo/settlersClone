@@ -218,10 +218,9 @@ int main(){
             //p.tasks.push_back( );
 
             entities.push_back(castle);
-	    v = setl0.nearest(SHASH, Resource::RType::TREE);
+    	    v = setl0.nearest(SHASH, Resource::RType::TREE);
             initted = true;
-	    game_started = true;        
-
+    	    game_started = true;
         }
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
@@ -242,6 +241,7 @@ int main(){
         window.setView(view1);
         window.draw(m.sprite); //Draw terrain
         g.draw(window,view1); //Draw objects
+        p.update(window,view1);//draw plauer
         window.display();
 
     
