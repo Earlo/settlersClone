@@ -53,7 +53,7 @@ int main(){
     bool button_pressed = false;
 
     Map m = Map(WORLDX,WORLDY);
-    
+    std::vector<int> v;
     HumanPlayer p = HumanPlayer();
     //TODO dont sort here
     std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
@@ -206,7 +206,6 @@ int main(){
             std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
             std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
             */
-        	
             Castle castle(pos.x + camX, pos.y + camY);
             Settler setl0(pos.x + camX +10, pos.y + camY);
             Settler setl1(pos.x + camX, pos.y + camY + 10);
@@ -221,9 +220,8 @@ int main(){
             entities.push_back(castle);
             entities.push_back(setl0);
             entities.push_back(setl1);
-		std::vector<int> v = setl0.nearest(SHASH, Resource::RType::TREE);
-		std::cout<< v[0] << "     " << v[1]<< "      "<< v[2]<< std::endl;
-		std::cout<< mouseX << "   " << mouseY << std::endl;
+		v = setl0.nearest(SHASH, Resource::RType::TREE);
+		std::cout<< v[0]/ENTHASH << "     " << v[1]/ENTHASH<< "      "<< v[2]<< std::endl;
             initted = true;
 	    game_started = true;        
 
@@ -233,8 +231,11 @@ int main(){
 
 
         //do stuff player does
-        p.update();
 
+	if(initted){
+		//std::cout<< p.settlers[0].get_x_position()<<"     "<<p.settlers[0].get_y_position() <<std::endl;
+		p.settlers[0].move(v, &m, &SHASH);
+	}
 
         window.clear();
 

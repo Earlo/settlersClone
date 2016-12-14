@@ -76,6 +76,7 @@ public:
 								if(matka > tang){
 									matka = tang;
 									targetX = SHASH.trees[i][j][a].get_x_position();
+									std::cout<< i << "   "<<j<<" "<<SHASH.trees[i][j].size()<<std::endl;
 									targetY = SHASH.trees[i][j][a].get_y_position();
 									targetNUM = a;
 								}
@@ -87,6 +88,7 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
+					v.push_back(1);
 					return v;
 				}
 			}
@@ -113,6 +115,7 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
+					v.push_back(2);
 					return v;
 				}
 			}
@@ -138,12 +141,51 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
+					v.push_back(3);
 					return v;
 				}
 			}
 			break;
 		}
-	}	
+	}
+	
+	void move(std::vector<int> t, Map* m,SpatialHash* SHASH){
+		int targetX, targetY;
+		double matka = 10000;
+		int x = this->x_pos;
+		int y = this->y_pos;
+		int nextX;
+		int nextY;
+		std::cout << t[0]/ENTHASH<< "  " << t[1]/ENTHASH<<"  "<< t[2] <<"  "<< t[3]<<" "<<SHASH->trees[t[0]][t[1]].size()<< std::endl;
+		switch(t[3]){
+		case 1://tree
+			targetX = SHASH->trees[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_x_position();
+			targetX = SHASH->trees[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_x_position();
+		case 2://stone
+			targetX = SHASH->stone[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_x_position();
+			targetY = SHASH->stone[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_y_position();
+		case 3://iron
+			targetX = SHASH->iron[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_x_position();
+			targetY = SHASH->iron[t[0]/ENTHASH][t[1]/ENTHASH][t[2]].get_y_position();
+		}
+
+		/*for(int i = x -1; i <= x +1; i++){
+			for(int j = y -1; j <= y +1; j++){
+				if(i >= 0 && j >= 0){//ei rajojen ulkopuolella
+					if(m.at(i,j).type() != Tile::Type::WATER){
+						double dis = sqrt(pow(targetX - x, 2) + pow(targetY - y, 2));
+						if(matka > dis){
+							matka = dis;
+							nextX = i;
+							nextY = j;		
+						}
+					}		
+				}
+			}
+		}
+		this->x_pos = nextX;
+		this->y_pos = nextY;*/
+	}
 	
     bool has_weapon() const;
     Item get_inventory() const;
