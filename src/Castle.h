@@ -16,9 +16,22 @@ public:
 		}
         	this->updateImg();
 	}
+	/*bool is_on_land(int x_pos, int y_pos, Map m){
+		unsigned int checker = 0;
+		for(unsigned int i = y_pos; i < (y_pos + ASSETHANDLER.CASTLEIMG.getSize().y); i++){
+			for(unsigned int j = x_pos; j < (x_pos + ASSETHANDLER.CASTLEIMG.getSize().x); j++){
+				if(m.at(i/DRAWSIZE, j/DRAWSIZE).type() == Tile::Type::DIRT){
+					checker++;
+				}
+			}
+		}
+		if(checker == (x_pos*y_pos){ return true; }
+		else return false;
+	}*/
 
 	void updateImg(){
 		this->sprite.setTexture(ASSETHANDLER.CASTLETEX, true);
+		
 		this->sprite.setPosition( this->x_pos-ASSETHANDLER.CASTLEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.CASTLEIMG.getSize().y );
 	}
 

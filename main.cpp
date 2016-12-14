@@ -202,7 +202,7 @@ int main(){
 	button_pressed = false;
 
 	//CASTLE SPAWN
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && m.at((mouseX + ASSETHANDLER.CASTLEIMG.getSize().x/2)/DRAWSIZE, (mouseY+ASSETHANDLER.WAREIMG.getSize().x/2)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m.at(mouseX/DRAWSIZE, mouseY/DRAWSIZE).type() == Tile::Type::DIRT && m.at((mouseX + ASSETHANDLER.CASTLEIMG.getSize().x/2)/DRAWSIZE, mouseY+ASSETHANDLER.WAREIMG.getSize().x/2)/DRAWSIZE).type() == Tile::Type::DIRT && game_started == false && !initted && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
 
 		sf::Vector2i pos = sf::Mouse::getPosition(window);
 
@@ -225,7 +225,7 @@ int main(){
 		entities.push_back(setl0);
 		entities.push_back(setl1);
 		initted = true;
-		  game_started = true;
+		game_started = true;
 
         }
 
