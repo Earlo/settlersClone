@@ -127,7 +127,7 @@ public:
 	unsigned int get_ironers(){return ironers;}
 	unsigned int get_idlers(){return idlers;}
 
-	void increase_woodcutters(SpatialHash SHASH){
+	void increase_woodcutters(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i].get_task() == Settler::TType::IDLE){
 				settlers[i].set_task(Settler::TType::GATHERW);
@@ -141,7 +141,7 @@ public:
 		}
 	}
 
-	void increase_stoners(SpatialHash SHASH){
+	void increase_stoners(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i].get_task() == Settler::TType::IDLE){
 				settlers[i].set_task(Settler::TType::GATHERS);
@@ -155,7 +155,7 @@ public:
 		}
 	}
 
-	void increase_ironers(SpatialHash SHASH){
+	void increase_ironers(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i].get_task() == Settler::TType::IDLE){
 				settlers[i].set_task(Settler::TType::GATHERI);

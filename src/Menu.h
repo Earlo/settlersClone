@@ -1,10 +1,17 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include "../assets.h"
 
 #include "../constants.h"
 #include "Game.h"
 #include "logic/HumanPlayer.h"
+
+
+#include "Fortress.h"
+#include "Warehouse.h"
+#include "Weaponsmith.h"
+#include "Castle.h"
+#include "FamilyHouse.h"
 
 
 class Menu
@@ -87,10 +94,10 @@ public:
 
 
 
-	int button1_clicked(sf::Event event, int x, int y, bool& b1_pressed){
+	int button1_clicked(sf::Event event, int x, int y){
 		if(x > 610 && x < 695 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+                           event.mouseButton.button == sf::Mouse::Left && b1 == false) {
 				return 1;
 			}
 			return 0;
@@ -99,30 +106,30 @@ public:
 		else return 0;
 	}
 
-	int button2_clicked(sf::Event event, int x, int y, bool& b1_pressed){
+	int button2_clicked(sf::Event event, int x, int y){
 		if(x > 705 && x < 790 && y > 200 && y < 290){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+                           event.mouseButton.button == sf::Mouse::Left && b1 == false) {
 				return 1;
 			}
 			return 0;
 	        }
                 else return 0;
         }
-        int button3_clicked(sf::Event event, int x, int y, bool& b1_pressed){
+        int button3_clicked(sf::Event event, int x, int y){
 		if(x > 610 && x < 695 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+                           event.mouseButton.button == sf::Mouse::Left && b1 == false) {
 				return 1;
 			}
 			return 0;
 	        }
                 else return 0;
         }
-        int button4_clicked(sf::Event event, int x, int y, bool& b1_pressed){
+        int button4_clicked(sf::Event event, int x, int y){
 		if(x > 705 && x < 790 && y > 300 && y < 390){
 			if(event.type == sf::Event::MouseButtonPressed &&
-                           event.mouseButton.button == sf::Mouse::Left && b1_pressed == false) {
+                           event.mouseButton.button == sf::Mouse::Left && b1 == false) {
 				return 1;
 				}
 			return 0;
@@ -222,12 +229,161 @@ public:
 		}
 		return 0;
 	}
+	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
+	
+		//FORTRESS BUTTON
+		if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many build buttons being clicked
+				std::cout << "yolololo" << std::endl;
+		                b1 = true;
+		                checker++;
+	    	}
 
-	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
-		p.update_resources();
-		int wood = p.get_wood();
-		int stone = p.get_stone();
-		int iron = p.get_iron();
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Fortress fort(mouseX + camX, mouseY + camY);
+		                v->push_back(fort);
+		                b1 = false;
+		                checker++;
+		                }
+			}
+		}
+
+	    	//WEAPONSMITH BUTTON
+	    	if(this->button2_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+	    		        std::cout << "wepsmith" << std::endl;
+		                    b2 = true;
+		                    checker++;
+	    	}
+
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Weaponsmith ws(mouseX + camX, mouseY + camY);
+		                v->push_back(ws);
+		                b2 = false;
+		                checker++;
+		                }
+			}
+		}
+
+	    	//FAMILYHOUSE BUTTON
+	    	if(this->button3_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+	    		        std::cout << "fam house" << std::endl;
+		                    b3 = true;
+		                    checker++;
+	    	}
+
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                FamilyHouse fhouse(mouseX + camX, mouseY + camY);
+		                v->push_back(fhouse);
+		                b3 = false;
+		                checker++;
+		        }
+			}
+		}
+
+		//WAREHOUSE BUTTON
+		if( this->button4_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
+				std::cout << "ware" << std::endl;
+		                b4 = true;
+		                checker++;
+		    }
+
+
+		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
+		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
+		                Warehouse ware(mouseX + camX, mouseY + camY);
+				p->add_wh(ware);
+		                v->push_back(ware);
+		                b4 = false;
+		                checker++;
+		                }
+			}
+		}
+		if(mouseX > 600 && mouseX < 800 && mouseY > 400 && mouseY < 600){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				if(b1 || b2 || b3 || b4){
+					b1 = false;
+					b2 = false;
+					b3 = false;
+					b4 = false;
+					checker++;		
+				}
+			}		
+		}
+	
+
+	/*if(mouseX > 610 && mouseX < 790 && mouseY > 200 && mouseY < 390){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				if(b1 || b2 || b3 || b4){
+					b1 = false;
+					b2 = false;
+					b3 = false;
+					b4 = false;
+					checker++;		
+				}			
+			}
+		}*/
+
+		//RESOURCE INCREASE/DECREASE BUTTON CHECKS
+		if(this->increase_wood(event, mouseX, mouseY) == 1){
+			p->increase_woodcutters(&SHASH);
+		}
+		if(this->increase_stone(event, mouseX, mouseY) == 1){
+			p->increase_stoners(&SHASH);
+		}
+		if(this->increase_iron(event, mouseX, mouseY) == 1){
+			p->increase_ironers(&SHASH);
+		}
+		if(this->decrease_wood(event, mouseX, mouseY) == 1){
+			p->decrease_woodcutters();
+		}
+		if(this->decrease_stone(event, mouseX, mouseY) == 1){
+			p->decrease_stoners();
+		}
+		if(this->decrease_iron(event, mouseX, mouseY) == 1){
+			p->decrease_ironers();
+		}
+	}
+
+	bool startClick(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
+		//CASTLE SPAWN
+	    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
+	        //int xpx = (pos.x + camX)/DRAWSIZE;
+	        //int ypx = (pos.y + camY)/DRAWSIZE;
+	        /*
+	        std::cout << xpx << ","<< ypx << " -> ";
+	        std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
+	        std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
+	        */
+	        Castle castle(mouseX + camX, mouseY + camY, p);
+	        Settler setl0(mouseX + camX +10, mouseY + camY);
+	        Settler setl1(mouseX + camX, mouseY + camY + 10);
+			Warehouse whouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
+			p->add_wh(whouse);
+
+	        p->settlers.push_back(setl0);
+	        p->settlers.push_back(setl1);
+
+	        //p->tasks.push_back( );
+
+	        v->push_back(castle);
+	    	v->push_back(whouse);
+		    //v = setl0.nearest(SHASH, Resource::RType::TREE);
+	        //initted = true;
+		    return true;
+	    }
+	return false;
+    }
+	void draw_info(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer* p){
+		p->update_resources();
+		int wood = p->get_wood();
+		int stone = p->get_stone();
+		int iron = p->get_iron();
 		
 
 		if(b1){
@@ -260,19 +416,12 @@ public:
 		window.draw(req_iron);
 	}
 
+	void drawmenu(sf::RenderWindow &window, HumanPlayer* p){
 
-
-
-
-
-
-	void drawmenu(sf::RenderWindow &window, bool b1, bool b2, bool b3, bool b4, HumanPlayer p){
-
-
-		wood_amount.setString(std::to_string(p.get_woodcutters()));
-		stone_amount.setString(std::to_string(p.get_stoners()));
-		iron_amount.setString(std::to_string(p.get_ironers()));
-		idle_amount.setString(std::to_string(p.get_idlers()));
+		wood_amount.setString(std::to_string(p->get_woodcutters()));
+		stone_amount.setString(std::to_string(p->get_stoners()));
+		iron_amount.setString(std::to_string(p->get_ironers()));
+		idle_amount.setString(std::to_string(p->get_idlers()));
 
 
 		window.draw(background);
@@ -292,6 +441,11 @@ public:
 	}
 
 private:
+	bool b1 = false;
+	bool b2 = false;
+	bool b3 = false;
+	bool b4 = false;
+	int checker = 0;
 	sf::Font font;
 	sf::Text wood_amount;
 	sf::Text iron_amount;

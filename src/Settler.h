@@ -61,7 +61,7 @@ public:
         }
     }*/
 
-	std::vector<int> nearest(SpatialHash SHASH, Resource::RType t){
+	std::vector<int> nearest(SpatialHash* SHASH, Resource::RType t){
 		int x = this->get_x_position()/ENTHASH;
 		int y = this->get_y_position()/ENTHASH;
 		int targetX;
@@ -76,14 +76,14 @@ public:
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
 						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
-							for(unsigned int a = 0; a < SHASH.trees[i][j].size(); a++){
-								if(SHASH.trees[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH.trees[i][j][a].get_x_position() - x, 2) + pow(SHASH.trees[i][j][a].get_y_position() - y, 2));
+							for(unsigned int a = 0; a < SHASH->trees[i][j].size(); a++){
+								if(SHASH->trees[i][j][a].is_free()){
+									double tang  = sqrt(pow(SHASH->trees[i][j][a].get_x_position() - x, 2) + pow(SHASH->trees[i][j][a].get_y_position() - y, 2));
 									if(matka > tang){
 										matka = tang;
-										targetX = SHASH.trees[i][j][a].get_x_position();
+										targetX = SHASH->trees[i][j][a].get_x_position();
 									
-										targetY = SHASH.trees[i][j][a].get_y_position();
+										targetY = SHASH->trees[i][j][a].get_y_position();
 										targetNUM = a;
 									}
 								}
@@ -95,8 +95,8 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
-					SHASH.trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
-					std::cout<< SHASH.trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].is_free()<<std::endl;
+					SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
+					std::cout<< SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].is_free()<<std::endl;
 					return v;
 				}
 			}
@@ -107,13 +107,13 @@ public:
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
 						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
-							for(unsigned int a = 0; a < SHASH.stone[i][j].size(); a++){
-								if(SHASH.stone[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH.stone[i][j][a].get_x_position() - x, 2) + pow(SHASH.stone[i][j][a].get_y_position() - y, 2));
+							for(unsigned int a = 0; a < SHASH->stone[i][j].size(); a++){
+								if(SHASH->stone[i][j][a].is_free()){
+									double tang  = sqrt(pow(SHASH->stone[i][j][a].get_x_position() - x, 2) + pow(SHASH->stone[i][j][a].get_y_position() - y, 2));
 									if(matka > tang){
 										matka = tang;
-										targetX = SHASH.stone[i][j][a].get_x_position();
-										targetY = SHASH.stone[i][j][a].get_y_position();
+										targetX = SHASH->stone[i][j][a].get_x_position();
+										targetY = SHASH->stone[i][j][a].get_y_position();
 										targetNUM = a;
 									}
 								}
@@ -125,7 +125,7 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
-					SHASH.stone[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
+					SHASH->stone[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
 					return v;
 				}
 			}
@@ -135,13 +135,13 @@ public:
 				for(int i = x - dis; i <= (x + dis); i++){
 					for(int j = y - dis; j <= (y + dis); j++){
 						if((x-dis) >= 0 && (y-dis) >= 0 && (x+dis) <= HASHX -1 && (y+dis) <= HASHY -1){
-							for(unsigned int a = 0; a < SHASH.iron[i][j].size(); a++){
-								if(SHASH.iron[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH.iron[i][j][a].get_x_position() - x, 2) + pow(SHASH.iron[i][j][a].get_y_position() - y, 2));
+							for(unsigned int a = 0; a < SHASH->iron[i][j].size(); a++){
+								if(SHASH->iron[i][j][a].is_free()){
+									double tang  = sqrt(pow(SHASH->iron[i][j][a].get_x_position() - x, 2) + pow(SHASH->iron[i][j][a].get_y_position() - y, 2));
 									if(matka > tang){
 										matka = tang;
-										targetX = SHASH.iron[i][j][a].get_x_position();
-										targetY = SHASH.iron[i][j][a].get_y_position();
+										targetX = SHASH->iron[i][j][a].get_x_position();
+										targetY = SHASH->iron[i][j][a].get_y_position();
 										targetNUM = a;
 									}
 								}
@@ -153,7 +153,7 @@ public:
 					v.push_back(targetX);
 					v.push_back(targetY);
 					v.push_back(targetNUM);
-					SHASH.iron[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
+					SHASH->iron[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
 					return v;
 				}
 			}
