@@ -17,7 +17,7 @@ int main(){
     SpatialHash SHASH;
     AssetHandler ASSETHANDLER;
 
-    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Hitlers");
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Settlers");
 
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));

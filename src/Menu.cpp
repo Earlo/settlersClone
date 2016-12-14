@@ -72,8 +72,8 @@ Menu::Menu(AssetHandler* ASSETHANDLER, SpatialHash* SHASH) {
 	button4.setPosition(105,300);
 
 	build.setSize(sf::Vector2f(40, 40));
-	build.setFillColor(sf::Color::White);
-	build.setPosition(128,140);
+	build.setTexture(&ASSETHANDLER->BUILDICONT, true);
+	build.setPosition(105,132);
 
 	infobox.setSize(sf::Vector2f(180, 190));
 	infobox.setTexture(&ASSETHANDLER->INFOTEX, true);
@@ -219,7 +219,7 @@ int Menu::decrease_iron(sf::Event event, int x, int y){
 	return 0;
 }
 int Menu::increase_build(sf::Event event, int x, int y){
-	if(x > 728 && x < 768 && y > 140 && y < 180){
+	if(x > 705 && x < 745 && y > 132 && y < 172){
 		if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 			//std::cout << "testing building" << std::endl;
 			clickflag = true;

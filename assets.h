@@ -23,6 +23,7 @@ class AssetHandler{
 	sf::Image CONTROLPANELIMG;
 	sf::Image INFOIMG;
 	sf::Image BUILD;
+	sf::Image BUILDICON;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -42,6 +43,7 @@ class AssetHandler{
 	sf::Texture CONTROLPANELTEX;
 	sf::Texture INFOTEX;
 	sf::Texture BUILDTEX;
+	sf::Texture BUILDICONT;
 
 	AssetHandler();
 

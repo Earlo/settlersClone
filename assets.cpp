@@ -55,4 +55,7 @@ AssetHandler::AssetHandler(){
 	BUILD.loadFromFile("sprites/constructionsite.png");
 	BUILDTEX.loadFromImage(BUILD);
 
+	BUILDICON.loadFromFile("sprites/buildbutton.png");
+	BUILDICONT.loadFromImage(BUILDICON);
+
 }
