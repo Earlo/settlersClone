@@ -31,6 +31,7 @@ public:
 
         this->task = Settler::TType::IDLE;
         this->updateImg();
+	this->workclock = 0;
         }
 
     void updateImg(){
@@ -190,7 +191,6 @@ public:
             dy = (int)((targetY - y)/abs(targetY - y));
         }
 
-		std::cout<< "nykyinen: "<< x << "  " << y<<std::endl;
 		this->x_pos += dx;//(int)(acos(dx)*STLSPEED);
 		this->y_pos += dy;//(int)(asin(dx)*STLSPEED);
 		this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
@@ -211,10 +211,15 @@ public:
 	Settler::TType get_task(){return task;}
 	void set_nearest(std::vector<int> v){near = v;}
 	std::vector<int> get_nearest(){return near;}
-
+	int get_near_x(){return near[0];}
+	int get_near_y(){return near[1];}
+	int get_workclock(){return workclock;}
+	void set_workclock(int time){workclock += time;}
+	int workPhase;
 private:
     //Game game;
     bool armed;
+    int workclock;
     Item inventory;
     Settler::TType task;
     std::vector<int> near;
