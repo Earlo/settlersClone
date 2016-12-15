@@ -33,7 +33,7 @@ public:
 		}
 		
 	}
-	void play(){
+	void play(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			switch(settlers[i]->get_task()){
 			case Settler::TType::BUILD:
@@ -139,11 +139,11 @@ public:
 					else{settlers[i]->set_workclock(1);}
 				}
 				if( settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
+					warehouses[0]->give_wood();
+					settlers[i]->set_task(Settler::TType::GATHERW);
+					std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::TREE);
 					settlers[i]->workPhase = 0;
-					settlers[i]->set_task(Settler::TType::IDLE);
-					woodcutters--;
-					idlers++;
-					warehouses[0]->give_wood();					
+					settlers[i]->set_nearest(v);				
 					settlers[i]->set_workclock(-300);
 				}
 				else{settlers[i]->move(settlers[i]->get_nearest());}
@@ -159,10 +159,11 @@ public:
 					else{settlers[i]->set_workclock(1);}
 				}
 				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
-					settlers[i]->set_task(Settler::TType::IDLE);
-					stoners--;
-					idlers++;
 					warehouses[0]->give_stone();
+					settlers[i]->set_task(Settler::TType::GATHERS);
+					std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::STONE);
+					settlers[i]->workPhase = 0;
+					settlers[i]->set_nearest(v);
 					settlers[i]->set_workclock(-300);
 				}
 				else{settlers[i]->move(settlers[i]->get_nearest());}
@@ -178,10 +179,11 @@ public:
 					else{settlers[i]->set_workclock(1);}
 				}
 				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
-					settlers[i]->set_task(Settler::TType::IDLE);
-					ironers--;
-					idlers++;
 					warehouses[0]->give_iron();
+					settlers[i]->set_task(Settler::TType::GATHERI);
+					std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::IRON);
+					settlers[i]->workPhase = 0;
+					settlers[i]->set_nearest(v);
 					settlers[i]->set_workclock(-300);
 					
 				}
