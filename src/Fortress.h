@@ -10,6 +10,10 @@ public:
 
 	Fortress(int x_position, int y_position) : Building(x_position, y_position){
         	this->updateImg();
+		this->required_iron = 10;
+		this->required_wood = 4;
+		this->required_stone = 20;
+		this->under_construction = true;
 	}
 	~Fortress(){}
 	
@@ -26,8 +30,14 @@ public:
 	}
 
 	void updateImg(){
-		this->sprite.setTexture(ASSETHANDLER.FORTRESSTEX, true);
-		this->sprite.setPosition( this->x_pos-ASSETHANDLER.FORTRESSIMG.getSize().x/2, this->y_pos-ASSETHANDLER.FORTRESSIMG.getSize().y );
+		if(this->under_construction){
+			this->sprite.setTexture(ASSETHANDLER.BUILDTEX, true);
+			this->sprite.setPosition( this->x_pos-ASSETHANDLER.BUILD.getSize().x/2, this->y_pos-ASSETHANDLER.BUILD.getSize().y );	
+		}
+		else{
+			this->sprite.setTexture(ASSETHANDLER.FHOUSETEX, true);
+			this->sprite.setPosition( this->x_pos-ASSETHANDLER.FHOUSEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.FHOUSEIMG.getSize().y );
+		}
 	}
 
 private:

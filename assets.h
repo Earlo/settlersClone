@@ -20,6 +20,7 @@ class AssetHandler{
 	sf::Image WAREICON;
 	sf::Image CONTROLPANELIMG;
 	sf::Image INFOIMG;
+	sf::Image BUILD;
 
 	sf::Texture TREETEX;
 	sf::Texture STONETEX;
@@ -37,6 +38,7 @@ class AssetHandler{
 	sf::Texture WAREICONT;
 	sf::Texture CONTROLPANELTEX;
 	sf::Texture INFOTEX;
+	sf::Texture BUILDTEX;
 
 	AssetHandler(){
 		TREEIMG.loadFromFile("sprites/Tree1.png");
@@ -86,6 +88,9 @@ class AssetHandler{
 
 		INFOIMG.loadFromFile("sprites/blankpanel.png");
 		INFOTEX.loadFromImage(INFOIMG);
+
+		BUILD.loadFromFile("sprites/constructionsite.png");
+		BUILDTEX.loadFromImage(BUILD);
 
 	}
 
