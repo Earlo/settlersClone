@@ -17,8 +17,8 @@ public:
 	Resource();
 	Resource(int x_position, int y_position, Resource::RType t):Entity(x_position, y_position){
 		this->type = t;
-        	this->updateImg();
-
+        this->updateImg();
+		//std::cout<<"at res "<<this->get_x_position()<<","<<this->get_y_position()<<std::endl;
 	}
 
 	void updateImg() {
@@ -48,5 +48,6 @@ public:
 private:
 	Resource::RType type;
 	unsigned int resource_amount = 5;
+
 };
 

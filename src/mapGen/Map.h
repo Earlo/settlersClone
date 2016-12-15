@@ -13,6 +13,7 @@
 #include "Tile.h"
 
 #include "../Resource.h"
+#include "../Game.h"
 
 #include "../../constants.h"
 
@@ -35,15 +36,15 @@ private:
 public:
 
 
-    //TODO make some more sensible way to store stuff drawn on screen
-    std::vector<Entity> stuff;
-    std::vector<Resource> resot;
+    //TODO make some more sensible way to store g->entities drawn on screen
+    //std::vector<Entity*> stuff;
+    std::vector<Resource*> resot;
 
 	sf::Sprite sprite;
 	unsigned int w;
 	unsigned int h;
 
-	Map( unsigned int _w, unsigned int _h ){
+	Map( unsigned int _w, unsigned int _h, Game* g){
 		this->w = _w;
 		this->h = _h;
 
@@ -119,13 +120,15 @@ public:
 					//int hval = ((terrain[i][j].z-100)/512.f);
 					if (chance(generator) > 0.985){
 						if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
-							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON);
-							stuff.push_back( reso );
+							Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON);
+							g->entities.push_back( reso  );
 							resot.push_back( reso );
+							//std::cout<<"at map "<<reso.get_x_position()<<","<<reso.get_y_position()<<std::endl;
+
 						}
 						else {
-							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE);
-						    stuff.push_back( reso );
+							Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE);
+						    g->entities.push_back( reso );
 						    resot.push_back( reso );
 						}
 					}
@@ -135,8 +138,8 @@ public:
 					if (val > .55){
 						terrain[i][j].setType( Tile::Type::WOODS );
 						if ( val > .55 + chance(generator) ) {
-							Resource reso = Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE);
-							stuff.push_back( reso );
+							Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE);
+							g->entities.push_back( reso );
 							resot.push_back( reso );
 						}					
 					}
@@ -150,6 +153,13 @@ public:
 			}
 		}
 		this->updateImg();
+	    /*
+	    for(unsigned int i = 0; i < g->entities.size(); i++){ // Draw the entities from buildings vector
+	        std::cout<<"at G.e "<<g->entities[i]->get_x_position()<<","<<g->entities[i]->get_y_position()<<std::endl;
+	        std::cout<<"at R-> "<<resot[i]->get_x_position()<<","<<resot[i]->get_y_position()<<std::endl;
+        }   
+		*/
+		//std::cout<<"at MAP "<<g->entities[15]->get_x_position()<<","<<g->entities[15]->get_y_position()<<std::endl;
 	    std::cout << "done" << std::endl;
 	};
 	

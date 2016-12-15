@@ -12,8 +12,8 @@ public:
 
 	Castle(int x_position, int y_position, HumanPlayer* p) : Building(x_position, y_position){
 		for(unsigned int i = 0; i < 10; i++){
-			Settler settler(x_position, y_position);
-			p->settlers.push_back(settler);
+			Settler* s = new Settler(x_position, y_position);
+			p->settlers.push_back(s);
 			p->increase_idlers();
 
 		}

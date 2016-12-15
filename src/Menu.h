@@ -4,8 +4,8 @@
 
 #include "../constants.h"
 #include "Game.h"
-#include "logic/HumanPlayer.h"
 
+#include "logic/HumanPlayer.h"
 
 #include "Fortress.h"
 #include "Warehouse.h"
@@ -248,7 +248,7 @@ public:
 		}
 		return 0;
 	}
-	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
+	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity*>* v){
 	
 		//FORTRESS BUTTON
 		if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many build buttons being clicked
@@ -260,9 +260,9 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Fortress fort(mouseX + camX, mouseY + camY);
-				p->buildings.push_back(fort);
-		                v->push_back(fort);
+		                Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
+						p->buildings.push_back(f);
+		                v->push_back(f);
 		                b1 = false;
 		                checker++;
 		                }
@@ -279,8 +279,8 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Weaponsmith ws(mouseX + camX, mouseY + camY);
-				p->buildings.push_back(ws);
+		                Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
+						p->buildings.push_back(ws);
 		                v->push_back(ws);
 		                b2 = false;
 		                checker++;
@@ -298,8 +298,8 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                FamilyHouse fhouse(mouseX + camX, mouseY + camY, p);
-				p->buildings.push_back(fhouse);
+		                FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY );
+						p->buildings.push_back(fhouse);
 		                v->push_back(fhouse);
 		                b3 = false;
 		                checker++;
@@ -318,10 +318,12 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // Checking if mouse is on map
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                Warehouse ware(mouseX + camX, mouseY + camY);
-				p->buildings.push_back(ware);
-				p->add_wh(ware);
+		                Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
+
+						p->buildings.push_back(ware);
+						p->add_wh(ware);
 		                v->push_back(ware);
+
 		                b4 = false;
 		                checker++;
 		                }
@@ -376,7 +378,7 @@ public:
 		}
 	}
 
-	bool startClick(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
+	bool startClick(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity*>* v){
 		//CASTLE SPAWN
 	    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT && mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600) {
 	        //int xpx = (pos.x + camX)/DRAWSIZE;
@@ -386,15 +388,15 @@ public:
 	        std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
 	        std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
 	        */
-	        Castle castle(mouseX + camX, mouseY + camY, p);
-		Warehouse whouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
-		p->add_wh(whouse);
+	        Castle* C = new Castle(mouseX + camX, mouseY + camY, p);
+			Warehouse* W = new Warehouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
+			p->add_wh( W );
 
 
 	        //p->tasks.push_back( );
 
-	        v->push_back(castle);
-	    	v->push_back(whouse);
+	        v->push_back( C );
+	    	v->push_back( W );
 		    //v = setl0.nearest(SHASH, Resource::RType::TREE);
 	        //initted = true;
 		    return true;
@@ -488,4 +490,5 @@ private:
 	sf::RectangleShape button4;
 	sf::RectangleShape build;
 };
+
 

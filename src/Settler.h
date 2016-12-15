@@ -67,96 +67,83 @@ public:
 		int targetX;
 		int targetY;
 		int targetNUM;
-		double matka = 10000;
-		std::vector<int> v;
-		switch (t) {
-		case Resource::RType::TREE:
-			for(int dis = 0;dis < HASHX; dis++){
-				for(int i = x - dis; i <= (x + dis); i++){
-					for(int j = y - dis; j <= (y + dis); j++){
-						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
-							for(unsigned int a = 0; a < SHASH->trees[i][j].size(); a++){
-								if(SHASH->trees[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH->trees[i][j][a].get_x_position() - x, 2) + pow(SHASH->trees[i][j][a].get_y_position() - y, 2));
-									if(matka > tang){
-										matka = tang;
-										targetX = SHASH->trees[i][j][a].get_x_position();
-									
-										targetY = SHASH->trees[i][j][a].get_y_position();
-										targetNUM = a;
-									}
-								}
-							}
-						}	
-					}
-				}
-				if(matka != 10000){
-					v.push_back(targetX);
-					v.push_back(targetY);
-					v.push_back(targetNUM);
-					SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
-					std::cout<< SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM].is_free()<<std::endl;
-					return v;
-				}
-			}
-			break;
+		
 
-		case Resource::RType::STONE:
-			for(int dis = 0;dis < HASHX; dis++){
-				for(int i = x - dis; i <= (x + dis); i++){
-					for(int j = y - dis; j <= (y + dis); j++){
-						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
+		double matka = 10000;
+		bool done = false;
+		std::vector<int> v;
+		for(int dis = 0;dis < HASHX; dis++){
+			for(int i = x - dis; i <= (x + dis); i++){
+				for(int j = y - dis; j <= (y + dis); j++){
+					if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
+					switch (t) {
+						case Resource::RType::TREE:
+						for(unsigned int a = 0; a < SHASH->trees[i][j].size(); a++){
+							if(SHASH->trees[i][j][a]->is_free()){
+								double tang  = sqrt(pow(SHASH->trees[i][j][a]->get_x_position() - x, 2) + pow(SHASH->trees[i][j][a]->get_y_position() - y, 2));
+								if(matka > tang){
+									matka = tang;
+									targetX = SHASH->trees[i][j][a]->get_x_position();
+									targetY = SHASH->trees[i][j][a]->get_y_position();
+									targetNUM = a;
+									done = true;
+								}
+							}
+						}
+						if(done){
+							v.push_back(targetX);
+							v.push_back(targetY);
+							v.push_back(targetNUM);
+							SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->set_free(false);
+							std::cout<< SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->is_free()<<std::endl;
+							return v;
+						}
+						break;
+						case Resource::RType::STONE:
 							for(unsigned int a = 0; a < SHASH->stone[i][j].size(); a++){
-								if(SHASH->stone[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH->stone[i][j][a].get_x_position() - x, 2) + pow(SHASH->stone[i][j][a].get_y_position() - y, 2));
+								if(SHASH->stone[i][j][a]->is_free()){
+									double tang  = sqrt(pow(SHASH->stone[i][j][a]->get_x_position() - x, 2) + pow(SHASH->stone[i][j][a]->get_y_position() - y, 2));
 									if(matka > tang){
 										matka = tang;
-										targetX = SHASH->stone[i][j][a].get_x_position();
-										targetY = SHASH->stone[i][j][a].get_y_position();
+										targetX = SHASH->stone[i][j][a]->get_x_position();
+										targetY = SHASH->stone[i][j][a]->get_y_position();
 										targetNUM = a;
 									}
 								}
 							}
-						}	
-					}
-				}
-				if(matka != 10000){
-					v.push_back(targetX);
-					v.push_back(targetY);
-					v.push_back(targetNUM);
-					SHASH->stone[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
-					return v;
-				}
-			}
-			break;
-		case Resource::RType::IRON:
-			for(int dis = 0;dis < HASHX; dis++){
-				for(int i = x - dis; i <= (x + dis); i++){
-					for(int j = y - dis; j <= (y + dis); j++){
-						if( i >= 0 && j >= 0 && i <= HASHX -1 && j <= HASHY -1){
+							if(matka != 10000){
+								v.push_back(targetX);
+								v.push_back(targetY);
+								v.push_back(targetNUM);
+								SHASH->stone[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->set_free(false);
+								return v;
+							}
+							break;
+						case Resource::RType::IRON:
 							for(unsigned int a = 0; a < SHASH->iron[i][j].size(); a++){
-								if(SHASH->iron[i][j][a].is_free()){
-									double tang  = sqrt(pow(SHASH->iron[i][j][a].get_x_position() - x, 2) + pow(SHASH->iron[i][j][a].get_y_position() - y, 2));
+								if(SHASH->iron[i][j][a]->is_free()){
+									double tang  = sqrt(pow(SHASH->iron[i][j][a]->get_x_position() - x, 2) + pow(SHASH->iron[i][j][a]->get_y_position() - y, 2));
 									if(matka > tang){
 										matka = tang;
-										targetX = SHASH->iron[i][j][a].get_x_position();
-										targetY = SHASH->iron[i][j][a].get_y_position();
+										targetX = SHASH->iron[i][j][a]->get_x_position();
+										targetY = SHASH->iron[i][j][a]->get_y_position();
 										targetNUM = a;
 									}
 								}
 							}
+							if(matka != 10000){
+								v.push_back(targetX);
+								v.push_back(targetY);
+								v.push_back(targetNUM);
+								SHASH->iron[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->set_free(false);
+								return v;
+							}
+							break;
 						}	
 					}
 				}
-				if(matka != 10000){
-					v.push_back(targetX);
-					v.push_back(targetY);
-					v.push_back(targetNUM);
-					SHASH->iron[targetX/ENTHASH][targetY/ENTHASH][targetNUM].set_free(false);
-					return v;
-				}
 			}
-			break;
+
 		}
 		return std::vector<int> (-1);
 	}
