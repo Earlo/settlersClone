@@ -86,6 +86,10 @@ public:
 		button4.setTexture(&ASSETHANDLER.WAREICONT, true);
 		button4.setPosition(105,300);
 
+		build.setSize(sf::Vector2f(40, 40));
+		build.setFillColor(sf::Color::White);
+		build.setPosition(128,140);
+
 		infobox.setSize(sf::Vector2f(180, 190));
 		infobox.setTexture(&ASSETHANDLER.INFOTEX, true);
 		infobox.setPosition(10,400);
@@ -229,6 +233,21 @@ public:
 		}
 		return 0;
 	}
+	int increase_build(sf::Event event, int x, int y){
+		if(x > 728 && x < 768 && y > 140 && y < 180){
+			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
+				std::cout << "testing building" << std::endl;
+				clickflag = true;
+				return 1;
+			}
+			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+				clickflag = false;
+				return 0;			
+			}
+			return 0;
+		}
+		return 0;
+	}
 	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity>* v){
 	
 		//FORTRESS BUTTON
@@ -242,6 +261,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Fortress fort(mouseX + camX, mouseY + camY);
+				p->buildings.push_back(fort);
 		                v->push_back(fort);
 		                b1 = false;
 		                checker++;
@@ -260,6 +280,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Weaponsmith ws(mouseX + camX, mouseY + camY);
+				p->buildings.push_back(ws);
 		                v->push_back(ws);
 		                b2 = false;
 		                checker++;
@@ -277,7 +298,8 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                FamilyHouse fhouse(mouseX + camX, mouseY + camY);
+		                FamilyHouse fhouse(mouseX + camX, mouseY + camY, p);
+				p->buildings.push_back(fhouse);
 		                v->push_back(fhouse);
 		                b3 = false;
 		                checker++;
@@ -297,6 +319,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Warehouse ware(mouseX + camX, mouseY + camY);
+				p->buildings.push_back(ware);
 				p->add_wh(ware);
 		                v->push_back(ware);
 		                b4 = false;
@@ -347,6 +370,9 @@ public:
 		}
 		if(this->decrease_iron(event, mouseX, mouseY) == 1){
 			p->decrease_ironers();
+		}
+		if(this->increase_build(event, mouseX, mouseY) == 1){
+			p->increase_builders();
 		}
 	}
 
@@ -434,6 +460,7 @@ public:
 		window.draw(iron_amount);
 		window.draw(stone_amount);
 		window.draw(idle_amount);
+		window.draw(build);
 	}
 
 private:
@@ -442,6 +469,7 @@ private:
 	bool b3 = false;
 	bool b4 = false;
 	int checker = 0;
+	
 	sf::Font font;
 	sf::Text wood_amount;
 	sf::Text iron_amount;
@@ -458,5 +486,6 @@ private:
 	sf::RectangleShape button2;
 	sf::RectangleShape button3;
 	sf::RectangleShape button4;
+	sf::RectangleShape build;
 };
 

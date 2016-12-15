@@ -9,10 +9,13 @@ class Warehouse : public Building {
 public:
 	Warehouse(int x_position, int y_position) : Building(x_position, y_position){
         	this->updateImg();
-		wood = 5;
-		stone = 5;
-		iron = 5;
-		weapon = 0;	
+		this->wood = 12;
+		this->stone = 5;
+		this->iron = 2;
+		this->weapon = 0;
+		this->required_iron = 0;
+		this->required_wood = 15;
+		this->required_stone = 6;	
 	}
 	void take_wood(){
 		if(wood > 0){
