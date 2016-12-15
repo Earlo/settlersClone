@@ -3,16 +3,24 @@
 //const for screen
 const int MOVSPEED = 4;
 const int DRAWSIZE = 4;
-const int SCREENX = 800;
-const int SCREENY = 600;
+
 const int VIEWX = 600;
 const int VIEWY = 600;
+const int MENUX = 200;
+const int MENUY = 600;
+
+const int SCREENX = VIEWX + MENUX;
+const int SCREENY = 600;
+
+const double VIEWPORTW = (double)VIEWX/(double)SCREENX;
+const double MENUPOWRTW = 1.0 - VIEWPORTW;
+
 const int CAMCENTERX = VIEWX/2;
 const int CAMCENTERY = VIEWY/2;
 //const int WORLDX = 1000;
 //const int WORLDY = 1000;
-const int WORLDX = 400;
-const int WORLDY = 400;
+const int WORLDX = 300;
+const int WORLDY = 300;
 
 const int SCROLLX = WORLDX * DRAWSIZE - SCREENX;
 const int SCROLLY = WORLDY * DRAWSIZE - SCREENY;

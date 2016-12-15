@@ -16,79 +16,80 @@ public:
 		idlers = 0;
 	
 	}
-	std::vector<Settler> settlers;
+	std::vector<Settler*> settlers;
+	std::vector<Warehouse*> warehouses;
 
 	void update(sf::RenderWindow &window, sf::View view){
 		for(unsigned int i = 0; i < settlers.size(); i++){ //draw
-			int x = settlers[i].get_x_position();
-			int y = settlers[i].get_y_position();
+			int x = settlers[i]->get_x_position();
+			int y = settlers[i]->get_y_position();
 			if ( x > view.getCenter().x-CAMCENTERX  && x < view.getCenter().x+CAMCENTERX
 				&& y > view.getCenter().y-CAMCENTERY  && y < view.getCenter().y+CAMCENTERY){
-				window.draw(settlers[i].sprite);
+				window.draw(settlers[i]->sprite);
 			}
 		}
 		
 	}
 	void play(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			switch(settlers[i].get_task()){
+			switch(settlers[i]->get_task()){
 			case Settler::TType::BUILD: //vielä kesken
 				break;
 			case Settler::TType::GATHERW:
-				if(settlers[i].get_x_position() == settlers[i].get_near_x() && settlers[i].get_y_position() == settlers[i].get_near_y()){
-					if(settlers[i].get_workclock() > 300){
-						settlers[i].set_nearest(warehouse_pos());
-						settlers[i].set_workclock(-300);
-						settlers[i].move(settlers[i].get_nearest());
-						settlers[i].workPhase = 1;
+				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
+					if(settlers[i]->get_workclock() > 300){
+						settlers[i]->set_nearest(warehouse_pos());
+						settlers[i]->set_workclock(-300);
+						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->workPhase = 1;
 					}
-					else{settlers[i].set_workclock(1);}
+					else{settlers[i]->set_workclock(1);}
 				}
-				if( settlers[i].workPhase == 1 && settlers[i].get_x_position() == warehouses[0].get_x_position() && settlers[i].get_y_position() == warehouses[0].get_y_position()){
-					settlers[i].workPhase = 0;
-					settlers[i].set_task(Settler::TType::IDLE);
+				if( settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
+					settlers[i]->workPhase = 0;
+					settlers[i]->set_task(Settler::TType::IDLE);
 					woodcutters--;
 					idlers++;
-					settlers[i].set_workclock(-300);
+					settlers[i]->set_workclock(-300);
 				}
-				else{settlers[i].move(settlers[i].get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
 			case Settler::TType::GATHERS:
-				if(settlers[i].get_x_position() == settlers[i].get_near_x() && settlers[i].get_y_position() == settlers[i].get_near_y()){
-					if(settlers[i].get_workclock() > 300){
-						settlers[i].set_nearest(warehouse_pos());
-						settlers[i].set_workclock(-300);
-						settlers[i].move(settlers[i].get_nearest());
-						settlers[i].workPhase = 1;
+				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
+					if(settlers[i]->get_workclock() > 300){
+						settlers[i]->set_nearest(warehouse_pos());
+						settlers[i]->set_workclock(-300);
+						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->workPhase = 1;
 					}
-					else{settlers[i].set_workclock(1);}
+					else{settlers[i]->set_workclock(1);}
 				}
-				if(settlers[i].workPhase == 1 && settlers[i].get_x_position() == warehouses[0].get_x_position() && settlers[i].get_y_position() == warehouses[0].get_y_position()){
-					settlers[i].set_task(Settler::TType::IDLE);
+				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
+					settlers[i]->set_task(Settler::TType::IDLE);
 					stoners--;
 					idlers++;
-					settlers[i].set_workclock(-300);
+					settlers[i]->set_workclock(-300);
 				}
-				else{settlers[i].move(settlers[i].get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
 			case Settler::TType::GATHERI:
-				if(settlers[i].get_x_position() == settlers[i].get_near_x() && settlers[i].get_y_position() == settlers[i].get_near_y()){
-					if(settlers[i].get_workclock() > 300){
-						settlers[i].set_nearest(warehouse_pos());
-						settlers[i].set_workclock(-300);
-						settlers[i].move(settlers[i].get_nearest());
-						settlers[i].workPhase = 1;
+				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
+					if(settlers[i]->get_workclock() > 300){
+						settlers[i]->set_nearest(warehouse_pos());
+						settlers[i]->set_workclock(-300);
+						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->workPhase = 1;
 					}
-					else{settlers[i].set_workclock(1);}
+					else{settlers[i]->set_workclock(1);}
 				}
-				if(settlers[i].workPhase == 1 && settlers[i].get_x_position() == warehouses[0].get_x_position() && settlers[i].get_y_position() == warehouses[0].get_y_position()){
-					settlers[i].set_task(Settler::TType::IDLE);
+				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
+					settlers[i]->set_task(Settler::TType::IDLE);
 					ironers--;
 					idlers++;
-					settlers[i].set_workclock(-300);
+					settlers[i]->set_workclock(-300);
 					
 				}
-				else{settlers[i].move(settlers[i].get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
 			case Settler::TType::IDLE:
 				break;			
@@ -96,8 +97,8 @@ public:
 		}
 	}
 
-	void add_wh(Warehouse wh){
-		warehouses.push_back(wh);
+	void add_wh(Warehouse* wh){
+		warehouses.push_back( wh );
 	}
 
 	void update_resources(){
@@ -107,9 +108,9 @@ public:
 
 		if(warehouses.size() > 0){
 			for(auto i : warehouses){
-				wood += i.get_wood();
-				stone += i.get_stone();
-				iron += i.get_iron();
+				wood += i->get_wood();
+				stone += i->get_stone();
+				iron += i->get_iron();
 			}
 		}
 		
@@ -129,11 +130,11 @@ public:
 
 	void increase_woodcutters(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::IDLE){
-				settlers[i].set_task(Settler::TType::GATHERW);
-				std::vector<int> v = settlers[i].nearest(SHASH, Resource::RType::TREE);
-				settlers[i].workPhase = 0;
-				settlers[i].set_nearest(v);
+			if(settlers[i]->get_task() == Settler::TType::IDLE){
+				settlers[i]->set_task(Settler::TType::GATHERW);
+				std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::TREE);
+				settlers[i]->workPhase = 0;
+				settlers[i]->set_nearest(v);
 				woodcutters++;
 				idlers--;
 				break;
@@ -143,11 +144,11 @@ public:
 
 	void increase_stoners(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::IDLE){
-				settlers[i].set_task(Settler::TType::GATHERS);
-				std::vector<int> v = settlers[i].nearest(SHASH, Resource::RType::STONE);
-				settlers[i].workPhase = 0;
-				settlers[i].set_nearest(v);
+			if(settlers[i]->get_task() == Settler::TType::IDLE){
+				settlers[i]->set_task(Settler::TType::GATHERS);
+				std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::STONE);
+				settlers[i]->workPhase = 0;
+				settlers[i]->set_nearest(v);
 				stoners++;
 				idlers--;
 				break;
@@ -157,11 +158,11 @@ public:
 
 	void increase_ironers(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::IDLE){
-				settlers[i].set_task(Settler::TType::GATHERI);
-				std::vector<int> v = settlers[i].nearest(SHASH, Resource::RType::IRON);
-				settlers[i].workPhase = 0;
-				settlers[i].set_nearest(v);
+			if(settlers[i]->get_task() == Settler::TType::IDLE){
+				settlers[i]->set_task(Settler::TType::GATHERI);
+				std::vector<int> v = settlers[i]->nearest(SHASH, Resource::RType::IRON);
+				settlers[i]->workPhase = 0;
+				settlers[i]->set_nearest(v);
 				ironers++;
 				idlers--;
 				break;
@@ -171,8 +172,8 @@ public:
 
 	void decrease_woodcutters(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::GATHERW){
-				settlers[i].set_task(Settler::TType::IDLE);
+			if(settlers[i]->get_task() == Settler::TType::GATHERW){
+				settlers[i]->set_task(Settler::TType::IDLE);
 				woodcutters--;
 				idlers++;
 				break;
@@ -182,8 +183,8 @@ public:
 
 	void decrease_stoners(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::GATHERS){
-				settlers[i].set_task(Settler::TType::IDLE);
+			if(settlers[i]->get_task() == Settler::TType::GATHERS){
+				settlers[i]->set_task(Settler::TType::IDLE);
 				stoners--;
 				idlers++;
 				break;
@@ -193,8 +194,8 @@ public:
 
 	void decrease_ironers(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
-			if(settlers[i].get_task() == Settler::TType::GATHERI){
-				settlers[i].set_task(Settler::TType::IDLE);
+			if(settlers[i]->get_task() == Settler::TType::GATHERI){
+				settlers[i]->set_task(Settler::TType::IDLE);
 				ironers--;
 				idlers++;
 				break;
@@ -205,12 +206,11 @@ public:
 
 	std::vector<int> warehouse_pos(){
 		std::vector<int> v;
-		v.push_back(warehouses[0].get_x_position());
-		v.push_back(warehouses[0].get_y_position());
+		v.push_back(warehouses[0]->get_x_position());
+		v.push_back(warehouses[0]->get_y_position());
 		return v;
 	}
 
-	std::vector<Warehouse> warehouses;
 private:
 
 	int all_wood;

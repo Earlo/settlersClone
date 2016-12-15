@@ -22,17 +22,18 @@
 
 
 //MOVE TO OTHER PLACE
-bool sortByY (Entity i,Entity j) { return (i.get_y_position()<j.get_y_position()); }
+bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_position()); }
 
 
 int main(){
 
     sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
+
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
-    view1.setViewport(sf::FloatRect(0, 0, .75f, 1));
+    view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));
 
     sf::View menuView(sf::FloatRect(0,0,800-VIEWX,VIEWY));
-    menuView.setViewport(sf::FloatRect(.75f, 0, 0.25f, 1));
+    menuView.setViewport(sf::FloatRect(VIEWPORTW, 0, MENUPOWRTW, 1));
 
     window.setFramerateLimit(60);
 
@@ -49,16 +50,26 @@ int main(){
     bool b3_pressed = false;
     bool b4_pressed = false;
     */
-    Map m = Map(WORLDX,WORLDY);
 
+    Game g;
+    std::cout<<g.entities.size()<<" entities"<<std::endl;
+    Map m = Map(WORLDX,WORLDY, &g);
+    std::cout<<g.entities.size()<<" entities"<<std::endl;
+    std::cout<<"at MAI "<<g.entities[1]->get_x_position()<<","<<g.entities[1]->get_y_position()<<std::endl;
+    std::cout<<"at MAI "<<g.entities[2]->get_x_position()<<","<<g.entities[2]->get_y_position()<<std::endl;
+
+    /*
+    for(unsigned int i = 0; i < g.entities.size(); i++){ // Draw the entities from buildings vector
+        std::cout<<"at ASD "<<g.entities[i]->get_x_position()<<","<<g.entities[i]->get_y_position()<<std::endl;
+        //std::cout<<"at man "<<x<<","<<y<<std::endl;
+        }   
+    */
     //TODO dont sort here
-    std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
+    //std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
     HumanPlayer p;
-    Game g = Game(m.stuff);
     Menu menu;
-    std::vector<Entity>& entities = g.get_entities();
 
-    SHASH.initHash( m );
+    SHASH.initHash( &m );
 
     while (window.isOpen())
     {
@@ -91,10 +102,10 @@ int main(){
 
 
         if(!game_started){
-            game_started = menu.startClick(event, mouseX, mouseY, camX, camY, &m, &p, &entities);
+            game_started = menu.startClick(event, mouseX, mouseY, camX, camY, &m, &p, g.get_entities());
         }
         else{
-            menu.update( event, mouseX, mouseY, camX, camY, &m, &p, &entities);
+            menu.update( event, mouseX, mouseY, camX, camY, &m, &p, g.get_entities());
 	    p.play();
         }
 

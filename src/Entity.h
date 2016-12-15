@@ -16,6 +16,8 @@ public:
 	Entity(int x_position, int y_position){
 		this->x_pos = x_position;
 		this->y_pos = y_position;
+		//std::cout<<"at ent "<<this->get_x_position()<<","<<this->get_y_position()<<std::endl;
+
 		this->free = true;
 	}
 	virtual ~Entity() {};
@@ -29,11 +31,13 @@ public:
 	
 	virtual void updateImg() {};
 
+
 protected:
 	bool free;
 	int size;
-	int x_pos;
-	int y_pos;
+
+	int x_pos = 0;
+	int y_pos = 0;
 };
 
 #endif

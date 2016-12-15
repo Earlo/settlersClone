@@ -21,26 +21,26 @@ public:
 	std::vector<std::vector<double>> WEIGHT;
 
 	//actually makes sense to have seperate hash for each, since looking for trees or stone is completely different task
-    std::vector<std::vector<std::vector<Resource>>> trees;
-    std::vector<std::vector<std::vector<Resource>>> stone;
-    std::vector<std::vector<std::vector<Resource>>> iron;
+    std::vector<std::vector<std::vector<Resource*>>> trees;
+    std::vector<std::vector<std::vector<Resource*>>> stone;
+    std::vector<std::vector<std::vector<Resource*>>> iron;
 
 	SpatialHash( ){
 		for (unsigned int i = 0; i < HASHX; i++){
-			trees.push_back( std::vector<std::vector<Resource>>() );
-			stone.push_back( std::vector<std::vector<Resource>>() );
-			iron.push_back( std::vector<std::vector<Resource>>() );
+			trees.push_back( std::vector<std::vector<Resource*>>() );
+			stone.push_back( std::vector<std::vector<Resource*>>() );
+			iron.push_back( std::vector<std::vector<Resource*>>() );
 			WEIGHT.push_back( std::vector<double>() );
 			for (unsigned int j = 0; j < HASHY; j++){
-				trees[i].push_back( std::vector<Resource>() );
-				stone[i].push_back( std::vector<Resource>() );
-				iron[i].push_back( std::vector<Resource>() );
+				trees[i].push_back( std::vector<Resource*>() );
+				stone[i].push_back( std::vector<Resource*>() );
+				iron[i].push_back( std::vector<Resource*>() );
 				WEIGHT[i].push_back( -1.f );
 			}
 		}
 	}
 
-	void initHash( Map m ){
+	void initHash( Map *m ){
 		std::cout<<"happennen"<<std::endl;
 		for (unsigned int i = 0; i < HASHX; i++){
 			for (unsigned int j = 0; j < HASHY; j++){
@@ -49,7 +49,7 @@ public:
 				int watercount = 0;
 				for (unsigned int x = 0; x < HASHRES; x++){
 					for (unsigned int y = 0; y < HASHRES; y++){
-						switch(	m.at(bx+x,by+y).type() ){
+						switch(	m->at(bx+x,by+y).type() ){
 							case Tile::Type::WATER:
 								watercount+=1;
 								break;
@@ -83,17 +83,18 @@ public:
 			}
 		}
 		*/
-		for(unsigned int i = 0; i < m.resot.size(); i++){
-			//std::cout << m.resot[i].get_x_position()/ENTHASH<<"    "<< m.resot[i].get_y_position()/ENTHASH <<"    "<< i << "    "<< m.resot.size()<< "     " << m.resot.size() << std::endl;
-			switch (m.resot[i].get_resource_type()) {
+		for(unsigned int i = 0; i < m->resot.size(); i++){
+			//std::cout << m->resot[i]->get_x_position()/ENTHASH<<"    "<< m->resot[i]->get_y_position()/ENTHASH <<"    "<< i << "    "<< m->resot.size()<< "     " << m->resot.size() << std::endl;
+			switch (m->resot[i]->get_resource_type()) {
 				case Resource::RType::TREE:
-					trees[floor(m.resot[i].get_x_position()/ENTHASH)][floor(m.resot[i].get_y_position()/ENTHASH)].push_back(m.resot[i]);
+					trees[floor(m->resot[i]->get_x_position()/ENTHASH)][floor(m->resot[i]->get_y_position()/ENTHASH)].push_back(m->resot[i]);
 					break;
 				case Resource::RType::STONE:
-					stone[floor(m.resot[i].get_x_position()/ENTHASH)][floor(m.resot[i].get_y_position()/ENTHASH)].push_back(m.resot[i]);
+					stone[floor(m->resot[i]->get_x_position()/ENTHASH)][floor(m->resot[i]->get_y_position()/ENTHASH)].push_back(m->resot[i]);
 					break;
 				case Resource::RType::IRON:
-					iron[floor(m.resot[i].get_x_position()/ENTHASH)][floor(m.resot[i].get_y_position()/ENTHASH)].push_back(m.resot[i]);
+					iron[floor(m->resot[i]->get_x_position()/ENTHASH)][floor(m->resot[i]->get_y_position()/ENTHASH)].push_back(
+						m->resot[i]);
 					break;
 
 			}
