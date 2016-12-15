@@ -23,7 +23,7 @@ public:
 		if(!font.loadFromFile("fonts/atwriter.ttf")){
 			std::cout << "error" << std::endl;
 		}
-		info_text.setFont(font);
+	    info_text.setFont(font);
 		info_text.setCharacterSize(20);
 		info_text.setColor(sf::Color::White);
 		info_text.setPosition(15, 420);

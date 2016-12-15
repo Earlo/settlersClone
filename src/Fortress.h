@@ -9,12 +9,13 @@ class Fortress : public Building {
 public:
 
 	Fortress(int x_position, int y_position) : Building(x_position, y_position){
+		this->under_construction = true;
         	this->updateImg();
 		this->required_iron = 10;
 		this->required_wood = 4;
 		this->required_stone = 20;
 		this->pop_increase = 0;
-		this->under_construction = true;
+		
 	}
 	~Fortress(){}
 	
