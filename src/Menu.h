@@ -298,7 +298,7 @@ public:
 		if(mouseX > 0 && mouseX < 600 && mouseY > 0 && mouseY < 600){ // is mouse on button check
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
-		                FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY );
+		                FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
 						p->buildings.push_back(fhouse);
 		                v->push_back(fhouse);
 		                b3 = false;

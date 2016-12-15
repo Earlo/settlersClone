@@ -8,14 +8,17 @@
 class FamilyHouse : public Building {
 public:
 	
-	FamilyHouse(int x_position, int y_position ) : Building(x_position, y_position){
+	FamilyHouse(int x_position, int y_position, HumanPlayer* p) : Building(x_position, y_position){
 		this->required_iron = 2;
 		this->required_wood = 12;
 		this->required_stone = 5;
+		this->pop_increase = 4;
 		this->under_construction = true;
 
     	this->updateImg();
 	}
+
+
 
 	void updateImg(){
 		
@@ -30,7 +33,7 @@ public:
 	}
 
 private:
-	int health_points = 20;
+
 	int size = 2;
 
 };

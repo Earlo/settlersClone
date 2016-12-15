@@ -13,6 +13,7 @@ public:
 		this->required_iron = 10;
 		this->required_wood = 4;
 		this->required_stone = 20;
+		this->pop_increase = 0;
 		this->under_construction = true;
 	}
 	~Fortress(){}

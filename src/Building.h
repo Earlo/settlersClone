@@ -5,7 +5,7 @@
 //#include "Entity.h"
 #include "Settler.h"
 #include "../constants.h"
-
+//#include "logic/HumanPlayer.h"
 //forward declaration
 class Settler;
 
@@ -25,6 +25,12 @@ public:
 	
 	void complete_building(){
 		this->under_construction = false;
+		this->updateImg();
+		for(unsigned int i = 0; i < this->pop_increase; i++){
+			//Settler* s = new Settler(this->get_x_position(), this->get_y_position());
+			//pl->settlers.push_back(s);
+			//pl->increase_idlers();
+		}
 	}
 	
 	//void add_settler(Settler sett) { settlers_inside.push_back(sett); }
@@ -68,10 +74,11 @@ protected:
 	unsigned int current_wood;
 	unsigned int current_stone;
 	unsigned int current_iron;
-
 	unsigned int required_iron;
 	unsigned int required_wood;
 	unsigned int required_stone;
+	//HumanPlayer* pl;
+	unsigned int pop_increase = 0;
 
 	unsigned int health_points;
 	bool under_construction; // false if the building is constructed
