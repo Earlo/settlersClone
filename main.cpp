@@ -29,7 +29,7 @@ bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_positi
 
 int main(){
 
-    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Settlers");
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Hitlers");
 
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));
