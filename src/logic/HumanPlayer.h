@@ -37,6 +37,14 @@ public:
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			switch(settlers[i]->get_task()){
 			case Settler::TType::BUILD:
+				if (buildings[0]->needed_resource() == 0 ){
+					settlers[i]->workPhase = 0;
+					settlers[i]->set_task(Settler::TType::IDLE);
+					builders--;
+					idlers++;
+					settlers[i]->set_workclock(-300);
+					break;
+				}
 				//std::cout << buildings[0]->needed_resource() << std::endl;
 				for(unsigned int b = 0; b < buildings.size(); b++){
 				if(buildings[b]->get_construction_status() && settlers[i]->workPhase == 0){

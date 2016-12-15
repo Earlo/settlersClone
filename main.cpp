@@ -22,14 +22,12 @@
 
 #include "src/logic/HumanPlayer.h"
 
-
 //MOVE TO OTHER PLACE
 bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_position()); }
 
-
 int main(){
 
-    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Settlers");
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Hitlers");
 
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));
@@ -46,26 +44,9 @@ int main(){
 
     bool game_started = false;
 
-    //buttonchecks
-    /*bool b1_pressed = false;
-    bool b2_pressed = false;
-    bool b3_pressed = false;
-    bool b4_pressed = false;
-    */
-
     Game g;
-    std::cout<<g.entities.size()<<" entities"<<std::endl;
     Map m = Map(WORLDX,WORLDY, &g);
-    std::cout<<g.entities.size()<<" entities"<<std::endl;
-    std::cout<<"at MAI "<<g.entities[1]->get_x_position()<<","<<g.entities[1]->get_y_position()<<std::endl;
-    std::cout<<"at MAI "<<g.entities[2]->get_x_position()<<","<<g.entities[2]->get_y_position()<<std::endl;
-
-    /*
-    for(unsigned int i = 0; i < g.entities.size(); i++){ // Draw the entities from buildings vector
-        std::cout<<"at ASD "<<g.entities[i]->get_x_position()<<","<<g.entities[i]->get_y_position()<<std::endl;
-        //std::cout<<"at man "<<x<<","<<y<<std::endl;
-        }
-    */
+   
     //TODO dont sort here
     //std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
     HumanPlayer p;
@@ -113,26 +94,13 @@ int main(){
         window.clear();
 
         window.setView(menuView);
-        menu.drawmenu(window, &p);
+        menu.drawmenu(window, &p); //Draw UI
 
         window.setView(view1);
         window.draw(m.sprite);  //Draw terrain
         g.draw(window,view1);   //Draw objects
         p.update(window,view1); //draw plauer
         window.display();
-
-
-        //currentTime = clock.getElapsedTime().asSeconds();
-        //fps = 1.f / (currentTime - lastTime);
-
-
-        //currentTime = clock.getElapsedTime().asSeconds();
-        //fps = 1.f / (currentTime - lastTime);
-
-        //window.setTitle(std::to_string(fps));
-        //lastTime = currentTime;
-        //std::cout<<fps<<std::endl;
-	   //std::cout << p.get_idlers() << std::endl;
     }
     return 0;
 }
