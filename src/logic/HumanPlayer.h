@@ -133,6 +133,14 @@ public:
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
+				SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				if(SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
+					SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
+					//delete(SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
+					//SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH].erase(
+					//	SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH].begin() +settlers[i]->get_near_a());
+				}	
+				else{SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
 						settlers[i]->move(settlers[i]->get_nearest());
 						settlers[i]->workPhase = 1;
 					}
@@ -153,6 +161,12 @@ public:
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
+				SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				if(SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
+					SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
+					//delete(SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
+				}
+				else{SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
 						settlers[i]->move(settlers[i]->get_nearest());
 						settlers[i]->workPhase = 1;
 					}
@@ -173,6 +187,12 @@ public:
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
+				SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				if(SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
+					SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
+					//delete(SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
+				}
+				else{SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
 						settlers[i]->move(settlers[i]->get_nearest());
 						settlers[i]->workPhase = 1;
 					}

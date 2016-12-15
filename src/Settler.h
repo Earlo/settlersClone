@@ -209,6 +209,7 @@ public:
 	std::vector<int> get_nearest(){return near;}
 	int get_near_x(){return near[0];}
 	int get_near_y(){return near[1];}
+	int get_near_a(){return near[2];}
 	int get_workclock(){return workclock;}
 	void set_workclock(int time){workclock += time;}
 	int workPhase;
