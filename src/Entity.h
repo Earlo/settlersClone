@@ -16,6 +16,7 @@ public:
 	Entity(int x_position, int y_position){
 		this->x_pos = x_position;
 		this->y_pos = y_position;
+		this->hp = 2;
 		//std::cout<<"at ent "<<this->get_x_position()<<","<<this->get_y_position()<<std::endl;
 
 		this->free = true;
@@ -30,12 +31,20 @@ public:
 	
 	
 	virtual void updateImg() {};
-
+	
+	int get_hp(){return hp;}
+	void minus_hp(){hp--;}
+	bool check_hp(){
+		if(hp < 0){
+			return true;		
+		}
+		return false;
+	}
 
 protected:
 	bool free;
 	int size;
-
+	int hp;
 	int x_pos = 0;
 	int y_pos = 0;
 };
