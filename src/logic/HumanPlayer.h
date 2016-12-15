@@ -49,14 +49,14 @@ public:
 					
 					if(buildings[b]->needed_resource() == 1 && warehouses[0]->get_wood() > 0){
 						settlers[i]->workPhase = 2;
-						std::cout << "takes wood" << std::endl;
+						//std::cout << "takes wood" << std::endl;
 						warehouses[0]->take_wood();
 						settlers[i]->set_nearest(build_position(buildings[b]));
 						settlers[i]->move(settlers[i]->get_nearest());
 						
 					}
 					else if(buildings[b]->needed_resource() == 2 && warehouses[0]->get_stone() > 0){
-						std::cout << "takes stone" << std::endl;							
+						//std::cout << "takes stone" << std::endl;							
 						warehouses[0]->take_stone();
 						settlers[i]->set_nearest(build_position(buildings[b]));
 						settlers[i]->move(settlers[i]->get_nearest());
@@ -64,7 +64,7 @@ public:
 						
 					}
 					else if(buildings[b]->needed_resource() == 3 && warehouses[0]->get_iron() > 0){
-						std::cout << "takes iron" << std::endl;						
+						//std::cout << "takes iron" << std::endl;						
 						warehouses[0]->take_iron();
 						settlers[i]->set_nearest(build_position(buildings[b]));
 						settlers[i]->move(settlers[i]->get_nearest());
@@ -82,7 +82,7 @@ public:
 				}
 				//GO TO BUILDING WITH WOOD
 				if(settlers[i]->workPhase == 2 && settlers[i]->get_x_position() == buildings[0]->get_x_position() && settlers[i]->get_y_position() == buildings[0]->get_y_position()){
-							std::cout << "brings wood to building" << std::endl;
+							//std::cout << "brings wood to building" << std::endl;
 							settlers[i]->workPhase = 5;
 							buildings[0]->increase_current_wood();
 							settlers[i]->set_nearest(warehouse_pos());
@@ -119,12 +119,16 @@ public:
 				
 				
 				break;
+
 			case Settler::TType::GATHERW:
+
+				//GO TO TREE WAIT 5 SEC AND TAKE 1 TREE
 				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
 				SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				//MINUS HP AND SET TREE SO IT CANT BE ACCESSED ANYMORE
 				if(SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
 					SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
 					//delete(SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
@@ -137,6 +141,7 @@ public:
 					}
 					else{settlers[i]->set_workclock(1);}
 				}
+				//MAKE SETTLERS WORK CONSTANTLY
 				if( settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
 					warehouses[0]->give_wood();
 					settlers[i]->set_task(Settler::TType::GATHERW);
@@ -145,14 +150,19 @@ public:
 					settlers[i]->set_nearest(v);				
 					settlers[i]->set_workclock(-300);
 				}
+				//MOVE SETTLERS
 				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
+
 			case Settler::TType::GATHERS:
+
+				//GO TO STONE WAIT 5 SEC AND TAKE 1 STONE
 				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
 				SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				//MINUS HP AND SET STONE SO IT CANT BE ACCESSED ANYMORE
 				if(SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
 					SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
 					//delete(SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
@@ -163,6 +173,7 @@ public:
 					}
 					else{settlers[i]->set_workclock(1);}
 				}
+				//MAKE SETTLERS WORK CONSTANTLY
 				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
 					warehouses[0]->give_stone();
 					settlers[i]->set_task(Settler::TType::GATHERS);
@@ -171,14 +182,19 @@ public:
 					settlers[i]->set_nearest(v);
 					settlers[i]->set_workclock(-300);
 				}
+				//MOVE SETTLERS
 				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
+
 			case Settler::TType::GATHERI:
+
+				//GO TO IRON WAIT 5 SEC AND TAKE 1 IRON
 				if(settlers[i]->get_x_position() == settlers[i]->get_near_x() && settlers[i]->get_y_position() == settlers[i]->get_near_y()){
 					if(settlers[i]->get_workclock() > 300){
 						settlers[i]->set_nearest(warehouse_pos());
 						settlers[i]->set_workclock(-300);
 				SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->minus_hp();
+				//MINUS HP AND SET IRON SO IT CANT BE ACCESSED ANYMORE
 				if(SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->check_hp()){
 					SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(false);
 					//delete(SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
@@ -189,6 +205,7 @@ public:
 					}
 					else{settlers[i]->set_workclock(1);}
 				}
+				//MAKE SETTLERS WORK CONSTANTLY
 				if(settlers[i]->workPhase == 1 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
 					warehouses[0]->give_iron();
 					settlers[i]->set_task(Settler::TType::GATHERI);
@@ -198,6 +215,7 @@ public:
 					settlers[i]->set_workclock(-300);
 					
 				}
+				//MOVE SETTLERS
 				else{settlers[i]->move(settlers[i]->get_nearest());}
 				break;
 			case Settler::TType::IDLE:
@@ -236,7 +254,7 @@ public:
 	unsigned int get_stoners(){return stoners;}
 	unsigned int get_ironers(){return ironers;}
 	unsigned int get_idlers(){return idlers;}
-
+								//BUTTON TO MAKE IDLE SETTLERS GATHER TREE
 	void increase_woodcutters(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::IDLE){
@@ -250,7 +268,7 @@ public:
 			}
 		}
 	}
-
+								//BUTTON TO MAKE IDLE SETTLERS GATHER STONE
 	void increase_stoners(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::IDLE){
@@ -264,7 +282,7 @@ public:
 			}
 		}
 	}
-
+								//BUTTON TO MAKE IDLE SETTLERS GATHER IRON
 	void increase_ironers(SpatialHash* SHASH){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::IDLE){
@@ -278,7 +296,7 @@ public:
 			}
 		}
 	}
-
+								//BUTTON TO MAKE WOOD GATHERING SETTLERS IDLE
 	void decrease_woodcutters(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::GATHERW){
@@ -289,7 +307,7 @@ public:
 			}
 		}
 	}
-
+								//BUTTON TO MAKE STONE GATHERING SETTLERS IDLE
 	void decrease_stoners(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::GATHERS){
@@ -300,7 +318,7 @@ public:
 			}
 		}
 	}
-
+								//BUTTON TO MAKE IRON GATHERING SETTLERS IDLE
 	void decrease_ironers(){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			if(settlers[i]->get_task() == Settler::TType::GATHERI){
@@ -324,13 +342,13 @@ public:
 	}
 	void increase_idlers(){idlers++;}
 
-	std::vector<int> warehouse_pos(){
+	std::vector<int> warehouse_pos(){ // MOVE FUNCTION IN SETTLERS TAKE VECTOR<INT> SO THIS MUST BE DONE, NOT TOO SMART
 		std::vector<int> v;
 		v.push_back(warehouses[0]->get_x_position());
 		v.push_back(warehouses[0]->get_y_position());
 		return v;
 	}
-	std::vector<int> build_position(Building *b){
+	std::vector<int> build_position(Building *b){ // MOVE FUNCTION IN SETTLERS TAKE VECTOR<INT> SO THIS MUST BE DONE, NOT TOO SMART
 		std::vector<int> pos;
 		pos.push_back(b->get_x_position());
 		pos.push_back(b->get_y_position());
