@@ -15,7 +15,8 @@ public:
 		this->weapon = 0;
 		this->required_iron = 0;
 		this->required_wood = 15;
-		this->required_stone = 6;	
+		this->required_stone = 6;
+		this->pop_increase = 0;
 	}
 	void take_wood(){
 		if(wood > 0){

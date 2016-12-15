@@ -15,6 +15,7 @@ public:
 		this->required_iron = 15;
 		this->required_wood = 2;
 		this->required_stone = 10;
+		this->pop_increase = 0;
 		this->under_construction = true;
         	this->updateImg();
 		}
