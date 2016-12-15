@@ -146,7 +146,7 @@ public:
 		if(x > 705 && x < 720 && y > 35 && y < 52){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "WOOD INC" << std::endl;
+				//std::cout << "WOOD INC" << std::endl;
 				return 1;
 
 			}
@@ -162,7 +162,7 @@ public:
 		if(x > 728 && x < 744 && y > 35 && y < 52){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "WOOD DEC" << std::endl;
+				//std::cout << "WOOD DEC" << std::endl;
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -177,7 +177,7 @@ public:
 		if(x > 705 && x < 720 && y > 71 && y < 88){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "STONE INC" << std::endl;
+				//std::cout << "STONE INC" << std::endl;
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -192,7 +192,7 @@ public:
 		if(x > 728 && x < 744 && y > 71 && y < 88){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "STONE DEC" << std::endl;
+				//std::cout << "STONE DEC" << std::endl;
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -207,7 +207,7 @@ public:
 		if(x > 705 && x < 720 && y > 108 && y < 124){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "IRON INC" << std::endl;
+				//std::cout << "IRON INC" << std::endl;
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -222,7 +222,7 @@ public:
 		if(x > 728 && x < 744 && y > 108 && y < 124){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
 				clickflag = true;
-				std::cout << "IRON DEC" << std::endl;
+				//std::cout << "IRON DEC" << std::endl;
 				return 1;
 			}
 			else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -236,7 +236,7 @@ public:
 	int increase_build(sf::Event event, int x, int y){
 		if(x > 728 && x < 768 && y > 140 && y < 180){
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !clickflag){
-				std::cout << "testing building" << std::endl;
+				//std::cout << "testing building" << std::endl;
 				clickflag = true;
 				return 1;
 			}
@@ -252,7 +252,7 @@ public:
 	
 		//FORTRESS BUTTON
 		if( this->button1_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){ // checker prevents many build buttons being clicked
-				std::cout << "yolololo" << std::endl;
+
 		                b1 = true;
 		                checker++;
 	    	}
@@ -261,7 +261,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
-						p->buildings.push_back(f);
+						p->buildings.insert(p->buildings.begin(),f);
 		                v->push_back(f);
 		                b1 = false;
 		                checker++;
@@ -271,7 +271,7 @@ public:
 
 	    	//WEAPONSMITH BUTTON
 	    	if(this->button2_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-	    		        std::cout << "wepsmith" << std::endl;
+	    		        //std::cout << "wepsmith" << std::endl;
 		                    b2 = true;
 		                    checker++;
 	    	}
@@ -280,7 +280,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
-						p->buildings.push_back(ws);
+						p->buildings.insert(p->buildings.begin(),ws);
 		                v->push_back(ws);
 		                b2 = false;
 		                checker++;
@@ -290,7 +290,7 @@ public:
 
 	    	//FAMILYHOUSE BUTTON
 	    	if(this->button3_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-	    		        std::cout << "fam house" << std::endl;
+	    		        //std::cout << "fam house" << std::endl;
 		                    b3 = true;
 		                    checker++;
 	    	}
@@ -299,7 +299,7 @@ public:
 			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
-						p->buildings.push_back(fhouse);
+						p->buildings.insert(p->buildings.begin(), fhouse);
 		                v->push_back(fhouse);
 		                b3 = false;
 		                checker++;
@@ -309,7 +309,7 @@ public:
 
 		//WAREHOUSE BUTTON
 		if( this->button4_clicked(event, mouseX, mouseY) == 1 && checker % 2 == 0){
-				std::cout << "ware" << std::endl;
+				//std::cout << "ware" << std::endl;
 		                b4 = true;
 		                checker++;
 		    }
@@ -320,7 +320,7 @@ public:
 		                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 		                Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
 
-						p->buildings.push_back(ware);
+						p->buildings.insert(p->buildings.begin(),ware);
 						p->add_wh(ware);
 		                v->push_back(ware);
 

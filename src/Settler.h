@@ -95,7 +95,7 @@ public:
 							v.push_back(targetY);
 							v.push_back(targetNUM);
 							SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->set_free(false);
-							std::cout<< SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->is_free()<<std::endl;
+							//std::cout<< SHASH->trees[targetX/ENTHASH][targetY/ENTHASH][targetNUM]->is_free()<<std::endl;
 							return v;
 						}
 						break;

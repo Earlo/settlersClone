@@ -12,9 +12,9 @@ public:
 	void make_weapon();
 	void take_weapon();
 	Weaponsmith(int x_position, int y_position) : Building(x_position, y_position){
-		this->required_iron = 15;
-		this->required_wood = 2;
-		this->required_stone = 10;
+		this->required_iron = 1;
+		this->required_wood = 1;
+		this->required_stone = 1;
 		this->pop_increase = 0;
 		this->under_construction = true;
         	this->updateImg();
