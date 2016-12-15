@@ -19,11 +19,11 @@ const int CAMCENTERX = VIEWX/2;
 const int CAMCENTERY = VIEWY/2;
 //const int WORLDX = 1000;
 //const int WORLDY = 1000;
-const int WORLDX = 300;
-const int WORLDY = 300;
+const int WORLDX = 500;
+const int WORLDY = 500;
 
-const int SCROLLX = WORLDX * DRAWSIZE - SCREENX;
-const int SCROLLY = WORLDY * DRAWSIZE - SCREENY;
+const int SCROLLX = WORLDX * DRAWSIZE - VIEWX;
+const int SCROLLY = WORLDY * DRAWSIZE - VIEWY;
 const unsigned int TILESTODRAWX = (VIEWX/DRAWSIZE)+3;
 const unsigned int TILESTODRAWY = (VIEWY/DRAWSIZE)+3;
 //consts for spatial hash
