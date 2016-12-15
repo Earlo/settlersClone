@@ -3,19 +3,15 @@
 
 #include "../constants.h"
 #include "Entity.h"
-//#include "logic/HumanPlayer.h"
-//class HumanPlayer;
-//should inherint something along line class Drawable or something(?)
+
 class Building : public Entity {
 public:
-	
-	//Building(int x_position, int y_position) : x_pos(x_position), y_pos(y_position) { }
+
 	Building(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 	
 	void complete_building();
 	
 	//void add_settler(Settler sett) { settlers_inside.push_back(sett); }
-
 	//unsigned int get_required_wood() const { return required_wood; }
 	//unsigned int get_required_stone() const { return required_stone; }
 	//unsigned int get_required_iron() const { return required_iron; }

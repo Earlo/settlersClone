@@ -1,8 +1,6 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include <SFML/Graphics.hpp>
-
 #include "../assets.h"
 #include "Building.h"
 

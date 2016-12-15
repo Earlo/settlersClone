@@ -1,8 +1,6 @@
 #ifndef FORTRESS_H
 #define FORTRESS_H
 
-#include <SFML/Graphics.hpp>
-
 #include "../assets.h"
 #include "Building.h"
 

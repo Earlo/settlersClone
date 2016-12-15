@@ -1,12 +1,6 @@
 #include "Game.h"
 
 Game::Game(){
-		/*for(unsigned int i = 0; i < entities.size(); i++){ // Draw the entities from buildings vector
-			int x = entities[i]->get_x_position();
-			int y = entities[i]->get_y_position();
-			std::cout<<"at gam "<<x<<","<<y<<std::endl;
-			}	
-			*/
 }
 
 void Game::draw(sf::RenderWindow &window, sf::View view){		

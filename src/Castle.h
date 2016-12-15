@@ -1,8 +1,7 @@
 #ifndef CASTLE_H
 #define CASTLE_H
-#include "Building.h"
 
-#include <SFML/Graphics.hpp>
+#include "Building.h"
 #include "Settler.h"
 #include "logic/HumanPlayer.h"
 

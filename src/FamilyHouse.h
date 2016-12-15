@@ -17,7 +17,6 @@ public:
 private:
 	HumanPlayer* pl;
 	int size = 2;
-
 };
 
 #endif

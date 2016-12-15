@@ -1,17 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <vector>
 #include <SFML/Graphics.hpp>
-/*
-#include "Tree.h"
-#include "Stone.h"
-#include "Iron.h"
-#include "Settler.h"
-*/
+#include <vector>
+
 #include "Entity.h"
 #include "../assets.h"
-
 #include "../constants.h"
 
 class Game {

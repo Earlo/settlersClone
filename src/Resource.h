@@ -8,7 +8,6 @@ public:
 	
 	enum class RType { TREE, STONE, IRON };
 	
-	//Resource(int x, int y, Resource::RType t, unsigned int amount) : x_pos(x), y_pos(y), type(t), resource_amount(amount) { }
 	Resource(int x_position, int y_position, Resource::RType t, AssetHandler* ASSETHANDLER);
 
 	void updateImg();

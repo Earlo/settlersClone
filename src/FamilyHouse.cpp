@@ -7,11 +7,10 @@ FamilyHouse::FamilyHouse(int x_position, int y_position, HumanPlayer* p, AssetHa
 	this->pop_increase = 4;
 	this->under_construction = true;
 	this->pl = p;
-this->updateImg();
+	this->updateImg();
 }
 
-void FamilyHouse::updateImg(){
-		
+void FamilyHouse::updateImg(){	
 	if(this->under_construction){
 		this->sprite.setTexture(ASSETHANDLER->BUILDTEX, true);
 		this->sprite.setPosition( this->x_pos-ASSETHANDLER->BUILD.getSize().x/2, this->y_pos-ASSETHANDLER->BUILD.getSize().y );	

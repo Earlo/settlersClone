@@ -1,8 +1,8 @@
 #ifndef WEAPONSMITH_H
 #define WEAPONSMITH_H
-#include "Building.h"
 
-#include <SFML/Graphics.hpp>
+
+#include "Building.h"
 #include "../assets.h"
 
 #define max_weapons 5;

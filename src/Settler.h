@@ -3,27 +3,16 @@
 
 
 #include <math.h>
-
-#include "Item.h"
-#include "Resource.h"
-#include "Building.h"
-
-#include "mapGen/Map.h"
-
-//#include "Game.h"
-//#include "logic/SpatialHash.h"
-//#include "logic/SpatialHash.h"
+#include <vector>
 
 #include "../constants.h"
-//#include "Entity.h"
-//#include "../assets.h"
+#include "Resource.h"
+#include "Building.h"
+#include "mapGen/Map.h"
 
-//#include "logic/Task.h"
 
 //forward declaration
 class SpatialHash;
-//class Building;
-//class Resource;
 
 class Settler : public Entity {
 public:
@@ -40,7 +29,7 @@ public:
     void move(std::vector<int> t, Map* m);
 	
     bool has_weapon() const;
-    Item get_inventory() const;
+    //Item get_inventory() const;
 
     void set_task(Settler::TType t){task = t;}
     void build( const Building b);
@@ -64,7 +53,7 @@ private:
     //Game game;
     bool armed;
     int workclock;
-    Item inventory;
+    //Item inventory;
     Settler::TType task;
     std::vector<int> near;
     //Resource Nearest;

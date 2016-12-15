@@ -1,5 +1,5 @@
 #include "Settler.h"
-#include <vector>
+
 //has been forward declared
 #include "logic/SpatialHash.h"
 
@@ -13,28 +13,6 @@ void Settler::updateImg(){
 	this->sprite.setTexture(ASSETHANDLER->SETTLERTEX, true);
 	this->sprite.setPosition( this->x_pos-ASSETHANDLER->SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER->SETTLERIMG.getSize().y );
 }
-
-/*void update(){
-switch (this->current_task) {
-case Settler::TType::GATHERW:
-    if (this->target.size() == 0){
-        break;
-    }
-    else{
-        //this->gather();
-        break;
-    }
-    break;
-case Settler::TType::GATHERS:
-    break;
-case Settler::TType::GATHERI:
-    break;
-case Settler::TType::BUILD:
-    break;
-case Settler::TType::IDLE:
-    break;
-}
-}*/
 
 std::vector<int> Settler::nearest(SpatialHash* SHASH, Resource::RType t){
 	int x = this->get_x_position()/ENTHASH;
@@ -149,18 +127,18 @@ void Settler::move(std::vector<int> t, Map* m){
 */
 //int dx = targetX - x;//(targetX - x)/abs(targetX - x);
 //int dy = targetY - y;//(targetY - y)/abs(targetY - y);
-if(targetX - x == 0){
-    dx = 0;
-}
-else{
-    dx = (int)((targetX - x)/abs(targetX - x));
-}
-if(targetY - y == 0){
-    dy = 0;
-}
-else{
-    dy = (int)((targetY - y)/abs(targetY - y));
-}
+	if(targetX - x == 0){
+	    dx = 0;
+	}
+	else{
+	    dx = (int)((targetX - x)/abs(targetX - x));
+	}
+	if(targetY - y == 0){
+	    dy = 0;
+	}
+	else{
+	    dy = (int)((targetY - y)/abs(targetY - y));
+	}
 
 	this->x_pos += dx;//(int)(acos(dx)*STLSPEED);
 	this->y_pos += dy;//(int)(asin(dx)*STLSPEED);
