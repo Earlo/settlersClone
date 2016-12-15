@@ -29,7 +29,7 @@ bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_positi
 
 int main(){
 
-    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Settlers");
 
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));
@@ -64,7 +64,7 @@ int main(){
     for(unsigned int i = 0; i < g.entities.size(); i++){ // Draw the entities from buildings vector
         std::cout<<"at ASD "<<g.entities[i]->get_x_position()<<","<<g.entities[i]->get_y_position()<<std::endl;
         //std::cout<<"at man "<<x<<","<<y<<std::endl;
-        }   
+        }
     */
     //TODO dont sort here
     //std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
@@ -100,7 +100,7 @@ int main(){
 
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 
-        
+
         if(!game_started){
             game_started = menu.startClick(event, mouseX, mouseY, camX, camY, &m, &p, g.get_entities());
         }
@@ -136,4 +136,3 @@ int main(){
     }
     return 0;
 }
-
