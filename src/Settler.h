@@ -148,7 +148,7 @@ public:
 		return std::vector<int> (-1);
 	}
 	
-	void move(std::vector<int> t){
+	void move(std::vector<int> t, Map* m){
 		int targetX = t[0];
 		int targetY = t[1];
 		//double matka = 10000;
@@ -189,6 +189,13 @@ public:
 
 		this->x_pos += dx;//(int)(acos(dx)*STLSPEED);
 		this->y_pos += dy;//(int)(asin(dx)*STLSPEED);
+		if( m->at(this->x_pos / DRAWSIZE,this->y_pos/DRAWSIZE).z < 0 ){
+	        this->sprite.setTexture(ASSETHANDLER.SETTLERWTEX, true);
+		}
+		else{
+	        this->sprite.setTexture(ASSETHANDLER.SETTLERTEX, true);
+		}
+	
 		this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
 	}
 	

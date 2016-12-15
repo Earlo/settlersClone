@@ -8,7 +8,9 @@ class AssetHandler{
 	sf::Image STONEIMG;
 	sf::Image IRONIMG;
 	sf::Image FORTRESSIMG;
-	sf::Image SETTLERIMG;	
+	sf::Image SETTLERIMG;
+	sf::Image SETTLERWIMG;	
+
 	sf::Image MENU_BACKGROUND_IMG;
 	sf::Image FHOUSEIMG;
 	sf::Image WEPSMITHIMG;
@@ -27,6 +29,7 @@ class AssetHandler{
 	sf::Texture IRONTEX;
 	sf::Texture FORTRESSTEX;
 	sf::Texture SETTLERTEX;
+	sf::Texture SETTLERWTEX;
 	sf::Texture MENU_BACKGROUND_TEX;
 	sf::Texture FHOUSETEX;
 	sf::Texture WEPSMITHTEX;
@@ -55,6 +58,9 @@ class AssetHandler{
 
 		SETTLERIMG.loadFromFile("sprites/settler0.png");
 		SETTLERTEX.loadFromImage(SETTLERIMG);
+
+		SETTLERWIMG.loadFromFile("sprites/settler0W.png");
+		SETTLERWTEX.loadFromImage(SETTLERWIMG);
 
 		MENU_BACKGROUND_IMG.loadFromFile("sprites/menutile.png");
 		MENU_BACKGROUND_TEX.loadFromImage(MENU_BACKGROUND_IMG);

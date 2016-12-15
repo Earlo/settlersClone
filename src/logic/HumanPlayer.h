@@ -33,7 +33,7 @@ public:
 		}
 		
 	}
-	void play(SpatialHash* SHASH){
+	void play(SpatialHash* SHASH, Map* m){
 		for(unsigned int i = 0; i < settlers.size(); i++){
 			switch(settlers[i]->get_task()){
 			case Settler::TType::BUILD:
@@ -49,7 +49,7 @@ public:
 				for(unsigned int b = 0; b < buildings.size(); b++){
 				if(buildings[b]->get_construction_status() && settlers[i]->workPhase == 0){
 					settlers[i]->set_nearest(warehouse_pos());
-					settlers[i]->move(settlers[i]->get_nearest());
+					settlers[i]->move(settlers[i]->get_nearest(), m);
 					settlers[i]->workPhase = 1;
 				}
 			
@@ -60,14 +60,14 @@ public:
 						//std::cout << "takes wood" << std::endl;
 						warehouses[0]->take_wood();
 						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						
 					}
 					else if(buildings[b]->needed_resource() == 2 && warehouses[0]->get_stone() > 0){
 						//std::cout << "takes stone" << std::endl;							
 						warehouses[0]->take_stone();
 						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						settlers[i]->workPhase = 3;
 						
 					}
@@ -75,7 +75,7 @@ public:
 						//std::cout << "takes iron" << std::endl;						
 						warehouses[0]->take_iron();
 						settlers[i]->set_nearest(build_position(buildings[b]));
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						settlers[i]->workPhase = 4;
 						
 					}
@@ -94,7 +94,7 @@ public:
 							settlers[i]->workPhase = 5;
 							buildings[0]->increase_current_wood();
 							settlers[i]->set_nearest(warehouse_pos());
-							settlers[i]->move(settlers[i]->get_nearest());
+							settlers[i]->move(settlers[i]->get_nearest(), m);
 				}			
 
 				//GO TO BUILDING WITH STONE
@@ -102,7 +102,7 @@ public:
 							settlers[i]->workPhase = 5;
 							buildings[0]->increase_current_stone();
 							settlers[i]->set_nearest(warehouse_pos());
-							settlers[i]->move(settlers[i]->get_nearest());				
+							settlers[i]->move(settlers[i]->get_nearest(), m);				
 				}
 
 				//GO TO BUILDING WITH IRON
@@ -110,7 +110,7 @@ public:
 							settlers[i]->workPhase = 5;
 							buildings[0]->increase_current_iron();
 							settlers[i]->set_nearest(warehouse_pos());
-							settlers[i]->move(settlers[i]->get_nearest());				
+							settlers[i]->move(settlers[i]->get_nearest(), m);				
 				}
 				//GO BACK TO WAREHOUSE
 				if(settlers[i]->workPhase == 5 && settlers[i]->get_x_position() == warehouses[0]->get_x_position() && settlers[i]->get_y_position() == warehouses[0]->get_y_position()){
@@ -121,7 +121,7 @@ public:
 							settlers[i]->set_workclock(-300);		
 				}
 				else{
-					settlers[i]->move(settlers[i]->get_nearest());
+					settlers[i]->move(settlers[i]->get_nearest(), m);
 				}
 			
 				
@@ -144,7 +144,7 @@ public:
 					//	SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH].begin() +settlers[i]->get_near_a());
 				}	
 				else{SHASH->trees[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						settlers[i]->workPhase = 1;
 					}
 					else{settlers[i]->set_workclock(1);}
@@ -159,7 +159,7 @@ public:
 					settlers[i]->set_workclock(-300);
 				}
 				//MOVE SETTLERS
-				else{settlers[i]->move(settlers[i]->get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest(), m);}
 				break;
 
 			case Settler::TType::GATHERS:
@@ -176,7 +176,7 @@ public:
 					//delete(SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
 				}
 				else{SHASH->stone[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						settlers[i]->workPhase = 1;
 					}
 					else{settlers[i]->set_workclock(1);}
@@ -191,7 +191,7 @@ public:
 					settlers[i]->set_workclock(-300);
 				}
 				//MOVE SETTLERS
-				else{settlers[i]->move(settlers[i]->get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest(), m);}
 				break;
 
 			case Settler::TType::GATHERI:
@@ -208,7 +208,7 @@ public:
 					//delete(SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]);
 				}
 				else{SHASH->iron[settlers[i]->get_x_position()/ENTHASH][settlers[i]->get_y_position()/ENTHASH][settlers[i]->get_near_a()]->set_free(true);}
-						settlers[i]->move(settlers[i]->get_nearest());
+						settlers[i]->move(settlers[i]->get_nearest(), m);
 						settlers[i]->workPhase = 1;
 					}
 					else{settlers[i]->set_workclock(1);}
@@ -224,7 +224,7 @@ public:
 					
 				}
 				//MOVE SETTLERS
-				else{settlers[i]->move(settlers[i]->get_nearest());}
+				else{settlers[i]->move(settlers[i]->get_nearest(), m);}
 				break;
 			case Settler::TType::IDLE:
 				break;			

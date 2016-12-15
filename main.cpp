@@ -87,7 +87,7 @@ int main(){
         }
         else{
             menu.update( event, mouseX, mouseY, camX, camY, &m, &p, g.get_entities());
-            p.play(&SHASH);
+            p.play(&SHASH, &m);
         }
         view1.setCenter (camX + CAMCENTERX, camY + CAMCENTERY);
 
