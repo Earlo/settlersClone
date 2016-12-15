@@ -1,15 +1,16 @@
 #ifndef FORTRESS_H
 #define FORTRESS_H
-#include "Building.h"
 
 #include <SFML/Graphics.hpp>
+
 #include "../assets.h"
+#include "Building.h"
 
 
 class Fortress : public Building {
 public:
 
-	Fortress(int x_position, int y_position);
+	Fortress(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 	~Fortress(){}
 	
 	void take_damage(int damage);

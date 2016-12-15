@@ -47,6 +47,4 @@ class AssetHandler{
 
 };
 
-AssetHandler ASSETHANDLER;
-
 #endif

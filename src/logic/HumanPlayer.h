@@ -1,11 +1,11 @@
 #ifndef HUMANPLAYER_H
 #define HUMANPLAYER_H
 
-
+#include "SpatialHash.h"
 #include "../Warehouse.h"
+#include "../Settler.h"
 
 class HumanPlayer {
-
 public:
 	HumanPlayer();
 	std::vector<Settler*> settlers;

@@ -1,6 +1,10 @@
 #ifndef MENU_H
 #define MENU_H
+
+
+#include <iostream>
 #include <SFML/Graphics.hpp>
+
 #include "../assets.h"
 
 #include "../constants.h"
@@ -20,12 +24,12 @@ class Menu
 public:
 	bool clickflag = false;
 
-	Menu();
+	Menu(AssetHandler* ASSETHANDLER, SpatialHash* SHASH);
 
 	int button1_clicked(sf::Event event, int x, int y);
 	int button2_clicked(sf::Event event, int x, int y);
-        int button3_clicked(sf::Event event, int x, int y);
-        int button4_clicked(sf::Event event, int x, int y);
+    int button3_clicked(sf::Event event, int x, int y);
+    int button4_clicked(sf::Event event, int x, int y);
 
 
 	int increase_wood(sf::Event event, int x, int y);
@@ -34,6 +38,8 @@ public:
 	int decrease_stone(sf::Event event, int x, int y);
 	int increase_iron(sf::Event event, int x, int y);
 	int decrease_iron(sf::Event event, int x, int y);
+	int increase_build(sf::Event event, int x, int y);
+
 
 	void update(sf::Event event, int mouseX, int mouseY, int camX, int camY, Map* m, HumanPlayer* p, std::vector<Entity*>* v);
 
@@ -49,6 +55,8 @@ private:
 	bool b4 = false;
 	int checker = 0;
 	
+	AssetHandler* ASSETHANDLER;
+	SpatialHash* SHASH;
 	sf::Font font;
 	sf::Text wood_amount;
 	sf::Text iron_amount;

@@ -1,14 +1,14 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
-#include "Building.h"
 
 #include <SFML/Graphics.hpp>
-#include "../assets.h"
 
+#include "../assets.h"
+#include "Building.h"
 
 class Warehouse : public Building {
 public:
-	Warehouse(int x_position, int y_position);
+	Warehouse(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 	void take_wood();
 
 	void take_stone();

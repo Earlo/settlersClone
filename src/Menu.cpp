@@ -1,6 +1,10 @@
 #include "Menu.h"
 
-Menu::Menu() {
+Menu::Menu(AssetHandler* ASSETHANDLER, SpatialHash* SHASH) {
+
+	this->ASSETHANDLER = ASSETHANDLER;
+	this->SHASH = SHASH;
+
 	if(!font.loadFromFile("fonts/atwriter.ttf")){
 		std::cout << "error" << std::endl;
 	}
@@ -45,26 +49,26 @@ Menu::Menu() {
 	idle_amount.setPosition(75, 133);
 
 	background.setSize(sf::Vector2f(200, 800));
-	background.setTexture(&ASSETHANDLER.MENU_BACKGROUND_TEX, true);
+	background.setTexture(&ASSETHANDLER->MENU_BACKGROUND_TEX, true);
 
 	controlpanel.setSize(sf::Vector2f(180, 180));
-	controlpanel.setTexture(&ASSETHANDLER.CONTROLPANELTEX, true);
+	controlpanel.setTexture(&ASSETHANDLER->CONTROLPANELTEX, true);
 	controlpanel.setPosition(10,10);
 
 	button1.setSize(sf::Vector2f(85, 90));
-	button1.setTexture(&ASSETHANDLER.FORTICONT, true);
+	button1.setTexture(&ASSETHANDLER->FORTICONT, true);
 	button1.setPosition(10,200);
 
 	button2.setSize(sf::Vector2f(85, 90));
-	button2.setTexture(&ASSETHANDLER.WSICONT, true);
+	button2.setTexture(&ASSETHANDLER->WSICONT, true);
 	button2.setPosition(105,200);
 
 	button3.setSize(sf::Vector2f(85, 90));
-	button3.setTexture(&ASSETHANDLER.FHOUSEICONT, true);
+	button3.setTexture(&ASSETHANDLER->FHOUSEICONT, true);
 	button3.setPosition(10,300);
 
 	button4.setSize(sf::Vector2f(85, 90));
-	button4.setTexture(&ASSETHANDLER.WAREICONT, true);
+	button4.setTexture(&ASSETHANDLER->WAREICONT, true);
 	button4.setPosition(105,300);
 
 	build.setSize(sf::Vector2f(40, 40));
@@ -72,7 +76,7 @@ Menu::Menu() {
 	build.setPosition(128,140);
 
 	infobox.setSize(sf::Vector2f(180, 190));
-	infobox.setTexture(&ASSETHANDLER.INFOTEX, true);
+	infobox.setTexture(&ASSETHANDLER->INFOTEX, true);
 	infobox.setPosition(10,400);
 }
 
@@ -243,7 +247,7 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 		if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b1 == true){
 	                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 				if(p->buildings.size() == 0){
-					Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
+					Fortress* f = new Fortress(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),f);
 					v->push_back(f);
 					b1 = false;
@@ -251,7 +255,7 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 				}
 				
 				if(!p->buildings[0]->get_construction_status()){
-					Fortress* f = new Fortress(mouseX + camX, mouseY + camY);
+					Fortress* f = new Fortress(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),f);
 					v->push_back(f);
 					b1 = false;
@@ -272,14 +276,14 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 		if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b2 == true){
 	                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 				if(p->buildings.size() == 0){
-					Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
+					Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),ws);
 					v->push_back(ws);
 					b2 = false;
 					checker++;
 				}
 				else if(!p->buildings[0]->get_construction_status()){		                
-					Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY);
+					Weaponsmith* ws = new Weaponsmith(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),ws);
 					v->push_back(ws);
 					b2 = false;
@@ -300,14 +304,14 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 		if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b3 == true){
 	                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 				if(p->buildings.size() == 0){
-					FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
+					FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(), fhouse);
 					v->push_back(fhouse);
 					b3 = false;
 					checker++;
 				}
 				if(!p->buildings[0]->get_construction_status()){	
-					FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p);
+					FamilyHouse* fhouse = new FamilyHouse(mouseX + camX, mouseY + camY, p, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(), fhouse);
 					v->push_back(fhouse);
 					b3 = false;
@@ -329,7 +333,7 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 		if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && b4 == true){
 	                if(m->at((mouseX+camX)/DRAWSIZE, (mouseY+camY)/DRAWSIZE).type() == Tile::Type::DIRT){
 				if(p->buildings.size() == 0){
-					Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
+					Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),ware);
 					p->add_wh(ware);
 					v->push_back(ware);
@@ -337,7 +341,7 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 					checker++;
 				}
 				if(!p->buildings[0]->get_construction_status()){	
-					Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY);
+					Warehouse* ware = new Warehouse(mouseX + camX, mouseY + camY, ASSETHANDLER);
 					p->buildings.insert(p->buildings.begin(),ware);
 					p->add_wh(ware);
 					v->push_back(ware);
@@ -375,13 +379,13 @@ void Menu::update(sf::Event event, int mouseX, int mouseY, int camX, int camY, M
 
 	//RESOURCE INCREASE/DECREASE BUTTON CHECKS
 	if(this->increase_wood(event, mouseX, mouseY) == 1){
-		p->increase_woodcutters(&SHASH);
+		p->increase_woodcutters(SHASH);
 	}
 	if(this->increase_stone(event, mouseX, mouseY) == 1){
-		p->increase_stoners(&SHASH);
+		p->increase_stoners(SHASH);
 	}
 	if(this->increase_iron(event, mouseX, mouseY) == 1){
-		p->increase_ironers(&SHASH);
+		p->increase_ironers(SHASH);
 	}
 	if(this->decrease_wood(event, mouseX, mouseY) == 1){
 		p->decrease_woodcutters();
@@ -407,8 +411,8 @@ bool Menu::startClick(sf::Event event, int mouseX, int mouseY, int camX, int cam
         std::cout << (xpx)/HASHRES << ";"<< (ypx)/HASHRES << std::endl;
         std::cout<<SHASH.WEIGHT[(xpx)/HASHRES][(ypx)/HASHRES]<<std::endl;
         */
-        Castle* C = new Castle(mouseX + camX, mouseY + camY, p);
-		Warehouse* W = new Warehouse(mouseX + camX + ASSETHANDLER.CASTLEIMG.getSize().x/2 + ASSETHANDLER.WAREIMG.getSize().x/2, mouseY + camY);
+        Castle* C = new Castle(mouseX + camX, mouseY + camY, p, ASSETHANDLER);
+		Warehouse* W = new Warehouse(mouseX + camX + ASSETHANDLER->CASTLEIMG.getSize().x/2 + ASSETHANDLER->WAREIMG.getSize().x/2, mouseY + camY, ASSETHANDLER);
 		p->add_wh( W );
 
 

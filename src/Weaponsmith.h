@@ -12,7 +12,7 @@ public:
 
 	void make_weapon();
 	void take_weapon();
-	Weaponsmith(int x_position, int y_position);
+	Weaponsmith(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 
 	void updateImg();
 

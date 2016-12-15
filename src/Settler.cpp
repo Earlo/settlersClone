@@ -1,17 +1,17 @@
 #include "Settler.h"
 #include <vector>
+//has been forward declared
+#include "logic/SpatialHash.h"
 
-Settler::Settler(int x_position, int y_position )
-:Entity(x_position, y_position){
-
+Settler::Settler(int x_position, int y_position, AssetHandler* ASSETHANDLER ):Entity(x_position, y_position, ASSETHANDLER){
 	this->task = Settler::TType::IDLE;
 	this->updateImg();
 	this->workclock = 0;
 }
 
 void Settler::updateImg(){
-	this->sprite.setTexture(ASSETHANDLER.SETTLERTEX, true);
-	this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
+	this->sprite.setTexture(ASSETHANDLER->SETTLERTEX, true);
+	this->sprite.setPosition( this->x_pos-ASSETHANDLER->SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER->SETTLERIMG.getSize().y );
 }
 
 /*void update(){
@@ -165,11 +165,11 @@ else{
 	this->x_pos += dx;//(int)(acos(dx)*STLSPEED);
 	this->y_pos += dy;//(int)(asin(dx)*STLSPEED);
 	if( m->at(this->x_pos / DRAWSIZE,this->y_pos/DRAWSIZE).z < 0 ){
-        this->sprite.setTexture(ASSETHANDLER.SETTLERWTEX, true);
+        this->sprite.setTexture(ASSETHANDLER->SETTLERWTEX, true);
 	}
 	else{
-        this->sprite.setTexture(ASSETHANDLER.SETTLERTEX, true);
+        this->sprite.setTexture(ASSETHANDLER->SETTLERTEX, true);
 	}
 
-	this->sprite.setPosition( this->x_pos-ASSETHANDLER.SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER.SETTLERIMG.getSize().y );
+	this->sprite.setPosition( this->x_pos-ASSETHANDLER->SETTLERIMG.getSize().x/2, this->y_pos-ASSETHANDLER->SETTLERIMG.getSize().y );
 }

@@ -1,16 +1,16 @@
 #include "Map.h"
-#include "../Resource.h"
-#include "Tile.h"
 #include <iostream>
 
-Map::Map( unsigned int _w, unsigned int _h, Game* g){
-	this->w = _w;
-	this->h = _h;
 
-	//this->IMG.create( _w*DRAWSIZE, _h*DRAWSIZE);
-	this->IMG.create( _w, _h);
 
-    std::cout << "doing a map of size " << _w << "," << _h << std::endl;
+std::default_random_engine generator = std::default_random_engine(time(NULL));
+std::uniform_int_distribution<int> distribution = std::uniform_int_distribution<int>(1000000,9999999);
+std::uniform_real_distribution<double> chance = std::uniform_real_distribution<double>(0,1.f);
+
+Map::Map( Game* g, AssetHandler* ASSETHANDLER){
+	this->IMG.create( WORLDX, WORLDY);
+
+    std::cout << "doing a map of size " << WORLDX << "," << WORLDY << std::endl;
     //init three noise functions with different seeds
 	PerlinNoise pn0(distribution(generator));
 	PerlinNoise pn1(distribution(generator));
@@ -32,11 +32,11 @@ Map::Map( unsigned int _w, unsigned int _h, Game* g){
 
 	double wC = 30.0;
 	double tw = w0+w1+w2+wC;//+wm;
-	for (unsigned int i = 0; i < _w; i++){
+	for (unsigned int i = 0; i < WORLDX; i++){
 		terrain.push_back( std::vector<Tile>() );
-		for (unsigned int j = 0; j < _h; j++){
-			double x = (double)j/((double)w) - 0.5;
-			double y = (double)i/((double)h) - 0.5;
+		for (unsigned int j = 0; j < WORLDY; j++){
+			double x = (double)j/((double)WORLDX) - 0.5;
+			double y = (double)i/((double)WORLDY) - 0.5;
 			// Typical Perlin noise
 			double k = -10;
 			// 4 10 30
@@ -52,8 +52,8 @@ Map::Map( unsigned int _w, unsigned int _h, Game* g){
 		}
 	}
 
-	for (unsigned int i = 0; i < _w; i++){
-		for (unsigned int j = 0; j < _h; j++){
+	for (unsigned int i = 0; i < WORLDX; i++){
+		for (unsigned int j = 0; j < WORLDY; j++){
 			if (terrain[i][j].z >= 100){
 				terrain[i][j].setType( Tile::Type::ROCK );
 				}
@@ -69,24 +69,24 @@ Map::Map( unsigned int _w, unsigned int _h, Game* g){
 	}
 
 
-	for (unsigned int i = 0; i < _w; i++){
-		for (unsigned int j = 0; j < _h; j++){
-			double x = (double)j/((double)w) - 0.5;
-			double y = (double)i/((double)h) - 0.5;
+	for (unsigned int i = 0; i < WORLDX; i++){
+		for (unsigned int j = 0; j < WORLDY; j++){
+			double x = (double)j/((double)WORLDX) - 0.5;
+			double y = (double)i/((double)WORLDY) - 0.5;
 
 
 			if ( terrain[i][j].type() == Tile::Type::ROCK ){
 				//int hval = ((terrain[i][j].z-100)/512.f);
 				if (chance(generator) > 0.985){
 					if (pnO0.noise(8  * x, 8  * y, x*y) > .50){
-						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON);
+						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::IRON, ASSETHANDLER);
 						g->entities.push_back( reso  );
 						resot.push_back( reso );
 						//std::cout<<"at map "<<reso.get_x_position()<<","<<reso.get_y_position()<<std::endl;
 
 					}
 					else {
-						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE);
+						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::STONE, ASSETHANDLER);
 					    g->entities.push_back( reso );
 					    resot.push_back( reso );
 					}
@@ -97,7 +97,7 @@ Map::Map( unsigned int _w, unsigned int _h, Game* g){
 				if (val > .55){
 					terrain[i][j].setType( Tile::Type::WOODS );
 					if ( val > .55 + chance(generator) ) {
-						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE);
+						Resource* reso = new Resource(i*DRAWSIZE,j*DRAWSIZE, Resource::RType::TREE, ASSETHANDLER);
 						g->entities.push_back( reso );
 						resot.push_back( reso );
 					}					
@@ -106,8 +106,8 @@ Map::Map( unsigned int _w, unsigned int _h, Game* g){
 		}
 	}
 
-	for (unsigned int i = 0; i < _w; i++){
-		for (unsigned int j = 0; j < _h; j++){
+	for (unsigned int i = 0; i < WORLDX; i++){
+		for (unsigned int j = 0; j < WORLDY; j++){
 			terrain[i][j].refreshShape();
 		}
 	}
@@ -130,7 +130,7 @@ std::vector<Tile> Map::nextTo(int x, int y){
 	for ( int a = -1; a <= 1; a++){
 		for ( int b = -1; b <= 1; b++){
 			if ( a != 0 || b != 0){
-				if( ((a+x) > 0) && ((a+x) < (int)w) && ((b+y) > 0) && ((b+y) < (int)h)){
+				if( ((a+x) > 0) && ((a+x) < (int)WORLDX) && ((b+y) > 0) && ((b+y) < (int)WORLDY)){
 					ret.push_back(this->at(a+x,b+y));
 				}
 			}
@@ -140,8 +140,8 @@ std::vector<Tile> Map::nextTo(int x, int y){
 }
 
 void Map::updateImg(){
-	for (unsigned int i = 0; i < this->w; i++){
-		for (unsigned int j = 0; j < this->h; j++){
+	for (unsigned int i = 0; i < WORLDX; i++){
+		for (unsigned int j = 0; j < WORLDY; j++){
         this->IMG.setPixel(i, j, this->at(i,j).shape.getFillColor());
     }
 }

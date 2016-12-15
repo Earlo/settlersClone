@@ -1,26 +1,19 @@
 #ifndef ENTITY
 #define ENTITY
 
-//include "Resource.h"
-//#include "Settler.h"
 #include <vector>
-
 #include <SFML/Graphics.hpp>
 
+#include "../assets.h"
+//#include "logic/SpatialHash.h"
 
 class Entity {
 public:
 	sf::Sprite sprite;
 	
 	//Building(int x_position, int y_position) : x_pos(x_position), y_pos(y_position) { }
-	Entity(int x_position, int y_position){
-		this->x_pos = x_position;
-		this->y_pos = y_position;
-		this->hp = 2;
-		//std::cout<<"at ent "<<this->get_x_position()<<","<<this->get_y_position()<<std::endl;
+	Entity(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 
-		this->free = true;
-	}
 	virtual ~Entity() {};
 	
 	int get_x_position() const { return x_pos; }
@@ -42,6 +35,7 @@ public:
 	}
 
 protected:
+	AssetHandler* ASSETHANDLER;
 	bool free;
 	int size;
 	int hp;

@@ -1,23 +1,16 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-//include "Resource.h"
-//#include "Entity.h"
-#include "Settler.h"
 #include "../constants.h"
 #include "Entity.h"
 //#include "logic/HumanPlayer.h"
-//forward declaration
-class Settler;
-
-
+//class HumanPlayer;
 //should inherint something along line class Drawable or something(?)
 class Building : public Entity {
-
 public:
 	
 	//Building(int x_position, int y_position) : x_pos(x_position), y_pos(y_position) { }
-	Building(int x_position, int y_position);
+	Building(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 	
 	void complete_building();
 	
@@ -46,7 +39,6 @@ public:
 	bool get_construction_status() const { return under_construction; }
 
 protected:
-	std::vector<Settler> settlers_inside;
 	
 	unsigned int current_wood;
 	unsigned int current_stone;

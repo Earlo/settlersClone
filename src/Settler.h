@@ -1,12 +1,17 @@
 #ifndef SETTLER
 #define SETTLER
 
+
+#include <math.h>
+
 #include "Item.h"
 #include "Resource.h"
 #include "Building.h"
+
+#include "mapGen/Map.h"
+
 //#include "Game.h"
 //#include "logic/SpatialHash.h"
-#include "math.h"
 //#include "logic/SpatialHash.h"
 
 #include "../constants.h"
@@ -16,6 +21,7 @@
 //#include "logic/Task.h"
 
 //forward declaration
+class SpatialHash;
 //class Building;
 //class Resource;
 
@@ -26,7 +32,7 @@ public:
     enum class TType { BUILD, GATHERW, GATHERS, GATHERI, IDLE };
 
 
-    Settler(int x_position, int y_position);
+    Settler(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 
     void updateImg();
     std::vector<int> nearest(SpatialHash* SHASH, Resource::RType t);

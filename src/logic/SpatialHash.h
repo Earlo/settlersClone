@@ -1,13 +1,12 @@
 #ifndef SHASH_H
 #define SHAHS_H
+#include <iostream>
+#include <math.h>
 
 #include "../../constants.h"
-
 #include "../Resource.h"
-
 #include "../mapGen/Map.h"
 
-#include "math.h"
 
 //#include ""
 class SpatialHash{
@@ -29,9 +28,6 @@ public:
 
 	void initHash( Map *m );
 };
-
-SpatialHash SHASH;
-
 
 #endif
 

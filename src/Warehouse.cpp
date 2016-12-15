@@ -1,7 +1,7 @@
 #include "Warehouse.h"
 
-Warehouse::Warehouse(int x_position, int y_position) : Building(x_position, y_position){
-        	this->updateImg();
+Warehouse::Warehouse(int x_position, int y_position, AssetHandler* ASSETHANDLER) : Building(x_position, y_position, ASSETHANDLER){
+    	this->updateImg();
 		this->wood = 12;
 		this->stone = 5;
 		this->iron = 2;
@@ -42,9 +42,9 @@ void Warehouse::give_stone(){
 	stone++;
 }
 
-void updateImg(){
-	this->sprite.setTexture(ASSETHANDLER.WARETEX, true);
-	this->sprite.setPosition( this->x_pos-ASSETHANDLER.WAREIMG.getSize().x/2, this->y_pos-ASSETHANDLER.WAREIMG.getSize().y );
+void Warehouse::updateImg(){
+	this->sprite.setTexture(ASSETHANDLER->WARETEX, true);
+	this->sprite.setPosition( this->x_pos-ASSETHANDLER->WAREIMG.getSize().x/2, this->y_pos-ASSETHANDLER->WAREIMG.getSize().y );
 }
 
 void Warehouse::give_iron(){

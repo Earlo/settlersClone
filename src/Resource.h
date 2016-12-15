@@ -3,19 +3,13 @@
 
 #include "Entity.h"
 
-#include "../constants.h"
-
-#include "../assets.h"
-
-class SpatialHash;
-
 class Resource : public Entity{
 public:
 	
 	enum class RType { TREE, STONE, IRON };
 	
 	//Resource(int x, int y, Resource::RType t, unsigned int amount) : x_pos(x), y_pos(y), type(t), resource_amount(amount) { }
-	Resource(int x_position, int y_position, Resource::RType t);
+	Resource(int x_position, int y_position, Resource::RType t, AssetHandler* ASSETHANDLER);
 
 	void updateImg();
 	unsigned int get_resource_amount() { return resource_amount; }
