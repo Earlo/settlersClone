@@ -26,8 +26,8 @@ public:
 			this->sprite.setPosition( this->x_pos-ASSETHANDLER.BUILD.getSize().x/2, this->y_pos-ASSETHANDLER.BUILD.getSize().y );	
 		}
 		else{
-			this->sprite.setTexture(ASSETHANDLER.FHOUSETEX, true);
-			this->sprite.setPosition( this->x_pos-ASSETHANDLER.FHOUSEIMG.getSize().x/2, this->y_pos-ASSETHANDLER.FHOUSEIMG.getSize().y );
+			this->sprite.setTexture(ASSETHANDLER.WEPSMITHTEX, true);
+			this->sprite.setPosition( this->x_pos-ASSETHANDLER.WEPSMITHIMG.getSize().x/2, this->y_pos-ASSETHANDLER.WEPSMITHIMG.getSize().y );
 		}
 	}
 
