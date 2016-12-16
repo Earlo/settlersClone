@@ -6,6 +6,12 @@ Fortress::Fortress(int x_position, int y_position, AssetHandler* ASSETHANDLER) :
 	this->required_iron = 10;
 	this->required_wood = 4;
 	this->required_stone = 20;
+
+	this->total_iron = 10;
+	this->total_wood = 4;
+	this->total_stone = 20;
+
+
 	this->pop_increase = 0;
 }
 

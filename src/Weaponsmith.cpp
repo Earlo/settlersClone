@@ -4,6 +4,11 @@ Weaponsmith::Weaponsmith(int x_position, int y_position,AssetHandler* ASSETHANDL
 		this->required_iron = 1;
 		this->required_wood = 1;
 		this->required_stone = 1;
+
+		this->total_iron = 1;
+		this->total_wood = 1;
+		this->total_stone = 1;
+
 		this->pop_increase = 0;
 		this->under_construction = true;
         	this->updateImg();

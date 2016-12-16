@@ -29,19 +29,29 @@ public:
 	unsigned int get_required_wood(){return required_wood;}
 	unsigned int get_required_stone(){return required_stone;}
 	unsigned int get_required_iron(){return required_iron;}
-	
+
+	unsigned int get_total_wood(){return total_wood;}
+	unsigned int get_total_stone(){return total_stone;}
+	unsigned int get_total_iron(){return total_iron;}
+
 	//unsigned int get_nof_inhabitants() const { return settlers_inside.size(); }
 	
 	bool get_construction_status() const { return under_construction; }
+
+	unsigned int required_wood;
+	unsigned int required_stone;
+	unsigned int required_iron;
 
 protected:
 	
 	unsigned int current_wood;
 	unsigned int current_stone;
 	unsigned int current_iron;
-	unsigned int required_iron;
-	unsigned int required_wood;
-	unsigned int required_stone;
+
+	unsigned int total_wood;
+	unsigned int total_stone;
+	unsigned int total_iron;
+
 	//HumanPlayer* pl;
 	unsigned int pop_increase = 0;
 

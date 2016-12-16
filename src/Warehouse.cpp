@@ -9,6 +9,11 @@ Warehouse::Warehouse(int x_position, int y_position, AssetHandler* ASSETHANDLER)
 		this->required_iron = 0;
 		this->required_wood = 15;
 		this->required_stone = 6;
+
+		this->total_iron = 0;
+		this->total_wood = 15;
+		this->total_stone = 6;
+
 		this->pop_increase = 0;
 	}
 void Warehouse::take_wood(){

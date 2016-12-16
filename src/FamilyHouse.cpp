@@ -4,6 +4,11 @@ FamilyHouse::FamilyHouse(int x_position, int y_position, HumanPlayer* p, AssetHa
 	this->required_iron = 2;
 	this->required_wood = 12;
 	this->required_stone = 5;
+
+	this->total_iron = 2;
+	this->total_wood = 12;
+	this->total_stone = 5;
+
 	this->pop_increase = 4;
 	this->under_construction = true;
 	this->pl = p;

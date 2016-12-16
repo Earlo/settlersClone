@@ -11,18 +11,20 @@ void Building::complete_building(){
 	this->updateImg();
 }
 int Building::needed_resource(){
-	if((required_wood - current_wood) > 0){
+	if((required_wood) > 0){
 		return 1;		
 	}
-	else if((required_stone - current_stone) > 0){
+	else if((required_stone) > 0){
 		return 2;		
 	}
-	else if((required_iron - current_iron) > 0){
+	else if((required_iron) > 0){
 		return 3;		
 	}
-
-	else{ 
+	else if ( this->under_construction && total_wood == current_wood && total_stone == current_stone && total_iron == current_iron) { 
 		this->complete_building();
 		return 0;
+	}
+	else{
+		return -1;
 	}
 }
