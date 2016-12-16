@@ -1,7 +1,8 @@
-#pragma once
-#include "Building.h"
+#ifndef WEAPONSMITH_H
+#define WEAPONSMITH_H
 
-#include <SFML/Graphics.hpp>
+
+#include "Building.h"
 #include "../assets.h"
 
 #define max_weapons 5;
@@ -11,25 +12,9 @@ public:
 
 	void make_weapon();
 	void take_weapon();
-	Weaponsmith(int x_position, int y_position) : Building(x_position, y_position){
-		this->required_iron = 1;
-		this->required_wood = 1;
-		this->required_stone = 1;
-		this->pop_increase = 0;
-		this->under_construction = true;
-        	this->updateImg();
-		}
+	Weaponsmith(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 
-	void updateImg(){
-		if(this->under_construction){
-			this->sprite.setTexture(ASSETHANDLER.BUILDTEX, true);
-			this->sprite.setPosition( this->x_pos-ASSETHANDLER.BUILD.getSize().x/2, this->y_pos-ASSETHANDLER.BUILD.getSize().y );	
-		}
-		else{
-			this->sprite.setTexture(ASSETHANDLER.WEPSMITHTEX, true);
-			this->sprite.setPosition( this->x_pos-ASSETHANDLER.WEPSMITHIMG.getSize().x/2, this->y_pos-ASSETHANDLER.WEPSMITHIMG.getSize().y );
-		}
-	}
+	void updateImg();
 
 private:
 
@@ -37,3 +22,5 @@ private:
 	int required_settlers = 1;
 
 };
+
+#endif

@@ -1,33 +1,23 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "src/mapGen/Map.h"
-
-#include "src/logic/SpatialHash.h"
 
 #include "constants.h"
 #include "src/Game.h"
-
-//TODO DO THIS SOMEWHERE ELSE
-#include "src/Settler.h"
-
-/*
-#include "src/Fortress.h"
-#include "src/Warehouse.h"
-#include "src/Weaponsmith.h"
-#include "src/Castle.h"
-#include "src/FamilyHouse.h"
-*/
 #include "src/Menu.h"
-
+#include "src/mapGen/Map.h"
+//#include "src/logic/SpatialHash.h"
 #include "src/logic/HumanPlayer.h"
 
 //MOVE TO OTHER PLACE
-bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_position()); }
+//bool sortByY (Entity* i,Entity* j) { return (i->get_y_position()<j->get_y_position()); }
 
 int main(){
 
-    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Hitlers");
+    SpatialHash SHASH;
+    AssetHandler ASSETHANDLER;
+
+    sf::RenderWindow window(sf::VideoMode(SCREENX, SCREENY), "The Settlers");
 
     sf::View view1(sf::FloatRect(0, 0, VIEWX, VIEWY));
     view1.setViewport(sf::FloatRect(0, 0, VIEWPORTW, 1));
@@ -45,12 +35,12 @@ int main(){
     bool game_started = false;
 
     Game g;
-    Map m = Map(WORLDX,WORLDY, &g);
+    Map m = Map( &g, &ASSETHANDLER );
    
     //TODO dont sort here
     //std::sort (m.stuff.begin(), m.stuff.end(), sortByY);
     HumanPlayer p;
-    Menu menu;
+    Menu menu(&ASSETHANDLER, &SHASH);
 
     SHASH.initHash( &m );
 

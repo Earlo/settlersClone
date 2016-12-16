@@ -1,61 +1,23 @@
-#ifndef BUILDING
-#define BUILDING
+#ifndef BUILDING_H
+#define BUILDING_H
 
-//include "Resource.h"
-//#include "Entity.h"
-#include "Settler.h"
 #include "../constants.h"
-//#include "logic/HumanPlayer.h"
-//forward declaration
-class Settler;
+#include "Entity.h"
 
-
-//should inherint something along line class Drawable or something(?)
 class Building : public Entity {
-
 public:
+
+	Building(int x_position, int y_position, AssetHandler* ASSETHANDLER);
 	
-	//Building(int x_position, int y_position) : x_pos(x_position), y_pos(y_position) { }
-	Building(int x_position, int y_position)
-		:Entity(x_position, y_position){
-	this->current_wood = 0;
-	this->current_stone = 0;
-	this->current_iron = 0;
-	}
-	
-	void complete_building(){
-		this->under_construction = false;
-		this->updateImg();
-		for(unsigned int i = 0; i < this->pop_increase; i++){
-			//Settler* s = new Settler(this->get_x_position(), this->get_y_position());
-			//pl->settlers.push_back(s);
-			//pl->increase_idlers();
-		}
-	}
+	void complete_building();
 	
 	//void add_settler(Settler sett) { settlers_inside.push_back(sett); }
-
 	//unsigned int get_required_wood() const { return required_wood; }
 	//unsigned int get_required_stone() const { return required_stone; }
 	//unsigned int get_required_iron() const { return required_iron; }
 	
 	
-	int needed_resource(){
-		if((required_wood - current_wood) > 0){
-			return 1;		
-		}
-		else if((required_stone - current_stone) > 0){
-			return 2;		
-		}
-		else if((required_iron - current_iron) > 0){
-			return 3;		
-		}
-
-		else{ 
-			this->complete_building();
-			return 0;
-		}
-	}
+	int needed_resource();
 	void increase_current_wood(){current_wood++;}
 	void increase_current_stone(){current_stone++;}
 	void increase_current_iron(){current_iron++;}
@@ -73,7 +35,6 @@ public:
 	bool get_construction_status() const { return under_construction; }
 
 protected:
-	std::vector<Settler> settlers_inside;
 	
 	unsigned int current_wood;
 	unsigned int current_stone;
